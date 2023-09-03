@@ -8,6 +8,7 @@ var state_list : Dictionary = {}
 
 var current : State = null : set = set_state
 
+## Sets State via exiting the old and entering the new.
 func set_state(newState:State):
 	var args = []
 	

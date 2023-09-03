@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://d1tqj0uawiua7"]
+[gd_scene load_steps=2 format=3 uid="uid://d1tqj0uawiua7"]
+
+[ext_resource type="Script" path="res://Autoload/SceneLoader.gd" id="1_snvan"]
 
 [node name="SceneManager" type="Node"]
+script = ExtResource("1_snvan")
