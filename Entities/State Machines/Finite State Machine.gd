@@ -6,7 +6,17 @@ class_name FSM extends Node
 ## List of States
 var state_list : Dictionary = {}
 
+## Verifies Child States and sets the starting state when readied
+func _ready():
+	verify_states()
+	if readyState: current = readyState
+	else: current = state_list[ state_list.keys()[0] ]
+
+## Current State 
 var current : State = null : set = set_state
+
+## Starting State
+@export var readyState : State = null
 
 ## Sets State via exiting the old and entering the new.
 func set_state(newState:State):
@@ -18,27 +28,23 @@ func set_state(newState:State):
 		current = newState
 		current.enter_state(args)
 
+## Sets state via the name of the state
+func goto_state(newState:String): current = state_list[newState]
+
 ## Verifies the list of states that are children to the Finite State Machine
 func verify_states(): 
 	state_list = {}
-	for x in get_state_children(): state_list[x.name] = x
-
+	for x in get_state_children(): 
+		state_list[x.name] = x
+		x.Machine = self
+		
 ## Compiles of list of States that are children of the Node, as well as the children's children
 func get_state_children(node:Node = self) -> Array:
 	var tempList: Array[State] = []
 	
 	for x in get_children():
-		x.Machine = self
 		if x is State: tempList.append(x)
 		
 		if x.get_child_count() and not x is FSM: tempList.append_array( get_state_children(x) )
 		
 	return tempList
-	
-# Called when the node enters the scene tree for the first time.
-func _ready(): verify_states()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

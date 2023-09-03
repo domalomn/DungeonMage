@@ -16,7 +16,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Audio="*res://Autoload/Audio.tscn"
+Audio="*res://Autoload/Audio/Audio.tscn"
 File="*res://Autoload/FileLoader.tscn"
 Global="*res://Autoload/GlobalNode.tscn"
 SceneLoader="*res://Autoload/SceneLoader.tscn"
