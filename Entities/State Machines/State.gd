@@ -13,7 +13,7 @@ func set_machine(new_machine : FSM):
 		
 		if animation_player: animation_player.disconnect("animation_finished", _on_anim_finished )
 		animation_player = Machine.animation_player
-		animation_player.connect("animation_finished", _on_anim_finished )
+		if animation_player: animation_player.connect("animation_finished", _on_anim_finished )
 
 ## called when state is entered
 func enter_state(arg:Dictionary = {}): pass

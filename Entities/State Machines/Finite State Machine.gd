@@ -13,23 +13,22 @@ func _ready():
 	else: current = state_list[ state_list.keys()[0] ]
 
 ## Current State 
-var current : State = null : set = set_state
+var current : State = null
 
 ## Starting State
 @export var readyState : State = null
 
 ## Sets State via exiting the old and entering the new.
-func set_state(newState:State):
-	var args = []
+func set_state(newState:State,args:Dictionary={}):
 	
-	if current: args = current.exit_state()
+	if current: current.exit_state()
 		
 	if newState:
 		current = newState
 		current.enter_state(args)
 
 ## Sets state via the name of the state
-func goto_state(newState:String): current = state_list[newState]
+func goto_state(newState:String,args:Dictionary={}): set_state(state_list[newState],args)
 
 ## Verifies the list of states that are children to the Finite State Machine
 func verify_states(): 
@@ -45,6 +44,8 @@ func get_state_children(node:Node = self) -> Array:
 	for x in get_children():
 		if x is State: tempList.append(x)
 		
-		if x.get_child_count() and not x is FSM: tempList.append_array( get_state_children(x) )
+		if x.get_child_count() and not x is FSM: for y in x.get_children(): if y is State:
+			tempList.append_array( get_state_children(x) )
+			break
 		
 	return tempList

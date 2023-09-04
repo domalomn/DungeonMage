@@ -67,3 +67,9 @@ static func isNumInBit(num:int = 0,bit:int =1) -> bool:
 			bit-= checkBit
 				
 	return false
+
+func move_vector_to(cur_speed:Vector2, target_speed:Vector2, accel:float=1, cap_speed:bool=false,max_angle:float = PI/2):
+	if cap_speed or cur_speed.length() < target_speed.length() or abs(cur_speed.angle_to(target_speed)) > max_angle: 
+		return cur_speed.move_toward(target_speed,accel)
+		
+	return cur_speed
