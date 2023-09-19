@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://Entities/Character_Stats.gd" id="2_shtls"]
 [ext_resource type="Script" path="res://Entities/State Machines/Finite State Machine.gd" id="3_ui0s5"]
 [ext_resource type="Script" path="res://Entities/State Machines/Player States/Idle.gd" id="4_hgayi"]
-[ext_resource type="Script" path="res://Entities/State Machines/State.gd" id="5_ankvf"]
 [ext_resource type="Script" path="res://Entities/State Machines/Player States/Move.gd" id="6_jalty"]
+[ext_resource type="Script" path="res://Entities/State Machines/Player States/Falling.gd" id="7_g11qy"]
 
 [sub_resource type="Resource" id="Resource_plgi6"]
 script = ExtResource("2_shtls")
@@ -39,7 +39,6 @@ readyState = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
 script = ExtResource("4_hgayi")
-Move_State = "Move"
 user = NodePath("../..")
 
 [node name="Move" type="Node" parent="FSM" node_paths=PackedStringArray("user", "idle_timer")]
@@ -49,7 +48,8 @@ idle_timer = NodePath("IdleTimer")
 
 [node name="IdleTimer" type="Timer" parent="FSM/Move"]
 
-[node name="State3" type="Node" parent="FSM"]
-script = ExtResource("5_ankvf")
+[node name="Falling" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
+script = ExtResource("7_g11qy")
+user = NodePath("../..")
 
 [connection signal="timeout" from="FSM/Move/IdleTimer" to="FSM/Move" method="_on_timer_timeout"]
