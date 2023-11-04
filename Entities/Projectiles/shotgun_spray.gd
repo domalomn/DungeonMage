@@ -4,7 +4,7 @@ var speed = 150
 var spacing = 0.1
 var velocity
 
-const pelletPath = preload("res://shotgun_pellet.tscn")
+const pelletPath = preload("res://Entities/Projectiles/shotgun_pellet.tscn")
 
 var alreadySplit = false
 var rotation_degree = 0.16667 * PI
