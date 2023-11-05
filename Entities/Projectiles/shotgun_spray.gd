@@ -4,6 +4,9 @@ var speed = 150
 var spacing = 0.1
 var velocity
 
+var damage
+var affliction
+
 const pelletPath = preload("res://Entities/Projectiles/shotgun_pellet.tscn")
 
 var alreadySplit = false

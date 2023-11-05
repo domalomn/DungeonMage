@@ -1,4 +1,6 @@
 extends Node2D
+var damage
+var affliction
 
 @onready var sender = get_tree().get_first_node_in_group("Player")
 

@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 var speed = 500
 var spacing = 0.1
+var damage
+var affliction
 
 var alreadySplit = false
 var rotation_degree = 0.16667 * PI

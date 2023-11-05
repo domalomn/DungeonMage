@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 var speed = 500
 var player
+var damage
+var affliction
 
 enum {FLY, BACK}
 var state: int = FLY
