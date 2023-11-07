@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf7jignhp2fkd"]
+
+[ext_resource type="Script" path="res://Networking/PeerToPeerConnection.gd" id="1_60cg2"]
+
+[node name="ConnectScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_60cg2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 86.0
+offset_right = 333.0
+offset_bottom = 130.0
+theme_override_constants/separation = 30
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Host"
+
+[node name="Button2" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Join"
+
+[node name="Button3" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Start Game"
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_hostGame"]
+[connection signal="pressed" from="HBoxContainer/Button2" to="." method="_joinGame"]
+[connection signal="pressed" from="HBoxContainer/Button3" to="." method="_startGame"]
