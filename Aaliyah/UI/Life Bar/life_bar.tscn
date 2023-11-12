@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://83o8n30h7dek"]
+
+[ext_resource type="Texture2D" uid="uid://k6yq6oeihyys" path="res://Aaliyah/UI/Counter/Counter.bmp" id="1_pcqbh"]
+[ext_resource type="FontFile" uid="uid://bmtf3mpkawr66" path="res://Aaliyah/UI/UI/Font/ConnectionII.otf" id="2_qtdl8"]
+[ext_resource type="Texture2D" uid="uid://0ob7j6mvbstx" path="res://Aaliyah/UI/Life Bar/Life-bar.bmp" id="3_d3cc6"]
+[ext_resource type="Texture2D" uid="uid://sqw4p881lmqi" path="res://Aaliyah/UI/Life Bar/Fill.bmp" id="4_l0p8p"]
+
+[node name="Life Bar" type="HBoxContainer"]
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 590.0
+offset_bottom = 65.0
+
+[node name="HP" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+texture = ExtResource("1_pcqbh")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="HP" type="Label" parent="HP"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -19.0
+offset_right = 58.0
+offset_bottom = 19.0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_qtdl8")
+theme_override_font_sizes/font_size = 30
+text = "HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="HP"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -16.5
+offset_right = -8.0
+offset_bottom = 16.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_qtdl8")
+theme_override_font_sizes/font_size = 25
+text = "100/100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Progress Bar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+value = 100.0
+texture_under = ExtResource("3_d3cc6")
+texture_progress = ExtResource("4_l0p8p")

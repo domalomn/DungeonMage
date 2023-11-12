@@ -13,12 +13,14 @@ func physics_update(_delta):
 	user.velocity = Global.move_vector_to(user.velocity, Vector2.ZERO, user.Stats.Ground_Friction, true)
 	user.move_and_slide()
 	
-	if not user.is_on_floor(): Machine.goto_state(Jump_State,{})
+	if not user.is_on_floor(): 
+		Machine.goto_state(Jump_State,{})
 
 ## called when input is passed
 func handle_input(event : InputEvent): 
 	if abs( Input.get_axis("left","right") ) > 0.1: Machine.goto_state(Move_State,{})
 	
-	if Input.is_action_just_pressed("A"): 
+	if Input.is_action_just_pressed("up"): 
 		user.velocity.y = -250
 		Machine.goto_state(Jump_State,{})
+	

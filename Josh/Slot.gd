@@ -2,11 +2,11 @@ class_name SlotClass
 extends Panel
 
 ## This is an item class
-var ItemClass = preload("res://Item.tscn")
+var ItemClass = preload("res://Josh/Item.tscn")
 var item = null
 
-var default_tex = preload("res://Art/Button.png")
-var empty_tex = preload("res://Art/ButtonEmpty.png")
+var default_tex = preload("res://Josh/Art/Button.png")
+var empty_tex = preload("res://Josh/Art/ButtonEmpty.png")
 
 var default_style: StyleBoxTexture = null
 var empty_style: StyleBoxTexture = null
