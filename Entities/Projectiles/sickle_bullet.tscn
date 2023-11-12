@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://r435saw1n53k"]
+
+[ext_resource type="Script" path="res://Entities/Projectiles/sickle_bullet.gd" id="1_jxooj"]
+[ext_resource type="Texture2D" uid="uid://dyy5lm3ynhulo" path="res://Entities/Projectiles/tempsickle.png" id="2_0yfqe"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rla1y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0yfqe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="sickle_bullet" type="Node2D"]
+script = ExtResource("1_jxooj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rla1y")
+
+[node name="Timer" type="Timer" parent="."]

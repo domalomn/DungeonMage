@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://ykk7q7v53s0"]
+
+[ext_resource type="Script" path="res://Entities/Projectiles/Laser.gd" id="1_e6i1t"]
+[ext_resource type="Texture2D" uid="uid://746fu771uxkc" path="res://Entities/Projectiles/flame0.png" id="2_xa00q"]
+[ext_resource type="Texture2D" uid="uid://behw4wwcwuvys" path="res://Entities/Projectiles/flame1.png" id="3_k35wp"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_0h30j"]
+frames = 2
+speed_scale = -15.4
+frame_0/texture = ExtResource("2_xa00q")
+frame_1/texture = ExtResource("3_k35wp")
+frame_1/duration = 1.0
+
+[node name="Laser" type="Node2D"]
+script = ExtResource("1_e6i1t")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(112, 0)
+collision_mask = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 35.0
+texture = SubResource("AnimatedTexture_0h30j")
+texture_mode = 1

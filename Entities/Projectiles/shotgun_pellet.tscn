@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh0l55jtc11n6"]
+
+[ext_resource type="Script" path="res://Entities/Projectiles/shotgun_pellet.gd" id="1_5form"]
+[ext_resource type="Texture2D" uid="uid://b7bbid17psh2a" path="res://Entities/Projectiles/tempball.png" id="1_tn8mc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_exlc2"]
+radius = 7.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h88qr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tn8mc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ShotgunPellet" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_5form")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_exlc2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2.38419e-07, 4.76837e-07)
+scale = Vector2(0.285714, 0.285714)
+sprite_frames = SubResource("SpriteFrames_h88qr")

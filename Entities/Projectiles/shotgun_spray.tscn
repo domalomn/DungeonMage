@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceg1772mmf6k7"]
+
+[ext_resource type="Script" path="res://Entities/Projectiles/shotgun_spray.gd" id="1_jb01m"]
+
+[node name="shotgunSpray" type="Node2D"]
+script = ExtResource("1_jb01m")
+
+[node name="Marker2D" type="Marker2D" parent="."]
