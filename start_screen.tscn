@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ce0e5nkfemr0e"]
+[gd_scene load_steps=5 format=3 uid="uid://ce0e5nkfemr0e"]
 
 [ext_resource type="PackedScene" uid="uid://kogoc4hg41mb" path="res://Entities/Player/Player.tscn" id="1_iqd67"]
+[ext_resource type="Texture2D" uid="uid://bk3wrgkwso81w" path="res://Josh/Art/seamless-grounds - Cold Taundra.png" id="2_43xaj"]
+[ext_resource type="PackedScene" uid="uid://b3ctjyrhjwgo6" path="res://Josh/inventory_Gui.tscn" id="2_x3jco"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2rpx"]
-size = Vector2(1370, 20)
+size = Vector2(1142, 20)
 
 [node name="Start Screen" type="Node2D"]
 
@@ -13,5 +15,20 @@ position = Vector2(354, 343)
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(731, 449)
+position = Vector2(575, 411)
 shape = SubResource("RectangleShape2D_t2rpx")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Seamless-grounds-ColdTaundra" type="Sprite2D" parent="StaticBody2D/CollisionShape2D"]
+position = Vector2(1, 4)
+scale = Vector2(2.2, 0.8)
+texture = ExtResource("2_43xaj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("2_x3jco")]
+offset_left = 228.0
+offset_top = 462.0
+offset_right = -78.0
+offset_bottom = -54.0
+scale = Vector2(0.814, 1)

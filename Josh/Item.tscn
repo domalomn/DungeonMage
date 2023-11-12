@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://1nei4ajb0exc"]
+
+[ext_resource type="Script" path="res://Josh/ItemImages.gd" id="1_s2y2p"]
+[ext_resource type="Texture2D" uid="uid://c6331mx3ah21g" path="res://Josh/Art/Sword.png" id="2_bd06l"]
+
+[node name="Item" type="Node2D"]
+z_index = 1
+script = ExtResource("1_s2y2p")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 122.0
+offset_bottom = 122.0
+scale = Vector2(0.6, 0.6)
+mouse_filter = 2
+mouse_default_cursor_shape = 3
+texture = ExtResource("2_bd06l")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=2 format=3 uid="uid://crbp3r4xiv850"]
+
+[ext_resource type="Script" path="res://Items.gd" id="1_ganbe"]
+
+[resource]
+script = ExtResource("1_ganbe")
+name = "Con Log"
+stackable = false
+maxStackSize = 1
+type = 1
