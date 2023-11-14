@@ -2,22 +2,28 @@ extends Node2D
 
 @export var PlayerScene : PackedScene = preload("res://Entities/Player/Player.tscn")
 
-func _ready(): call_deferred("preparePlayers")
+
+
+func _ready(): if Multiplayer.isHost(): spawnPlayers.rpc()
 	
-func preparePlayers():
-	if len(Multiplayer.Players):
+@rpc("call_local")
+func spawnPlayers():
+	
+	if Multiplayer.Players.size():
 		var spawners = get_tree().get_nodes_in_group("PlayerSpawn")
 		var index = 0
 		for x in Multiplayer.Players.keys():
-			spawnPlayer(spawners[index].global_position,x)
+			var player = PlayerScene.instantiate()
+			add_child(player)
+			player.setAuth(Multiplayer.Players[x].id)
+			player.global_position = spawners[index].global_position
 			index+=1
+			
 	else:
 		var pos = get_tree().get_first_node_in_group("PlayerSpawn").global_position
-		spawnPlayer(pos)
-			
-			
-func spawnPlayer(pos:Vector2,id:int=1):
-	var player = PlayerScene.instantiate()
-	player.global_position = pos
-	player.name = str(id)
-	add_child(player)
+		var player = PlayerScene.instantiate()
+		add_child(player)
+		player.setAuth(multiplayer.get_unique_id())
+		player.global_position = pos
+	
+	

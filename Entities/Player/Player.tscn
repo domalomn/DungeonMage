@@ -199,7 +199,7 @@ _data = {
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
-properties/0/watch = false
+properties/0/watch = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjy5v"]
 size = Vector2(90, 130)
@@ -247,7 +247,8 @@ libraries = {
 "": SubResource("AnimationLibrary_x3q8q")
 }
 
-[node name="MSync" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_7vyvk")
 
 [node name="Hurtbox" parent="." instance=ExtResource("12_pxlu8")]
