@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://kogoc4hg41mb"]
+[gd_scene load_steps=23 format=3 uid="uid://kogoc4hg41mb"]
 
 [ext_resource type="Script" path="res://Entities/Character.gd" id="1_arqb2"]
 [ext_resource type="Texture2D" uid="uid://dcgm10pca2t8x" path="res://icon.svg" id="2_bhag2"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://4cu5cpj2v6f0" path="res://Entities/Player/penguinframejump.png" id="9_5bl8k"]
 [ext_resource type="Texture2D" uid="uid://ddogu6vw0uao0" path="res://Entities/Player/penguinframe1.png" id="9_bu2lt"]
 [ext_resource type="Texture2D" uid="uid://1mdymyjo6c6g" path="res://Entities/Player/penguinframe2.png" id="10_7jh70"]
+[ext_resource type="PackedScene" uid="uid://b75ryumx6imm2" path="res://Entities/CollisionAreas/hurtbox.tscn" id="12_pxlu8"]
 
 [sub_resource type="Resource" id="Resource_plgi6"]
 script = ExtResource("2_shtls")
@@ -200,6 +201,9 @@ properties/0/spawn = true
 properties/0/sync = true
 properties/0/watch = false
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjy5v"]
+size = Vector2(90, 130)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("State_Machine")]
 script = ExtResource("1_arqb2")
 State_Machine = NodePath("FSM")
@@ -246,4 +250,11 @@ libraries = {
 [node name="MSync" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_7vyvk")
 
+[node name="Hurtbox" parent="." instance=ExtResource("12_pxlu8")]
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("RectangleShape2D_xjy5v")
+
 [connection signal="timeout" from="FSM/Move/IdleTimer" to="FSM/Move" method="_on_timer_timeout"]
+
+[editable path="Hurtbox"]

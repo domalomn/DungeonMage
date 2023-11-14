@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://p1vai02627c2"]
+
+[ext_resource type="Script" path="res://Entities/Enemies/dummy_enemy.gd" id="1_05njw"]
+[ext_resource type="Texture2D" uid="uid://cntcvyjxw3alr" path="res://Entities/Enemies/ratframe0.png" id="1_e83xk"]
+[ext_resource type="PackedScene" uid="uid://b75ryumx6imm2" path="res://Entities/CollisionAreas/hurtbox.tscn" id="2_r5hks"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6c72"]
+size = Vector2(31, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owc37"]
+size = Vector2(33, 12)
+
+[node name="DummyEnemy" type="CharacterBody2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_05njw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_e83xk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_r6c72")
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_r5hks")]
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_owc37")
+
+[editable path="Hurtbox"]
