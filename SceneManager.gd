@@ -8,7 +8,7 @@ func preparePlayers():
 	if len(Multiplayer.Players):
 		var spawners = get_tree().get_nodes_in_group("PlayerSpawn")
 		var index = 0
-		for x in Multiplayer.Players:
+		for x in Multiplayer.Players.keys():
 			spawnPlayer(spawners[index].global_position,x)
 			index+=1
 	else:
@@ -19,5 +19,5 @@ func preparePlayers():
 func spawnPlayer(pos:Vector2,id:int=1):
 	var player = PlayerScene.instantiate()
 	player.global_position = pos
+	player.name = str(id)
 	add_child(player)
-	player.set_multiplayer(id)

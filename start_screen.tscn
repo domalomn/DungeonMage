@@ -34,8 +34,8 @@ scale = Vector2(0.814, 1)
 
 [node name="Life Bar" parent="." instance=ExtResource("4_lk1yx")]
 
-[node name="0" type="Node2D" parent="." groups=["PlayerSpawn"]]
+[node name="Spawner1" type="Node2D" parent="." groups=["PlayerSpawn"]]
 position = Vector2(173, 203)
 
-[node name="1" type="Node2D" parent="." groups=["PlayerSpawn"]]
+[node name="Spawner2" type="Node2D" parent="." groups=["PlayerSpawn"]]
 position = Vector2(558, 197)
