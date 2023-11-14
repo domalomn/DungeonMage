@@ -6,8 +6,7 @@ var world_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var State_Machine : FSM = null
 @export var Stats : CharacterStats = null
 
-func _input(event): 
-	State_Machine.current.handle_input(event)
+func _input(event): if $MSync.is_multiplayer_authority(): State_Machine.current.handle_input(event)
 
 func _physics_process(delta): State_Machine.current.physics_update(delta)
 

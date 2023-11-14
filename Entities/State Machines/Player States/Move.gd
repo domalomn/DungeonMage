@@ -10,9 +10,11 @@ const FLOOR_NORMAL: = Vector2.UP
 
 var velocity: = Vector2.ZERO
 
+func enter_state(arg:Dictionary = {}): animation_player.play("Walk")
+
 ## called every physics frame when active 
 func physics_update(_delta): 
-	animation_player.play("Walk")
+	
 	velocity.y += gravity * _delta
 	var direction: = get_direction()
 	velocity = calculate_move_velocity(velocity, direction, speed)

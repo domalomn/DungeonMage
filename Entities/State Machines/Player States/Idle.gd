@@ -8,9 +8,11 @@ extends State
 
 func get_friction(): pass
 
+func enter_state(arg:Dictionary = {}): animation_player.play("Idle")
+
 ## called every physics frame when active
 func physics_update(_delta): 
-	animation_player.play("Idle")
+	
 	user.velocity = Global.move_vector_to(user.velocity, Vector2.ZERO, user.Stats.Ground_Friction, true)
 	user.move_and_slide()
 	

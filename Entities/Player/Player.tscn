@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://kogoc4hg41mb"]
+[gd_scene load_steps=21 format=3 uid="uid://kogoc4hg41mb"]
 
 [ext_resource type="Script" path="res://Entities/Character.gd" id="1_arqb2"]
 [ext_resource type="Texture2D" uid="uid://dcgm10pca2t8x" path="res://icon.svg" id="2_bhag2"]
@@ -194,6 +194,12 @@ _data = {
 "Walk": SubResource("Animation_jcfi7")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7vyvk"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("State_Machine")]
 script = ExtResource("1_arqb2")
 State_Machine = NodePath("FSM")
@@ -236,5 +242,8 @@ animation = &"Idle"
 libraries = {
 "": SubResource("AnimationLibrary_x3q8q")
 }
+
+[node name="MSync" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_7vyvk")
 
 [connection signal="timeout" from="FSM/Move/IdleTimer" to="FSM/Move" method="_on_timer_timeout"]
