@@ -24,7 +24,8 @@ func _hostGame():
 	
 	multiplayer.set_multiplayer_peer(peer)
 	print("waiting for players")
-
+	
+	sendPlayerInfo("Host",multiplayer.get_unique_id())
 
 func _joinGame():
 	peer = ENetMultiplayerPeer.new()
@@ -47,11 +48,26 @@ func GoToGame():
 func _playerConnected(id):
 	print("Connected " + str(id))
 	
+	
 func _playerDisconnected(id):
 	print("Connection Failed " + str(id))
 
 func _serverConnected():
 	print("Connected to Server")
 	
+	sendPlayerInfo.rpc_id(1,"Groupie",multiplayer.get_unique_id())
+	
 func _failedConnection():
 	print("Connection Failed")
+
+@rpc("any_peer")
+func sendPlayerInfo(name,id):
+	if !Multiplayer.Players.has(id):
+		Multiplayer.Players[id] = {
+			"name": name,
+			"id": id
+		}
+		
+	if multiplayer.is_server():
+		for x in Multiplayer.Players: 
+			sendPlayerInfo.rpc(Multiplayer.Players[x].name,x)

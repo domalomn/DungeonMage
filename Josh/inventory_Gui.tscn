@@ -1,14 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3ctjyrhjwgo6"]
+[gd_scene load_steps=5 format=3 uid="uid://b3ctjyrhjwgo6"]
 
 [ext_resource type="Script" path="res://Josh/inventory_Gui.gd" id="1_fs45b"]
 [ext_resource type="Texture2D" uid="uid://52feq4kfp2wp" path="res://Josh/Art/InventoryGui.png" id="2_b5dmn"]
-[ext_resource type="Texture2D" uid="uid://dmjihbv2b2d7x" path="res://Josh/Art/Button.png" id="3_vd8os"]
+[ext_resource type="Theme" uid="uid://bykmy2e7k7fqa" path="res://Josh/items/SlotTheme.tres" id="3_x6yd0"]
 [ext_resource type="Script" path="res://Josh/Slot.gd" id="4_n5qpo"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_05h81"]
-texture = ExtResource("3_vd8os")
-
-[node name="InventoryGui" type="Control"]
+[node name="InventoryGui" type="Control" groups=["InventoryGui"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,59 +36,69 @@ columns = 10
 [node name="Slot1" type="Panel" parent="TextureRect/GridContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_05h81")
+theme = ExtResource("3_x6yd0")
+theme_type_variation = &"Held"
 script = ExtResource("4_n5qpo")
 
 [node name="Slot2" type="Panel" parent="TextureRect/GridContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_05h81")
+theme = ExtResource("3_x6yd0")
+theme_type_variation = &"Held"
 script = ExtResource("4_n5qpo")
 
 [node name="Slot3" type="Panel" parent="TextureRect/GridContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_05h81")
+theme = ExtResource("3_x6yd0")
+theme_type_variation = &"Held"
 script = ExtResource("4_n5qpo")
 
 [node name="Slot4" type="Panel" parent="TextureRect/GridContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_05h81")
+theme = ExtResource("3_x6yd0")
+theme_type_variation = &"Held"
 script = ExtResource("4_n5qpo")
 
 [node name="Slot5" type="Panel" parent="TextureRect/GridContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_05h81")
+theme = ExtResource("3_x6yd0")
+theme_type_variation = &"Held"
 script = ExtResource("4_n5qpo")
 
 [node name="Slot6" type="Panel" parent="TextureRect/GridContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_05h81")
+theme = ExtResource("3_x6yd0")
+theme_type_variation = &"Held"
 script = ExtResource("4_n5qpo")
 
 [node name="Slot7" type="Panel" parent="TextureRect/GridContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_05h81")
+theme = ExtResource("3_x6yd0")
+theme_type_variation = &"Held"
 script = ExtResource("4_n5qpo")
 
 [node name="Slot8" type="Panel" parent="TextureRect/GridContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_05h81")
+theme = ExtResource("3_x6yd0")
+theme_type_variation = &"Held"
 script = ExtResource("4_n5qpo")
 
 [node name="Slot9" type="Panel" parent="TextureRect/GridContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_05h81")
+theme = ExtResource("3_x6yd0")
+theme_type_variation = &"Empty"
 script = ExtResource("4_n5qpo")
 
 [node name="Slot10" type="Panel" parent="TextureRect/GridContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_05h81")
+theme = ExtResource("3_x6yd0")
+theme_type_variation = &"Empty"
 script = ExtResource("4_n5qpo")

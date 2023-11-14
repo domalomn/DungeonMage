@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bykmy2e7k7fqa"]
+
+[ext_resource type="Texture2D" uid="uid://jnt1ppn3ihbb" path="res://Josh/Art/ButtonEmpty.png" id="1_63o1r"]
+[ext_resource type="Texture2D" uid="uid://dmjihbv2b2d7x" path="res://Josh/Art/Button.png" id="1_j84xd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qjut0"]
+resource_local_to_scene = true
+texture = ExtResource("1_63o1r")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_voyy3"]
+resource_local_to_scene = true
+texture = ExtResource("1_j84xd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t8uyv"]
+resource_local_to_scene = true
+texture = ExtResource("1_j84xd")
+
+[resource]
+Default/base_type = &"Panel"
+Empty/base_type = &"Panel"
+Empty/styles/panel = SubResource("StyleBoxTexture_qjut0")
+Held/base_type = &"Panel"
+Held/styles/panel = SubResource("StyleBoxTexture_voyy3")
+Panel/styles/panel = SubResource("StyleBoxTexture_t8uyv")

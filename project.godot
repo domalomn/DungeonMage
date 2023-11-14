@@ -21,6 +21,7 @@ Audio="*res://Autoload/Audio/Audio.tscn"
 File="*res://Autoload/FileLoader.tscn"
 Global="*res://Autoload/GlobalNode.tscn"
 SceneLoader="*res://Autoload/SceneLoader.tscn"
+Multiplayer="*res://Autoload/MultiplayerManager.gd"
 
 [input]
 
