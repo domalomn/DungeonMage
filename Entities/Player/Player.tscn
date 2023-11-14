@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://kogoc4hg41mb"]
+[gd_scene load_steps=20 format=3 uid="uid://kogoc4hg41mb"]
 
 [ext_resource type="Script" path="res://Entities/Character.gd" id="1_arqb2"]
 [ext_resource type="Texture2D" uid="uid://dcgm10pca2t8x" path="res://icon.svg" id="2_bhag2"]
@@ -7,6 +7,10 @@
 [ext_resource type="Script" path="res://Entities/State Machines/Player States/Idle.gd" id="4_hgayi"]
 [ext_resource type="Script" path="res://Entities/State Machines/Player States/Move.gd" id="6_jalty"]
 [ext_resource type="Script" path="res://Entities/State Machines/Player States/Falling.gd" id="7_g11qy"]
+[ext_resource type="Texture2D" uid="uid://c77gij5v3aiug" path="res://Entities/Player/penguinframe0.png" id="8_po8hb"]
+[ext_resource type="Texture2D" uid="uid://4cu5cpj2v6f0" path="res://Entities/Player/penguinframejump.png" id="9_5bl8k"]
+[ext_resource type="Texture2D" uid="uid://ddogu6vw0uao0" path="res://Entities/Player/penguinframe1.png" id="9_bu2lt"]
+[ext_resource type="Texture2D" uid="uid://1mdymyjo6c6g" path="res://Entities/Player/penguinframe2.png" id="10_7jh70"]
 
 [sub_resource type="Resource" id="Resource_plgi6"]
 script = ExtResource("2_shtls")
@@ -18,7 +22,177 @@ Air_Friction = 100
 Air_Acceleration = 100
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_47if4"]
-size = Vector2(134, 126)
+size = Vector2(84, 126)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r628a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_po8hb")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_5bl8k")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_bu2lt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_po8hb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_7jh70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_po8hb")
+}],
+"loop": true,
+"name": &"Walking",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_f6ise"]
+resource_name = "Idle"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_iubk1"]
+resource_name = "Jump"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Jump"]
+}
+
+[sub_resource type="Animation" id="Animation_t5h4e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+
+[sub_resource type="Animation" id="Animation_jcfi7"]
+resource_name = "Walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:sprite_frames")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("SpriteFrames_r628a")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Walking"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x3q8q"]
+_data = {
+"Idle": SubResource("Animation_f6ise"),
+"Jump": SubResource("Animation_iubk1"),
+"RESET": SubResource("Animation_t5h4e"),
+"Walk": SubResource("Animation_jcfi7")
+}
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("State_Machine")]
 script = ExtResource("1_arqb2")
@@ -26,15 +200,15 @@ State_Machine = NodePath("FSM")
 Stats = SubResource("Resource_plgi6")
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(1, -65)
+visible = false
 texture = ExtResource("2_bhag2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, -65)
 shape = SubResource("RectangleShape2D_47if4")
 
-[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("readyState")]
+[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("animation_player", "readyState")]
 script = ExtResource("3_ui0s5")
+animation_player = NodePath("../AnimationPlayer")
 readyState = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
@@ -51,5 +225,16 @@ idle_timer = NodePath("IdleTimer")
 [node name="Falling" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
 script = ExtResource("7_g11qy")
 user = NodePath("../..")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_r628a")
+animation = &"Idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x3q8q")
+}
 
 [connection signal="timeout" from="FSM/Move/IdleTimer" to="FSM/Move" method="_on_timer_timeout"]
