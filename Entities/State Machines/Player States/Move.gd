@@ -12,11 +12,14 @@ var velocity: = Vector2.ZERO
 
 ## called every physics frame when active 
 func physics_update(_delta): 
+	animation_player.play("Walk")
 	velocity.y += gravity * _delta
 	var direction: = get_direction()
 	velocity = calculate_move_velocity(velocity, direction, speed)
 	var snap: Vector2 = Vector2.DOWN * 60.0 if direction.y == 0.0 else Vector2.ZERO
 	user.velocity = velocity
+	
+	
 	user.move_and_slide()
 
 func get_direction() -> Vector2:

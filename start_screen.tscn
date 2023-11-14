@@ -6,17 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://83o8n30h7dek" path="res://Aaliyah/UI/Life Bar/life_bar.tscn" id="4_lk1yx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2rpx"]
-size = Vector2(1142, 20)
+size = Vector2(1142, 40)
 
 [node name="Start Screen" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_iqd67")]
-position = Vector2(354, 343)
+position = Vector2(355, 316)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(575, 411)
+position = Vector2(575, 401)
 shape = SubResource("RectangleShape2D_t2rpx")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
