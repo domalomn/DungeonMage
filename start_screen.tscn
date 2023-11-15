@@ -1,13 +1,62 @@
-[gd_scene load_steps=7 format=3 uid="uid://ce0e5nkfemr0e"]
+[gd_scene load_steps=10 format=3 uid="uid://ce0e5nkfemr0e"]
 
 [ext_resource type="Script" path="res://SceneManager.gd" id="1_k638j"]
 [ext_resource type="Texture2D" uid="uid://bk3wrgkwso81w" path="res://Josh/Art/seamless-grounds - Cold Taundra.png" id="2_43xaj"]
 [ext_resource type="PackedScene" uid="uid://b3ctjyrhjwgo6" path="res://Josh/inventory_Gui.tscn" id="2_x3jco"]
 [ext_resource type="PackedScene" uid="uid://83o8n30h7dek" path="res://Aaliyah/UI/Life Bar/life_bar.tscn" id="4_lk1yx"]
 [ext_resource type="PackedScene" uid="uid://p1vai02627c2" path="res://Entities/Enemies/dummy_enemy.tscn" id="5_ffn86"]
+[ext_resource type="Texture2D" uid="uid://m0g0nq4fgq0u" path="res://Entities/CollisionAreas/tilemap.png" id="6_wn6v0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2rpx"]
 size = Vector2(1142, 40)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujlml"]
+texture = ExtResource("6_wn6v0")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+0:3/0 = 0
+0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:3/0/physics_layer_0/angular_velocity = 0.0
+1:3/0 = 0
+1:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:3/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_0cwtj"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 2
+sources/0 = SubResource("TileSetAtlasSource_ujlml")
 
 [node name="GameRoom" type="Node2D"]
 script = ExtResource("1_k638j")
@@ -15,6 +64,7 @@ script = ExtResource("1_k638j")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
 position = Vector2(575, 401)
 shape = SubResource("RectangleShape2D_t2rpx")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
@@ -33,13 +83,20 @@ offset_right = -78.0
 offset_bottom = -54.0
 scale = Vector2(0.814, 1)
 
-[node name="Life Bar" parent="." instance=ExtResource("4_lk1yx")]
+[node name="Life Bar" parent="CanvasLayer" instance=ExtResource("4_lk1yx")]
 
 [node name="Spawner1" type="Node2D" parent="." groups=["PlayerSpawn"]]
 position = Vector2(173, 203)
 
 [node name="Spawner2" type="Node2D" parent="." groups=["PlayerSpawn"]]
 position = Vector2(558, 197)
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+scale = Vector2(3, 3)
+tile_set = SubResource("TileSet_0cwtj")
+format = 2
+layer_0/tile_data = PackedInt32Array(262144, 0, 1, 262145, 0, 1, 262146, 0, 1, 262147, 0, 1, 262148, 0, 1, 262149, 0, 1, 262150, 0, 1, 262151, 0, 1, 262152, 0, 1, 262153, 0, 1, 262154, 0, 1, 262155, 0, 1, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 393215, 0, 0, 327679, 0, 0, 262143, 0, 0, 196607, 0, 0, 131071, 0, 0, 65535, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, 0, 65536, 0, 65536, 65536, 0, 131072, 65536, 0, 196608, 65536, 0, 196609, 65536, 0, 131073, 65536, 0, 65537, 65536, 0, 1, 65536, 0, 2, 65536, 0, 65538, 65536, 0, 131074, 65536, 0, 196610, 65536, 0, 196611, 65536, 0, 131075, 65536, 0, 65539, 65536, 0, 3, 65536, 0, 4, 65536, 0, 65540, 65536, 0, 131076, 65536, 0, 196612, 65536, 0, 196613, 65536, 0, 131077, 65536, 0, 65541, 65536, 0, 5, 65536, 0, 6, 65536, 0, 65542, 65536, 0, 131078, 65536, 0, 196614, 65536, 0, 196615, 65536, 0, 131079, 65536, 0, 65543, 65536, 0, 7, 65536, 0, 131080, 65536, 0, 196616, 65536, 0, 65544, 65536, 0, 8, 65536, 0, 9, 65536, 0, 65545, 65536, 0, 131081, 65536, 0, 196617, 65536, 0, 196618, 65536, 0, 131082, 65536, 0, 65546, 65536, 0, 10, 65536, 0, 65547, 65536, 0, 131083, 65536, 0, 196619, 65536, 0, 11, 65536, 0)
 
 [node name="DummyEnemy" parent="." instance=ExtResource("5_ffn86")]
 position = Vector2(862, 345)

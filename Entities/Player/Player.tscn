@@ -1,7 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://kogoc4hg41mb"]
+[gd_scene load_steps=25 format=3 uid="uid://kogoc4hg41mb"]
 
 [ext_resource type="Script" path="res://Entities/Character.gd" id="1_arqb2"]
-[ext_resource type="Texture2D" uid="uid://dcgm10pca2t8x" path="res://icon.svg" id="2_bhag2"]
 [ext_resource type="Script" path="res://Entities/Character_Stats.gd" id="2_shtls"]
 [ext_resource type="Script" path="res://Entities/State Machines/Finite State Machine.gd" id="3_ui0s5"]
 [ext_resource type="Script" path="res://Entities/State Machines/Player States/Idle.gd" id="4_hgayi"]
@@ -11,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://4cu5cpj2v6f0" path="res://Entities/Player/penguinframejump.png" id="9_5bl8k"]
 [ext_resource type="Texture2D" uid="uid://ddogu6vw0uao0" path="res://Entities/Player/penguinframe1.png" id="9_bu2lt"]
 [ext_resource type="Texture2D" uid="uid://1mdymyjo6c6g" path="res://Entities/Player/penguinframe2.png" id="10_7jh70"]
+[ext_resource type="Texture2D" uid="uid://st77q4lycdeq" path="res://Entities/Player/flipper.png" id="12_htgxe"]
 [ext_resource type="PackedScene" uid="uid://b75ryumx6imm2" path="res://Entities/CollisionAreas/hurtbox.tscn" id="12_pxlu8"]
+[ext_resource type="PackedScene" uid="uid://bcgqrgpbok47" path="res://Entities/CollisionAreas/hitbox.tscn" id="12_ug7hv"]
 
 [sub_resource type="Resource" id="Resource_plgi6"]
 script = ExtResource("2_shtls")
@@ -60,6 +61,8 @@ animations = [{
 "name": &"Walking",
 "speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gatha"]
 
 [sub_resource type="Animation" id="Animation_f6ise"]
 resource_name = "Idle"
@@ -204,14 +207,12 @@ properties/0/watch = true
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjy5v"]
 size = Vector2(90, 130)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("State_Machine")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("State_Machine", "aimStartPos", "meleeHitbox")]
 script = ExtResource("1_arqb2")
 State_Machine = NodePath("FSM")
 Stats = SubResource("Resource_plgi6")
-
-[node name="Icon" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_bhag2")
+aimStartPos = NodePath("AnimatedSprite2D/AimStartPosition")
+meleeHitbox = NodePath("AnimatedSprite2D/AimStartPosition/Hitbox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_47if4")
@@ -242,6 +243,24 @@ scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_r628a")
 animation = &"Idle"
 
+[node name="AimStartPosition" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(-6.33333, 7)
+scale = Vector2(0.333333, 0.333333)
+
+[node name="Flipper" type="Sprite2D" parent="AnimatedSprite2D/AimStartPosition"]
+texture_filter = 1
+position = Vector2(5, 3)
+rotation = -1.57079
+scale = Vector2(2.90625, 2.85511)
+texture = ExtResource("12_htgxe")
+
+[node name="Hitbox" parent="AnimatedSprite2D/AimStartPosition" instance=ExtResource("12_ug7hv")]
+
+[node name="CollisionShape2D" parent="AnimatedSprite2D/AimStartPosition/Hitbox" index="0"]
+position = Vector2(76.0001, 0)
+scale = Vector2(3.02918, 3.02918)
+shape = SubResource("RectangleShape2D_gatha")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_x3q8q")
@@ -256,6 +275,11 @@ replication_config = SubResource("SceneReplicationConfig_7vyvk")
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("RectangleShape2D_xjy5v")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.75, 0.75)
+position_smoothing_enabled = true
+
 [connection signal="timeout" from="FSM/Move/IdleTimer" to="FSM/Move" method="_on_timer_timeout"]
 
+[editable path="AnimatedSprite2D/AimStartPosition/Hitbox"]
 [editable path="Hurtbox"]

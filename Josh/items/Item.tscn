@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Josh/ItemImages.gd" id="1_h2qt3"]
 [ext_resource type="Texture2D" uid="uid://c6331mx3ah21g" path="res://Josh/Art/Sword.png" id="2_et4xe"]
 
-[node name="Item" type="Node2D"]
+[node name="Item" type="Node2D" groups=["Item"]]
 script = ExtResource("1_h2qt3")
 
 [node name="TextureRect" type="TextureRect" parent="."]
