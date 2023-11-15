@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://b0n8ba7ycnw1t"]
 
 [ext_resource type="Script" path="res://Main Menu.gd" id="1_befte"]
+[ext_resource type="Texture2D" uid="uid://dbp6xw1k6j3o" path="res://Aaliyah/UI/Background/Dungeon Pic.jpeg" id="2_rq68p"]
 [ext_resource type="FontFile" uid="uid://bmtf3mpkawr66" path="res://Aaliyah/UI/UI/Font/ConnectionII.otf" id="2_syhv3"]
-[ext_resource type="PackedScene" uid="uid://cf7jignhp2fkd" path="res://Networking/PeerToPeerConnection.tscn" id="3_uaw5c"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -13,11 +13,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_befte")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 1159.0
-offset_bottom = 652.0
-color = Color(0.345098, 0.0980392, 0.160784, 1)
+[node name="DungeonPic" type="Sprite2D" parent="."]
+position = Vector2(578.5, 326)
+scale = Vector2(1.13, 1.14)
+texture = ExtResource("2_rq68p")
 
 [node name="Game Name" type="Label" parent="."]
 layout_mode = 1
@@ -65,13 +64,13 @@ theme_override_fonts/font = ExtResource("2_syhv3")
 theme_override_font_sizes/font_size = 50
 text = "Quit"
 
-[node name="ConnectScreen" parent="." instance=ExtResource("3_uaw5c")]
-layout_mode = 1
-offset_left = 300.0
-offset_top = 493.0
-offset_right = 300.0
-offset_bottom = 493.0
+[node name="Multiplayer" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_syhv3")
+theme_override_font_sizes/font_size = 50
+text = "Multiplayer"
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="VBoxContainer/Multiplayer" to="." method="_on_multiplayer_pressed"]
