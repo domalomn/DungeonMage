@@ -2,16 +2,17 @@
 
 [ext_resource type="Script" path="res://Entities/Enemies/dummy_enemy.gd" id="1_05njw"]
 [ext_resource type="Texture2D" uid="uid://cntcvyjxw3alr" path="res://Entities/Enemies/ratframe0.png" id="1_e83xk"]
-[ext_resource type="PackedScene" uid="uid://b75ryumx6imm2" path="res://Entities/CollisionAreas/hurtbox.tscn" id="2_r5hks"]
+[ext_resource type="Script" path="res://Entities/CollisionAreas/Hurtbox.gd" id="3_vr82y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6c72"]
 size = Vector2(31, 10)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_owc37"]
-size = Vector2(33, 12)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvyir"]
+size = Vector2(33, 10.6667)
 
 [node name="DummyEnemy" type="CharacterBody2D"]
 scale = Vector2(3, 3)
+collision_layer = 2
 script = ExtResource("1_05njw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -22,10 +23,11 @@ texture = ExtResource("1_e83xk")
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_r6c72")
 
-[node name="Hurtbox" parent="." instance=ExtResource("2_r5hks")]
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("3_vr82y")
 
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_owc37")
-
-[editable path="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-0.5, -0.333333)
+shape = SubResource("RectangleShape2D_yvyir")
