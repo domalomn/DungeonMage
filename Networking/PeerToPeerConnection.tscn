@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cf7jignhp2fkd"]
 
 [ext_resource type="Script" path="res://Networking/PeerToPeerConnection.gd" id="1_60cg2"]
-[ext_resource type="FontFile" uid="uid://bmtf3mpkawr66" path="res://Aaliyah/UI/UI/Font/ConnectionII.otf" id="2_86amq"]
 [ext_resource type="Texture2D" uid="uid://dbp6xw1k6j3o" path="res://Aaliyah/UI/Background/Dungeon Pic.jpeg" id="2_eymyl"]
+[ext_resource type="FontFile" uid="uid://bmtf3mpkawr66" path="res://Aaliyah/UI/Font/ConnectionII.otf" id="3_unxdt"]
 
 [node name="ConnectScreen" type="Control"]
 layout_mode = 3
@@ -28,7 +28,7 @@ offset_top = 88.0
 offset_right = 212.5
 offset_bottom = 171.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_86amq")
+theme_override_fonts/font = ExtResource("3_unxdt")
 theme_override_font_sizes/font_size = 80
 text = "Multiplayer"
 
@@ -50,21 +50,21 @@ theme_override_constants/separation = 30
 [node name="Host" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_86amq")
+theme_override_fonts/font = ExtResource("3_unxdt")
 theme_override_font_sizes/font_size = 50
 text = "Host"
 
 [node name="Join" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_86amq")
+theme_override_fonts/font = ExtResource("3_unxdt")
 theme_override_font_sizes/font_size = 50
 text = "Join"
 
 [node name="Start Game" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_86amq")
+theme_override_fonts/font = ExtResource("3_unxdt")
 theme_override_font_sizes/font_size = 50
 text = "Start Game"
 

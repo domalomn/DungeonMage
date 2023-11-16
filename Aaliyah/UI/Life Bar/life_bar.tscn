@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://83o8n30h7dek"]
 
 [ext_resource type="Texture2D" uid="uid://k6yq6oeihyys" path="res://Aaliyah/UI/Counter/Counter.bmp" id="1_pcqbh"]
-[ext_resource type="FontFile" uid="uid://bmtf3mpkawr66" path="res://Aaliyah/UI/UI/Font/ConnectionII.otf" id="2_qtdl8"]
+[ext_resource type="FontFile" uid="uid://bmtf3mpkawr66" path="res://Aaliyah/UI/Font/ConnectionII.otf" id="2_5o8ek"]
 [ext_resource type="Texture2D" uid="uid://0ob7j6mvbstx" path="res://Aaliyah/UI/Life Bar/Life-bar.bmp" id="3_d3cc6"]
 [ext_resource type="Texture2D" uid="uid://sqw4p881lmqi" path="res://Aaliyah/UI/Life Bar/Fill.bmp" id="4_l0p8p"]
 
@@ -30,7 +30,7 @@ offset_top = -19.0
 offset_right = 58.0
 offset_bottom = 19.0
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_qtdl8")
+theme_override_fonts/font = ExtResource("2_5o8ek")
 theme_override_font_sizes/font_size = 30
 text = "HP"
 horizontal_alignment = 1
@@ -49,7 +49,7 @@ offset_right = -8.0
 offset_bottom = 16.5
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_qtdl8")
+theme_override_fonts/font = ExtResource("2_5o8ek")
 theme_override_font_sizes/font_size = 25
 text = "100/100"
 horizontal_alignment = 1
