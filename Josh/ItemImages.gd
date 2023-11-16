@@ -6,4 +6,6 @@ const Textures : Array[Texture] = [
 	preload("res://Josh/Art/Throwing Knife.png")
 ]
 
-func _ready(): $TextureRect.texture = Textures[randi_range(0,1)]
+func _ready(): 
+	$TextureRect.texture = Textures[randi_range(0,1)]
+	add_to_group("Item")
