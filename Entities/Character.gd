@@ -22,9 +22,10 @@ func _input(event): if %MultiplayerSynchronizer.is_multiplayer_authority(): Stat
 
 func _physics_process(delta): 
 	State_Machine.current.physics_update(delta)
+	
 	if Input.is_action_just_pressed("A"):
 		useItem() 
-	#aimStartPos.look_at(get_global_mouse_position())
+		
 	if velocity.x < 0:
 		$AnimatedSprite2D.flip_h = true
 		meleeHitbox.get_child(1).flip_h = true
@@ -72,9 +73,11 @@ func useItem():
 			# fires from unit vector pointing from player to cursor, speed is determined from staff data
 			bullet.velocity = (get_global_mouse_position() - bullet.position).normalized() * bullet.speed
 		
+		# no velocity value for laser, so it needs a seperate condition.
 		
 		else:
 			var laser = bulletPath.instantiate()
+			laser.damage = currentItemSelected.damage;
 			get_parent().add_child(laser)
 			laser.position = global_position
 		
@@ -82,12 +85,16 @@ func useItem():
 		# laser-class staffs should have a fire rate of zero as there should be no delay for an active laser.
 		# as should consumable items (if godot requires a return throughout func when a return is specified i'm not sure)
 		return currentItemSelected.firerate
+		
+		# (At the moment) checks for a generic item to perform a melee attack.
+		# Enabled hitbox and starts animation and timer.
 	elif currentItemSelected.is_in_group("Item") && meleeTimer.is_stopped():
 		print("Item found.")
 		meleeHitbox.get_child(0).disabled = false
 		meleeHitbox.get_child(2).play("Slash")
 		meleeTimer.start()
 
+# timer re-disables hitbox after brief interval.
 func _on_melee_timer_timeout():
 	meleeHitbox.get_child(0).disabled = true
 	print("Attack ended.")

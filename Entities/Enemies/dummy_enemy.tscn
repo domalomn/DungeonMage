@@ -23,11 +23,14 @@ texture = ExtResource("1_e83xk")
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_r6c72")
 
-[node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 4
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("boxOwner")]
+collision_layer = 0
 collision_mask = 8
 script = ExtResource("3_vr82y")
+boxOwner = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(-0.5, -0.333333)
 shape = SubResource("RectangleShape2D_yvyir")
+
+[connection signal="hitbox_detected" from="Hurtbox" to="." method="_on_hurtbox_hitbox_detected"]

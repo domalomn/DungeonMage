@@ -16,5 +16,10 @@ func _physics_process(delta):
 		
 	if health <= 0:
 		queue_free()
-
 	move_and_slide()
+	
+	
+
+
+func _on_hurtbox_hitbox_detected(area, boxowner):
+	health -= area.damage

@@ -97,6 +97,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_qbfnq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
 [sub_resource type="Animation" id="Animation_isypc"]
 resource_name = "Slash"
 length = 0.6
@@ -123,21 +138,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"Slash"]
-}
-
-[sub_resource type="Animation" id="Animation_qbfnq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ivb8y"]
@@ -326,16 +326,17 @@ animation = &"Idle"
 [node name="AimStartPosition" type="Marker2D" parent="AnimatedSprite2D"]
 scale = Vector2(0.333333, 0.333333)
 
-[node name="MeleeHitBox" type="Area2D" parent="AnimatedSprite2D/AimStartPosition"]
+[node name="MeleeHitBox" type="Area2D" parent="AnimatedSprite2D/AimStartPosition" node_paths=PackedStringArray("boxOwner")]
 position = Vector2(77.0001, -2)
 scale = Vector2(1.31456, 0.82353)
 collision_layer = 8
-collision_mask = 4
+collision_mask = 0
 script = ExtResource("12_wqjbt")
+boxOwner = NodePath("../../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/AimStartPosition/MeleeHitBox"]
 position = Vector2(0.0749931, 1.19209e-07)
-scale = Vector2(3.5645, 6.02475)
+scale = Vector2(-3.1407, 8.20818)
 shape = SubResource("RectangleShape2D_2q5y2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D/AimStartPosition/MeleeHitBox"]
@@ -365,7 +366,7 @@ zoom = Vector2(0.75, 0.75)
 position_smoothing_enabled = true
 
 [node name="MeleeTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.5
 one_shot = true
 
 [connection signal="timeout" from="FSM/Move/IdleTimer" to="FSM/Move" method="_on_timer_timeout"]
