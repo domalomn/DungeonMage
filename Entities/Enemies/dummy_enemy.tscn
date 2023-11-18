@@ -33,4 +33,6 @@ boxOwner = NodePath("..")
 position = Vector2(-0.5, -0.333333)
 shape = SubResource("RectangleShape2D_yvyir")
 
+[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]
+[connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_area_exited"]
 [connection signal="hitbox_detected" from="Hurtbox" to="." method="_on_hurtbox_hitbox_detected"]

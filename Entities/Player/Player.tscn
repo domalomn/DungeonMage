@@ -312,6 +312,7 @@ user = NodePath("../..")
 idle_timer = NodePath("IdleTimer")
 
 [node name="IdleTimer" type="Timer" parent="FSM/Move"]
+wait_time = 0.25
 
 [node name="Falling" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
 script = ExtResource("7_g11qy")

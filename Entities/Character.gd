@@ -97,4 +97,3 @@ func useItem():
 # timer re-disables hitbox after brief interval.
 func _on_melee_timer_timeout():
 	meleeHitbox.get_child(0).disabled = true
-	print("Attack ended.")
