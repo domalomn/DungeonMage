@@ -13,6 +13,7 @@ var currentItemSelected
 func setAuth(id:int): 
 	name = "Player" + str(id)
 	%MultiplayerSynchronizer.set_multiplayer_authority(id)
+	$Camera2D.enabled = %MultiplayerSynchronizer.is_multiplayer_authority()
 
 func _ready():
 	currentItemSelected = get_tree().get_first_node_in_group("InventoryGui").equippedItem()

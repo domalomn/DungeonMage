@@ -285,8 +285,18 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
 properties/0/watch = true
+properties/1/path = NodePath("AnimationPlayer:current_animation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath("AnimatedSprite2D:flip_h")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("State_Machine", "aimStartPos", "meleeHitbox", "meleeTimer")]
+collision_layer = 10
+collision_mask = 3
 script = ExtResource("1_arqb2")
 State_Machine = NodePath("FSM")
 Stats = SubResource("Resource_plgi6")
@@ -306,17 +316,16 @@ readyState = NodePath("Idle")
 script = ExtResource("4_hgayi")
 user = NodePath("../..")
 
-[node name="Move" type="Node" parent="FSM" node_paths=PackedStringArray("user", "idle_timer")]
+[node name="Move" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
 script = ExtResource("6_jalty")
 user = NodePath("../..")
-idle_timer = NodePath("IdleTimer")
-
-[node name="IdleTimer" type="Timer" parent="FSM/Move"]
-wait_time = 0.25
+speed = 500.0
 
 [node name="Falling" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
 script = ExtResource("7_g11qy")
 user = NodePath("../..")
+speed = 500.0
+acceleration = 25.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -370,5 +379,4 @@ position_smoothing_enabled = true
 wait_time = 0.5
 one_shot = true
 
-[connection signal="timeout" from="FSM/Move/IdleTimer" to="FSM/Move" method="_on_timer_timeout"]
 [connection signal="timeout" from="MeleeTimer" to="." method="_on_melee_timer_timeout"]
