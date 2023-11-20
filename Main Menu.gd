@@ -46,5 +46,5 @@ func updatePlayerList():
 		if x == multiplayer.get_unique_id(): text+=" (You)"
 	
 	$PlayerList/List.text = text
-	$"HBoxContainer/Start Game".disabled = Multiplayer.Players.keys().size() < 2
+	$"HBoxContainer/Start Game".disabled = not (Multiplayer.Players.keys().size() > 1 and Multiplayer.isHost())
 		
