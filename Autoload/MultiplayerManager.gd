@@ -58,7 +58,22 @@ func sendPlayerInfo(n,id):
 			"name": n,
 			"id": id
 		}
-		
+	
+	emit_signal("playerInfoUpdated")
 	if multiplayer.is_server():
 		for x in Multiplayer.Players.keys(): 
 			sendPlayerInfo.rpc(Multiplayer.Players[x]["name"],Multiplayer.Players[x]["id"])
+
+signal playerInfoUpdated
+
+@rpc("any_peer")
+func updatePlayerName(n,id):
+	if Multiplayer.Players.has(id): 
+		Multiplayer.Players[id].name = n
+		emit_signal("playerInfoUpdated")
+		
+		if multiplayer.is_server():
+			for x in Multiplayer.Players.keys():
+				updatePlayerName.rpc(n,id)
+				
+		

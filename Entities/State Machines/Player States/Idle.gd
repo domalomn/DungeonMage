@@ -10,12 +10,15 @@ func get_friction(): pass
 
 func enter_state(arg:Dictionary = {}): 
 	animation_player.play("Idle")
+	user.facing = sign(user.velocity.x)
 
 ## called every physics frame when active
 func physics_update(_delta): 
 	
 	user.velocity = Global.move_vector_to(user.velocity, Vector2.ZERO, user.Stats.Ground_Friction, true)
 	user.move_and_slide()
+	
+	
 	
 	if not user.is_on_floor(): Machine.goto_state(Jump_State,{})
 

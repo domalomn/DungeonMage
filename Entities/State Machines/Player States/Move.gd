@@ -17,7 +17,8 @@ func physics_update(delta):
 	var direction : Vector2 = get_direction()
 	
 	user.velocity = user.velocity.move_toward(direction*speed,acceleration)
-	
+	user.facing = sign(direction.x)
+		
 	user.move_and_slide()
 	
 	if direction.length() > 0: idleTime = idle_time

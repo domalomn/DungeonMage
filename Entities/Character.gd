@@ -21,18 +21,19 @@ func _ready():
 
 func _input(event): if %MultiplayerSynchronizer.is_multiplayer_authority(): State_Machine.current.handle_input(event)
 
+var facing = 1
 func _physics_process(delta): 
 	State_Machine.current.physics_update(delta)
 	
 	if Input.is_action_just_pressed("A"):
 		useItem() 
 		
-	if velocity.x < 0:
+	if facing < 0:
 		$AnimatedSprite2D.flip_h = true
 		meleeHitbox.get_child(1).flip_h = true
 		if meleeHitbox.position.x > 0:
 			meleeHitbox.position *= Vector2(-1, 1)
-	elif velocity.x > 0:
+	elif facing > 0:
 		$AnimatedSprite2D.flip_h = false
 		meleeHitbox.get_child(1).flip_h = false
 		if meleeHitbox.position.x < 0:

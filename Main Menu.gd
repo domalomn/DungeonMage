@@ -1,19 +1,15 @@
 extends Control
 
+const gameScene = preload("res://Game_Room.tscn")
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
+	Multiplayer.connect("playerInfoUpdated",updatePlayerList)
 
 func _on_start_pressed():
-	get_tree().change_scene_to_file("res://start_screen.tscn")
+	Global.changeScene( gameScene.instantiate() )
 
+func _on_multiplayer_pressed():
+	$Anim.play("MultiplayerState")
 
 func _on_options_pressed():
 	# add keycode options
@@ -23,6 +19,32 @@ func _on_options_pressed():
 func _on_quit_pressed():
 	get_tree().quit()
 
+func _hostGame(): 
+	Multiplayer._hostGame()
+	Multiplayer.updatePlayerName.rpc($PlayerList/Name.text, multiplayer.get_unique_id())
 
-func _on_multiplayer_pressed():
-	get_tree().change_scene_to_file("res://Networking/PeerToPeerConnection.tscn")
+func _joinGame():  Multiplayer._joinGame()
+
+func _startGame(): if Multiplayer.isHost(): GoToGame.rpc()
+
+@rpc("call_local")
+func GoToGame(): Global.changeScene( gameScene.instantiate() )
+
+
+
+func _nameEdit(): if Multiplayer.peer:
+	if Multiplayer.isHost():
+		Multiplayer.updatePlayerName($PlayerList/Name.text, multiplayer.get_unique_id())
+	else:
+		Multiplayer.updatePlayerName.rpc($PlayerList/Name.text, multiplayer.get_unique_id())
+	
+	
+func updatePlayerList():
+	var text = " Player List\n---------------"
+	for x in Multiplayer.Players.keys():
+		text+= "\n" + Multiplayer.Players[x].name 
+		if x == multiplayer.get_unique_id(): text+=" (You)"
+	
+	$PlayerList/List.text = text
+	$"HBoxContainer/Start Game".disabled = Multiplayer.Players.keys().size() < 2
+		
