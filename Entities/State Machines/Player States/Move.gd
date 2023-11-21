@@ -13,6 +13,7 @@ func enter_state(arg:Dictionary = {}):
 
 ## called every physics frame when active 
 var idleTime = 0.25
+var fallTime = 0.05
 func physics_update(delta): 
 	var direction : Vector2 = get_direction()
 	
@@ -25,8 +26,17 @@ func physics_update(delta):
 	else: 
 		
 		idleTime -= delta
+		
+		
 		if idleTime <= 0: Machine.goto_state(Idle_State,{})
-
+	
+	if user.is_on_floor(): fallTime = 0.05
+	else:
+		
+		fallTime-= delta
+		print(fallTime)
+		if Input.is_action_pressed("down"): Machine.goto_state("Falling",{"jumpHeight":300})
+		elif fallTime <= 0: Machine.goto_state("Falling",{})
 func handle_input(event : InputEvent): 
 	
 	if Input.is_action_just_pressed("up"): 

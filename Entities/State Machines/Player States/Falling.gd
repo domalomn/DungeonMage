@@ -16,6 +16,7 @@ func enter_state(arg:Dictionary = {}):
 	plummet = false
 	if arg.has("jumpHeight"): jump(arg.jumpHeight)
 	user.facing = sign( user.velocity.x)
+	animation_player.play("Jump")
 
 func jump(jumpHeight:float=airJumpHeight): 
 	user.velocity.y = jumpHeight
@@ -23,7 +24,7 @@ func jump(jumpHeight:float=airJumpHeight):
 	
 	
 func physics_update(_delta): 
-	animation_player.play("Jump")
+	
 	
 	if abs(user.velocity.y) > 5:
 		if plummet: user.velocity.y+= 250
@@ -32,7 +33,7 @@ func physics_update(_delta):
 	else:
 		user.velocity.y+= 1
 		
-	user.velocity = user.velocity.move_toward(get_direction(),acceleration)
+	if user.velocity.y > -5: user.velocity = user.velocity.move_toward(get_direction(),acceleration)
 	
 	var v = user.velocity
 	
@@ -84,6 +85,7 @@ func _input(event):
 			user.velocity = dir
 			
 			user.facing = sign(dir.x)
+			animation_player.play("Jump")
 		
 		elif jumps > 0:
 			plummet = false
@@ -92,6 +94,9 @@ func _input(event):
 			jumps-= 1
 			
 			user.facing = sign(user.velocity.x)
+			
+			if user.facing > 0: animation_player.play("AirJumpR")
+			else: animation_player.play("AirJumpL")
 		
 	
 			
