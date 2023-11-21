@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://kogoc4hg41mb"]
+[gd_scene load_steps=23 format=3 uid="uid://kogoc4hg41mb"]
 
 [ext_resource type="Script" path="res://Entities/Character.gd" id="1_arqb2"]
 [ext_resource type="Script" path="res://Entities/Character_Stats.gd" id="2_shtls"]
@@ -10,11 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://4cu5cpj2v6f0" path="res://Entities/Player/penguinframejump.png" id="9_5bl8k"]
 [ext_resource type="Texture2D" uid="uid://ddogu6vw0uao0" path="res://Entities/Player/penguinframe1.png" id="9_bu2lt"]
 [ext_resource type="Texture2D" uid="uid://1mdymyjo6c6g" path="res://Entities/Player/penguinframe2.png" id="10_7jh70"]
-[ext_resource type="Script" path="res://Entities/CollisionAreas/Hitbox.gd" id="12_wqjbt"]
-[ext_resource type="Texture2D" uid="uid://4mrl1jqanqjl" path="res://Entities/Player/slash0.png" id="13_rwtc3"]
-[ext_resource type="Texture2D" uid="uid://5364tppnneex" path="res://Entities/Player/slash1.png" id="14_0u22h"]
-[ext_resource type="Texture2D" uid="uid://dsb4lcinps0o" path="res://Entities/Player/slash2.png" id="15_cf3w2"]
-[ext_resource type="Texture2D" uid="uid://de2cuo3803yne" path="res://Entities/Player/slash3.png" id="16_3n05m"]
+[ext_resource type="Texture2D" uid="uid://st77q4lycdeq" path="res://Entities/Player/flipper.png" id="11_083uw"]
 
 [sub_resource type="Resource" id="Resource_plgi6"]
 script = ExtResource("2_shtls")
@@ -64,41 +60,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2q5y2"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_0p1h3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("13_rwtc3")
-}],
-"loop": true,
-"name": &"Inactive",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("13_rwtc3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_0u22h")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_cf3w2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_3n05m")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_rwtc3")
-}],
-"loop": true,
-"name": &"Slash",
-"speed": 5.0
-}]
-
-[sub_resource type="Animation" id="Animation_qbfnq"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_sjcko"]
+resource_name = "AirJumpL"
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -109,23 +73,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
-}
-
-[sub_resource type="Animation" id="Animation_isypc"]
-resource_name = "Slash"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -137,13 +85,107 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"Slash"]
+"values": [&"Jump"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 2.5), Vector2(3, 3.2), Vector2(3, 3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [6.28319, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ivb8y"]
-_data = {
-"RESET": SubResource("Animation_qbfnq"),
-"Slash": SubResource("Animation_isypc")
+[sub_resource type="Animation" id="Animation_yqn32"]
+resource_name = "AirJumpR"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Jump"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 2.5), Vector2(3, 3.2), Vector2(3, 3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [-6.28319, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_f6ise"]
@@ -415,134 +457,6 @@ tracks/5/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_sjcko"]
-resource_name = "AirJumpL"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Jump"]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:scale")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(3, 2.5), Vector2(3, 3.2), Vector2(3, 3)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(0.5, 1),
-"update": 0,
-"values": [6.28319, 0.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AnimatedSprite2D:offset")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_yqn32"]
-resource_name = "AirJumpR"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Jump"]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:scale")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(3, 2.5), Vector2(3, 3.2), Vector2(3, 3)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(0.5, 1),
-"update": 0,
-"values": [-6.28319, 0.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AnimatedSprite2D:offset")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x3q8q"]
 _data = {
 "AirJumpL": SubResource("Animation_sjcko"),
@@ -574,9 +488,9 @@ safe_margin = 4.0
 script = ExtResource("1_arqb2")
 State_Machine = NodePath("FSM")
 Stats = SubResource("Resource_plgi6")
-aimStartPos = NodePath("AimStartPosition")
-meleeHitbox = NodePath("AimStartPosition/MeleeHitBox")
-meleeTimer = NodePath("MeleeTimer")
+aimStartPos = NodePath("Flipper/AimStartPosition")
+meleeHitbox = NodePath("")
+meleeTimer = NodePath("")
 metadata/_edit_horizontal_guides_ = [63.0]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -610,38 +524,9 @@ sprite_frames = SubResource("SpriteFrames_r628a")
 animation = &"Idle"
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="AnimatedSprite2D"]
-remote_path = NodePath("../../AimStartPosition")
+remote_path = NodePath("../../Flipper/AimStartPosition")
 update_rotation = false
 update_scale = false
-
-[node name="AimStartPosition" type="Marker2D" parent="."]
-scale = Vector2(0.999999, 0.999999)
-
-[node name="MeleeHitBox" type="Area2D" parent="AimStartPosition" node_paths=PackedStringArray("boxOwner")]
-position = Vector2(77.0001, -2)
-scale = Vector2(1.31456, 0.82353)
-collision_layer = 8
-collision_mask = 0
-script = ExtResource("12_wqjbt")
-boxOwner = NodePath("../..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AimStartPosition/MeleeHitBox"]
-position = Vector2(0.0749931, 1.19209e-07)
-scale = Vector2(-3.1407, 8.20818)
-shape = SubResource("RectangleShape2D_2q5y2")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AimStartPosition/MeleeHitBox"]
-texture_filter = 1
-position = Vector2(0, 3.57628e-07)
-scale = Vector2(3, 3)
-sprite_frames = SubResource("SpriteFrames_0p1h3")
-animation = &"Inactive"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AimStartPosition/MeleeHitBox"]
-speed_scale = 2.0
-libraries = {
-"": SubResource("AnimationLibrary_ivb8y")
-}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -656,8 +541,12 @@ replication_config = SubResource("SceneReplicationConfig_7vyvk")
 zoom = Vector2(0.75, 0.75)
 position_smoothing_enabled = true
 
-[node name="MeleeTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
+[node name="Flipper" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-15, 25)
+scale = Vector2(3, 3)
+texture = ExtResource("11_083uw")
 
-[connection signal="timeout" from="MeleeTimer" to="." method="_on_melee_timer_timeout"]
+[node name="AimStartPosition" type="Marker2D" parent="Flipper"]
+position = Vector2(5, -8.33334)
+scale = Vector2(0.333333, 0.333333)

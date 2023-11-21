@@ -24,4 +24,4 @@ func _physics_process(delta):
 func _on_hurtbox_hitbox_detected(area, boxowner):
 	health -= area.damage
 	print("hit the rat")
-	$Hurtbox.go_invincible(1.0)
+	$Hurtbox.go_invincible(0.4)

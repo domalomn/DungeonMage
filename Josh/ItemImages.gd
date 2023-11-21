@@ -6,6 +6,8 @@ const Textures : Array[Texture] = [
 	preload("res://Josh/Art/Throwing Knife.png")
 ]
 
+const equippedPath = preload("res://EquippedItems/equipped_sword.tscn")
+
 func _ready(): 
 	$TextureRect.texture = Textures[randi_range(0,1)]
 	add_to_group("Item")

@@ -10,6 +10,8 @@ var currentItemSelected
 @export var meleeHitbox : Hitbox = null
 @export var meleeTimer : Timer = null
 
+var isHolding: bool = false
+
 func setAuth(id:int): 
 	name = "Player" + str(id)
 	%MultiplayerSynchronizer.set_multiplayer_authority(id)
@@ -17,7 +19,6 @@ func setAuth(id:int):
 
 func _ready():
 	currentItemSelected = get_tree().get_first_node_in_group("InventoryGui").equippedItem()
-	meleeHitbox.get_child(0).disabled = true
 
 func _input(event): if %MultiplayerSynchronizer.is_multiplayer_authority(): State_Machine.current.handle_input(event)
 
@@ -30,14 +31,14 @@ func _physics_process(delta):
 		
 	if facing < 0:
 		$AnimatedSprite2D.flip_h = true
-		meleeHitbox.get_child(1).flip_h = true
-		if meleeHitbox.position.x > 0:
-			meleeHitbox.position *= Vector2(-1, 1)
+		$Flipper.scale.x = -3
+		if $Flipper.position.x < 0:
+			$Flipper.position *= Vector2(-1, 1)
 	elif facing > 0:
 		$AnimatedSprite2D.flip_h = false
-		meleeHitbox.get_child(1).flip_h = false
-		if meleeHitbox.position.x < 0:
-			meleeHitbox.position *= Vector2(-1, 1)
+		$Flipper.scale.x = 3
+		if $Flipper.position.x > 0:
+			$Flipper.position *= Vector2(-1, 1)
 
 func _process(delta): State_Machine.current.update(delta)
 
@@ -90,11 +91,14 @@ func useItem():
 		
 		# (At the moment) checks for a generic item to perform a melee attack.
 		# Enabled hitbox and starts animation and timer.
-	elif currentItemSelected.is_in_group("Item") && meleeTimer.is_stopped():
+	elif currentItemSelected.is_in_group("Item"):
 		print("Item found.")
-		meleeHitbox.get_child(0).disabled = false
-		meleeHitbox.get_child(2).play("Slash")
-		meleeTimer.start()
+		var swordInstance = currentItemSelected.equippedPath.instantiate()
+		$Flipper.add_child(swordInstance)
+		
+		
+		
+		
 
 # timer re-disables hitbox after brief interval.
 func _on_melee_timer_timeout():
