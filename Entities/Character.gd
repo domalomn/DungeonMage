@@ -91,15 +91,13 @@ func useItem():
 		
 		# (At the moment) checks for a generic item to perform a melee attack.
 		# Enabled hitbox and starts animation and timer.
-	elif currentItemSelected.is_in_group("Item"):
+	elif currentItemSelected.is_in_group("Item") && $AttackCooldown.is_stopped():
 		print("Item found.")
 		var swordInstance = currentItemSelected.equippedPath.instantiate()
 		$Flipper.add_child(swordInstance)
+		$AttackCooldown.start()
 		
 		
 		
 		
 
-# timer re-disables hitbox after brief interval.
-func _on_melee_timer_timeout():
-	meleeHitbox.get_child(0).disabled = true

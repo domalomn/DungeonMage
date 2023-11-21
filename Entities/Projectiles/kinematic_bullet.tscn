@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://covd4yghqoo57"]
+[gd_scene load_steps=7 format=3 uid="uid://covd4yghqoo57"]
 
 [ext_resource type="Script" path="res://Entities/Projectiles/kinematic_bullet.gd" id="1_d62jh"]
 [ext_resource type="Texture2D" uid="uid://b7bbid17psh2a" path="res://Entities/Projectiles/tempball.png" id="1_thnht"]
+[ext_resource type="Script" path="res://Entities/CollisionAreas/Hitbox.gd" id="3_28bdu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5x7qw"]
 
@@ -16,8 +17,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_28w1d"]
+radius = 12.0
+
 [node name="KinematicBullet" type="CharacterBody2D"]
-collision_mask = 2
+collision_layer = 2
 script = ExtResource("1_d62jh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -27,3 +31,11 @@ shape = SubResource("CircleShape2D_5x7qw")
 position = Vector2(2.38419e-07, -5.96046e-07)
 scale = Vector2(0.392857, 0.392857)
 sprite_frames = SubResource("SpriteFrames_83tyn")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("3_28bdu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_28w1d")

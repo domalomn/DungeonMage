@@ -481,7 +481,7 @@ properties/2/spawn = true
 properties/2/sync = true
 properties/2/watch = false
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("State_Machine", "aimStartPos", "meleeHitbox", "meleeTimer")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("State_Machine", "aimStartPos")]
 collision_layer = 10
 collision_mask = 3
 safe_margin = 4.0
@@ -489,8 +489,6 @@ script = ExtResource("1_arqb2")
 State_Machine = NodePath("FSM")
 Stats = SubResource("Resource_plgi6")
 aimStartPos = NodePath("Flipper/AimStartPosition")
-meleeHitbox = NodePath("")
-meleeTimer = NodePath("")
 metadata/_edit_horizontal_guides_ = [63.0]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -548,5 +546,9 @@ scale = Vector2(3, 3)
 texture = ExtResource("11_083uw")
 
 [node name="AimStartPosition" type="Marker2D" parent="Flipper"]
-position = Vector2(5, -8.33334)
+position = Vector2(5, -8.33333)
 scale = Vector2(0.333333, 0.333333)
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
