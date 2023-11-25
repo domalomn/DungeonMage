@@ -1,0 +1,233 @@
+[gd_scene load_steps=17 format=3 uid="uid://csnfkr8q3qyg3"]
+
+[ext_resource type="Script" path="res://Entities/Enemies/ratAI.gd" id="1_3rgjr"]
+[ext_resource type="Texture2D" uid="uid://c1gcxtwmqjrmi" path="res://Entities/Enemies/ratattack0.png" id="2_s2o1k"]
+[ext_resource type="Texture2D" uid="uid://blcw12v8p1xf6" path="res://Entities/Enemies/ratattack1.png" id="3_llnau"]
+[ext_resource type="Texture2D" uid="uid://cntcvyjxw3alr" path="res://Entities/Enemies/ratframe0.png" id="4_mfyah"]
+[ext_resource type="Texture2D" uid="uid://ciff6vuohaqa4" path="res://Entities/Enemies/ratframe1.png" id="5_c0xe2"]
+[ext_resource type="Script" path="res://Entities/CollisionAreas/Hurtbox.gd" id="6_iebl6"]
+[ext_resource type="Script" path="res://Entities/CollisionAreas/Hitbox.gd" id="7_mea8j"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6tdfa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_s2o1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_llnau")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mfyah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_c0xe2")
+}],
+"loop": true,
+"name": &"Move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mfyah")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_k23ww"]
+resource_name = "Move"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:sprite_frames")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("SpriteFrames_6tdfa")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox:monitorable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Move"]
+}
+
+[sub_resource type="Animation" id="Animation_ak1rc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_kubx2"]
+resource_name = "Bite"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox:monitorable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Attack"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wewfj"]
+_data = {
+"Bite": SubResource("Animation_kubx2"),
+"Move": SubResource("Animation_k23ww"),
+"RESET": SubResource("Animation_ak1rc")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k21f2"]
+radius = 5.0
+height = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k42dm"]
+size = Vector2(33, 10.6667)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xvtcn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n0i60"]
+size = Vector2(20, 20.6736)
+
+[node name="Rat" type="CharacterBody2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_3rgjr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_6tdfa")
+animation = &"Move"
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wewfj")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_k21f2")
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("boxOwner")]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("6_iebl6")
+boxOwner = NodePath("")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-0.5, -0.333333)
+shape = SubResource("RectangleShape2D_k42dm")
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+scale = Vector2(8.51252, 8.49333)
+shape = SubResource("CircleShape2D_xvtcn")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+monitorable = false
+script = ExtResource("7_mea8j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(17.667, -0.295045)
+scale = Vector2(0.659091, 0.648649)
+shape = SubResource("RectangleShape2D_n0i60")
+
+[node name="ChaseTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]
+[connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_area_exited"]
+[connection signal="hitbox_detected" from="Hurtbox" to="." method="_on_hurtbox_hitbox_detected"]
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]
+[connection signal="timeout" from="ChaseTimer" to="." method="_on_chase_timer_timeout"]
