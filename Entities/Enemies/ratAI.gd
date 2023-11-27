@@ -83,6 +83,12 @@ func _on_animation_player_animation_finished(anim_name):
 func _on_hurtbox_hitbox_detected(area, boxowner):
 	currentHealth -= area.damage
 	print("hit the rat")
+	
+	
+	velocity.y = -300
+	if player:
+		velocity.x = sign( player.global_position.direction_to( global_position ).x ) * 500
+		
 	$Hurtbox.go_invincible(0.4)
 	if currentHealth <= 0:
 		die()

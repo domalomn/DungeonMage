@@ -21,9 +21,6 @@ Air_Speed = 100
 Air_Friction = 100
 Air_Acceleration = 100
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_47if4"]
-size = Vector2(84, 126)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_r628a"]
 animations = [{
 "frames": [{
@@ -59,6 +56,10 @@ animations = [{
 "name": &"Walking",
 "speed": 5.0
 }]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cnwos"]
+radius = 35.0
+height = 125.0
 
 [sub_resource type="Animation" id="Animation_sjcko"]
 resource_name = "AirJumpL"
@@ -484,15 +485,12 @@ properties/2/watch = false
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("State_Machine", "aimStartPos") groups=["Player"]]
 collision_layer = 10
 collision_mask = 3
-safe_margin = 4.0
+safe_margin = 1.0
 script = ExtResource("1_arqb2")
 State_Machine = NodePath("FSM")
 Stats = SubResource("Resource_plgi6")
 aimStartPos = NodePath("Flipper/AimStartPosition")
 metadata/_edit_horizontal_guides_ = [63.0]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_47if4")
 
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("animation_player", "readyState")]
 script = ExtResource("3_ui0s5")
@@ -525,6 +523,9 @@ animation = &"Idle"
 remote_path = NodePath("../../Flipper/AimStartPosition")
 update_rotation = false
 update_scale = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_cnwos")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -33,7 +33,10 @@ func physics_update(delta):
 	else:
 		user.velocity.y+= 1
 		
-	if moveControlTimer <= 0: user.velocity = user.velocity.move_toward(get_direction(),acceleration)
+	if moveControlTimer <= 0: 
+		var dir = get_direction()
+		if abs(dir.x) <= 0.1: dir.x = user.velocity.x
+		user.velocity = user.velocity.move_toward(dir,acceleration)
 	else: moveControlTimer-=delta
 	
 	var v = user.velocity
@@ -101,7 +104,7 @@ func _input(event):
 			
 			if user.facing > 0: animation_player.play("AirJumpR")
 			else: animation_player.play("AirJumpL")
-			moveControlTimer = 0.25
+			moveControlTimer = 0.2
 		
 	
 			
