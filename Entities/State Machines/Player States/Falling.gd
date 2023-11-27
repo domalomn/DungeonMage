@@ -17,13 +17,13 @@ func enter_state(arg:Dictionary = {}):
 	if arg.has("jumpHeight"): jump(arg.jumpHeight)
 	user.facing = sign( user.velocity.x)
 	animation_player.play("Jump")
+	moveControlTimer = 0
 
 func jump(jumpHeight:float=airJumpHeight): 
 	user.velocity.y = jumpHeight
 	
-	
-	
-func physics_update(_delta): 
+var moveControlTimer = 0
+func physics_update(delta): 
 	
 	
 	if abs(user.velocity.y) > 5:
@@ -33,7 +33,8 @@ func physics_update(_delta):
 	else:
 		user.velocity.y+= 1
 		
-	if user.velocity.y > -5: user.velocity = user.velocity.move_toward(get_direction(),acceleration)
+	if moveControlTimer <= 0: user.velocity = user.velocity.move_toward(get_direction(),acceleration)
+	else: moveControlTimer-=delta
 	
 	var v = user.velocity
 	
@@ -51,12 +52,14 @@ func physics_update(_delta):
 				plummet = false
 	
 			
+	if plummet: user.velocity = user.velocity.limit_length(3000)
+	else: user.velocity = user.velocity.limit_length(1400)
 	
 	if user.is_on_floor() and user.velocity.y >= 0: 
 		
 		if plummet:
 			if Input.is_action_pressed("down"):
-				user.velocity.y = airJumpHeight*2.25
+				user.velocity.y = airJumpHeight*abs(v.y)*0.00135
 			else:
 				user.velocity.y = airJumpHeight
 				
@@ -70,12 +73,12 @@ func physics_update(_delta):
 			else: Machine.goto_state("Idle",{})
 			
 			user.velocity.y = 0
-
+	
 func _input(event):
 	if Input.is_action_just_pressed("down"): plummet = true
 	
 	if Input.is_action_just_pressed("up"):
-		if user.is_on_wall_only():
+		if user.is_on_wall() and not user.is_on_floor():
 			var dir = user.get_wall_normal()
 			dir.x*=speed*1.25
 			
@@ -86,6 +89,7 @@ func _input(event):
 			
 			user.facing = sign(dir.x)
 			animation_player.play("Jump")
+			moveControlTimer = 0.25
 		
 		elif jumps > 0:
 			plummet = false
@@ -97,6 +101,7 @@ func _input(event):
 			
 			if user.facing > 0: animation_player.play("AirJumpR")
 			else: animation_player.play("AirJumpL")
+			moveControlTimer = 0.25
 		
 	
 			

@@ -75,5 +75,4 @@ func updatePlayerName(n,id):
 		if multiplayer.is_server():
 			for x in Multiplayer.Players.keys():
 				updatePlayerName.rpc(n,id)
-				
-		
+

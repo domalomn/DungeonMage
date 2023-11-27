@@ -76,7 +76,6 @@ func move_vector_to(cur_speed:Vector2, target_speed:Vector2, accel:float=1, cap_
 
 func changeScene(newScene:Node):
 	var oldScene = get_tree().current_scene
-	
 	get_tree().get_root().add_child(newScene)
 	get_tree().current_scene = newScene
 	oldScene.queue_free()
