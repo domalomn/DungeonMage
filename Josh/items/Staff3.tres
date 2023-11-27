@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemResources" load_steps=2 format=3 uid="uid://cxgqtse0gukls"]
+
+[ext_resource type="Script" path="res://Josh/Item1.gd" id="1_lrywk"]
+
+[resource]
+script = ExtResource("1_lrywk")
+itemName = "Lightning Staff"
+category = "Staff"
+stackSize = 1
+damage = 5
+multipleTargets = true
+radius = 3
+timeDelay = 3.5

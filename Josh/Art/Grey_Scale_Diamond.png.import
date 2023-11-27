@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgo07dhubkn0q"
-path="res://.godot/imported/Health Potion Sprite.png-4449f7716a6c05416186379b814d04da.ctex"
+uid="uid://cnswwav0yo5ep"
+path="res://.godot/imported/Grey_Scale_Diamond.png-ebc34d54e9d52cef92f9554044fbda59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Josh/Art/Health Potion Sprite.png"
-dest_files=["res://.godot/imported/Health Potion Sprite.png-4449f7716a6c05416186379b814d04da.ctex"]
+source_file="res://Josh/Art/Grey_Scale_Diamond.png"
+dest_files=["res://.godot/imported/Grey_Scale_Diamond.png-ebc34d54e9d52cef92f9554044fbda59.ctex"]
 
 [params]
 

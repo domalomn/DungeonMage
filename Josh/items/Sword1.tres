@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemResources" load_steps=3 format=3 uid="uid://bweb2406fr8t3"]
+
+[ext_resource type="Script" path="res://Josh/Item1.gd" id="1_1trrr"]
+[ext_resource type="Texture2D" uid="uid://c6331mx3ah21g" path="res://Josh/Art/Sword.png" id="2_ujowu"]
+
+[resource]
+script = ExtResource("1_1trrr")
+itemName = "Sword"
+category = "Weapon"
+stackSize = 1
+damage = 5
+multipleTargets = true
+radius = 2
+stunTime = 0
+timeDelay = 3.0
+textures = ExtResource("2_ujowu")

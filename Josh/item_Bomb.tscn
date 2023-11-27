@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bna1tro4v424v"]
+
+[ext_resource type="PackedScene" uid="uid://k3q00pnte5y6" path="res://Josh/items/Item.tscn" id="1_u1hpp"]
+[ext_resource type="Texture2D" uid="uid://cn5bdi7co0lob" path="res://Josh/Art/Bomb.png" id="2_4iemi"]
+
+[node name="Item" instance=ExtResource("1_u1hpp")]
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("2_4iemi")
