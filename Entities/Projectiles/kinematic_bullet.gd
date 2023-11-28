@@ -19,8 +19,9 @@ func _physics_process(delta):
 		queue_free()
 	
 func _process(delta):
-	if Input.is_action_just_pressed("Split"):
-		split()
+	#if Input.is_action_just_pressed("Split"):
+		#split()
+	pass
 
 func split():
 	if alreadySplit:

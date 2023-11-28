@@ -43,13 +43,16 @@ func _physics_process(delta):
 func _process(delta): State_Machine.current.update(delta)
 
 func useItem():
-	print("Using item.")
 	currentItemSelected = get_tree().get_first_node_in_group("InventoryGui").equippedItem()
-	if currentItemSelected == null: 
-		return
-	print(currentItemSelected.get_groups())
-	var bulletPath
+	
+	if !(currentItemSelected and $AttackCooldown.is_stopped()): return
+		
+	
+	
+	
 	if currentItemSelected.is_in_group("Staff"):
+		var bulletPath
+		
 		# checks enum in staff instance for its projectile type to instantiate bullet upon firing
 		match currentItemSelected.projectileType:
 			0:
@@ -68,7 +71,7 @@ func useItem():
 			# any instance of a staff should contain variables that can set the variables of its bullets (such as speed, damage per bullet, and any status affliction)
 			bullet.speed = currentItemSelected.speed;
 			bullet.damage = currentItemSelected.damage;
-			bullet.affliction = currentItemSelected.affliction;
+			#bullet.affliction = currentItemSelected.affliction;
 		
 			get_parent().add_child(bullet)
 			# starts at player position
@@ -84,20 +87,18 @@ func useItem():
 			get_parent().add_child(laser)
 			laser.position = global_position
 		
-		# returns fire rate given by staff instance so a timer can be determined for outside function calling UseItem (likely phsyics_process)
-		# laser-class staffs should have a fire rate of zero as there should be no delay for an active laser.
-		# as should consumable items (if godot requires a return throughout func when a return is specified i'm not sure)
-		return currentItemSelected.firerate
-		
 		# (At the moment) checks for a generic item to perform a melee attack.
 		# Enabled hitbox and starts animation and timer.
-	elif currentItemSelected.is_in_group("Item") && $AttackCooldown.is_stopped():
-		print("Item found.")
-		var swordInstance = currentItemSelected.equippedPath.instantiate()
-		$Flipper.add_child(swordInstance)
-		$AttackCooldown.start()
+	else:
+		var useItem = currentItemSelected.useNode.instantiate()
+		$Flipper.add_child(useItem)
 		
-		
-		
-		
+	$AttackCooldown.start(currentItemSelected.useCooldown)
 
+@export var maxHealth : int = 5
+@onready var Health = maxHealth
+func _getHit(area, boxowner):
+	print("HELLO")
+	velocity.y-=300
+	Health-=1
+	

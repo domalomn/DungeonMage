@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://bna1tro4v424v"]
+
+[ext_resource type="PackedScene" uid="uid://k3q00pnte5y6" path="res://Josh/items/Item.tscn" id="1_s0osu"]
+[ext_resource type="Texture2D" uid="uid://c6331mx3ah21g" path="res://Josh/Art/Sword.png" id="2_8dorr"]
+[ext_resource type="Script" path="res://Josh/ItemResource.gd" id="3_vst4k"]
+[ext_resource type="Texture2D" uid="uid://cn5bdi7co0lob" path="res://Josh/Art/Bomb.png" id="4_mctcq"]
+
+[sub_resource type="Resource" id="Resource_j5pcm"]
+script = ExtResource("3_vst4k")
+itemName = "Bomb"
+category = "Throwable"
+stackSize = 20
+damage = 8
+multipleTargets = true
+radius = 3
+stunTime = 0
+timeDelay = 8.0
+gui_texture = ExtResource("2_8dorr")
+use_texture = ExtResource("2_8dorr")
+
+[node name="Item" instance=ExtResource("1_s0osu")]
+itemResource = SubResource("Resource_j5pcm")
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("4_mctcq")

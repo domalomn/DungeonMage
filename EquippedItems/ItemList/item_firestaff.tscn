@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://coj4eripp6glu"]
+
+[ext_resource type="PackedScene" uid="uid://k3q00pnte5y6" path="res://Josh/items/Item.tscn" id="1_h2vn6"]
+[ext_resource type="Texture2D" uid="uid://c6331mx3ah21g" path="res://Josh/Art/Sword.png" id="2_mj4fh"]
+[ext_resource type="Texture2D" uid="uid://cnswwav0yo5ep" path="res://Josh/Art/Grey_Scale_Diamond.png" id="2_whlem"]
+[ext_resource type="Script" path="res://Josh/ItemResource.gd" id="3_vja8t"]
+
+[sub_resource type="Resource" id="Resource_hfvgm"]
+script = ExtResource("3_vja8t")
+itemName = "FireStaff"
+category = "Staff"
+stackSize = 1
+damage = 5
+multipleTargets = false
+radius = 2
+stunTime = 0
+timeDelay = 3.0
+gui_texture = ExtResource("2_mj4fh")
+use_texture = ExtResource("2_mj4fh")
+
+[node name="Item" instance=ExtResource("1_h2vn6")]
+itemResource = SubResource("Resource_hfvgm")
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("2_whlem")

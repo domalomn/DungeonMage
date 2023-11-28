@@ -8,4 +8,6 @@ class_name ItemResources extends Resource
 @export var radius: int = 2
 @export var stunTime: int = 0
 @export var timeDelay: float = 3.0
-@export var textures: Texture = preload("res://Josh/Art/Sword.png")
+
+@export var gui_texture : Texture = preload("res://Josh/Art/Sword.png")
+@export var use_texture : Texture = preload("res://Josh/Art/Sword.png")

@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://coj4eripp6glu"]
-
-[ext_resource type="PackedScene" uid="uid://k3q00pnte5y6" path="res://Josh/items/Item.tscn" id="1_uo8qx"]
-[ext_resource type="Texture2D" uid="uid://cnswwav0yo5ep" path="res://Josh/Art/Grey_Scale_Diamond.png" id="2_j1cgq"]
-
-[node name="Item" instance=ExtResource("1_uo8qx")]
-
-[node name="TextureRect" parent="." index="0"]
-texture = ExtResource("2_j1cgq")

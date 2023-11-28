@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://1nei4ajb0exc"]
 
-[ext_resource type="Script" path="res://Josh/ItemImages.gd" id="1_s2y2p"]
+[ext_resource type="Script" path="res://Josh/ItemNode.gd" id="1_wsnnr"]
 [ext_resource type="Texture2D" uid="uid://c6331mx3ah21g" path="res://Josh/Art/Sword.png" id="2_bd06l"]
 
 [node name="Item" type="Node2D"]
 z_index = 1
-script = ExtResource("1_s2y2p")
+script = ExtResource("1_wsnnr")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 122.0

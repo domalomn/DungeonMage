@@ -1,12 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://k3q00pnte5y6"]
 
-[ext_resource type="Script" path="res://Josh/ItemImages.gd" id="1_h2qt3"]
+[ext_resource type="Script" path="res://Josh/ItemNode.gd" id="1_r6pwu"]
 [ext_resource type="Texture2D" uid="uid://c6331mx3ah21g" path="res://Josh/Art/Sword.png" id="2_et4xe"]
 
 [node name="Item" type="Node2D" groups=["Item"]]
-script = ExtResource("1_h2qt3")
+script = ExtResource("1_r6pwu")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 122.0
 offset_bottom = 122.0
+mouse_filter = 2
 texture = ExtResource("2_et4xe")

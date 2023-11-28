@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemResources" load_steps=3 format=3 uid="uid://cgax8o65d6m0i"]
 
-[ext_resource type="Script" path="res://Josh/Item1.gd" id="1_okovg"]
+[ext_resource type="Script" path="res://Josh/ItemResource.gd" id="1_okovg"]
 [ext_resource type="Texture2D" uid="uid://xtpgykwd72t7" path="res://Josh/Art/Throwing Knife.png" id="2_o2g7w"]
 
 [resource]

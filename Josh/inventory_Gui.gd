@@ -5,10 +5,18 @@ var holding_item = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	for inv_slot in inventory_slots.get_children():
 		inv_slot.connect("gui_input",slot_gui_input.bind(inv_slot));
-
+		
+	call_deferred("initInventory")
+	
+func initInventory():
+	appendItem( preload("res://EquippedItems/ItemList/item_firestaff.tscn").instantiate() )
+	appendItem( preload("res://EquippedItems/ItemList/item_Knife.tscn").instantiate() )
+	
 func slot_gui_input(event: InputEvent, slot:SlotClass):
+	print("AAAA")
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 			if holding_item != null:
@@ -32,3 +40,12 @@ func _input(event):
 		
 func equippedItem():
 	return inventory_slots.get_child(0).item;
+
+
+func appendItem(item:Node):
+	for slot in inventory_slots.get_children():
+		if !slot.item: 
+			slot.putIntoSlot(item)
+			return true
+	
+	return false

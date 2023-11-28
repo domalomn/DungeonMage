@@ -21,7 +21,7 @@ animations = [{
 radius = 12.0
 
 [node name="KinematicBullet" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 0
 script = ExtResource("1_d62jh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -33,7 +33,7 @@ scale = Vector2(0.392857, 0.392857)
 sprite_frames = SubResource("SpriteFrames_83tyn")
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 4
 collision_mask = 4
 script = ExtResource("3_28bdu")
 

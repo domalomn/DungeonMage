@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemResources" load_steps=3 format=3 uid="uid://ccqyco0nhuy2g"]
 
-[ext_resource type="Script" path="res://Josh/Item1.gd" id="1_x8ror"]
-[ext_resource type="Texture2D" uid="uid://cn5bdi7co0lob" path="res://Josh/Art/Bomb.png" id="2_teuqa"]
+[ext_resource type="Script" path="res://Josh/ItemResource.gd" id="1_x8ror"]
+[ext_resource type="Texture2D" uid="uid://c6331mx3ah21g" path="res://Josh/Art/Sword.png" id="2_cm77l"]
 
 [resource]
 script = ExtResource("1_x8ror")
@@ -13,4 +13,5 @@ multipleTargets = true
 radius = 3
 stunTime = 0
 timeDelay = 8.0
-textures = ExtResource("2_teuqa")
+gui_texture = ExtResource("2_cm77l")
+use_texture = ExtResource("2_cm77l")
