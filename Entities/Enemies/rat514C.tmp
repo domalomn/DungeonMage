@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://csnfkr8q3qyg3"]
+[gd_scene load_steps=18 format=3 uid="uid://csnfkr8q3qyg3"]
 
 [ext_resource type="Script" path="res://Entities/Enemies/ratAI.gd" id="1_3rgjr"]
 [ext_resource type="Texture2D" uid="uid://c1gcxtwmqjrmi" path="res://Entities/Enemies/ratattack0.png" id="2_s2o1k"]
@@ -7,11 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://ciff6vuohaqa4" path="res://Entities/Enemies/ratframe1.png" id="5_c0xe2"]
 [ext_resource type="Script" path="res://Entities/CollisionAreas/Hurtbox.gd" id="6_iebl6"]
 [ext_resource type="Script" path="res://Entities/CollisionAreas/Hitbox.gd" id="7_mea8j"]
-[ext_resource type="Script" path="res://Entities/State Machines/Finite State Machine.gd" id="8_tiub3"]
-[ext_resource type="Script" path="res://Entities/Enemies/RatChase.gd" id="9_5gmin"]
-[ext_resource type="Script" path="res://Entities/Enemies/RatAttack.gd" id="10_dw4rh"]
-[ext_resource type="Script" path="res://Entities/Enemies/EnemyStates/Idle.gd" id="11_ne7j7"]
-[ext_resource type="Script" path="res://Entities/Enemies/Wander.gd" id="12_85eu6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6tdfa"]
 animations = [{
@@ -154,38 +149,9 @@ tracks/0/keys = {
 "values": [1]
 }
 
-[sub_resource type="Animation" id="Animation_110ij"]
-resource_name = "Idle"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Move"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wewfj"]
 _data = {
 "Bite": SubResource("Animation_kubx2"),
-"Idle": SubResource("Animation_110ij"),
 "Move": SubResource("Animation_k23ww"),
 "RESET": SubResource("Animation_ak1rc")
 }
@@ -270,60 +236,10 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="CollisionCooldown" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-
-[node name="WallDetector" type="RayCast2D" parent="."]
-target_position = Vector2(20, 0)
-
-[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("animation_player", "readyState")]
-script = ExtResource("8_tiub3")
-animation_player = NodePath("../AnimationPlayer")
-readyState = NodePath("Idle")
-
-[node name="Chase" type="Node" parent="FSM" node_paths=PackedStringArray("user", "groundDetector", "wallDetector")]
-script = ExtResource("9_5gmin")
-user = NodePath("../..")
-groundDetector = NodePath("../../GroundDetection")
-wallDetector = NodePath("../../WallDetector")
-attackDistance = 50.0
-
-[node name="ChaseTimer" type="Timer" parent="FSM/Chase"]
-wait_time = 10.0
-one_shot = true
-
-[node name="AttackCooldown" type="Timer" parent="FSM/Chase"]
-wait_time = 0.5
-one_shot = true
-
-[node name="Attack" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
-script = ExtResource("10_dw4rh")
-user = NodePath("../..")
-
-[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("user", "groundDetection", "wallDetector")]
-script = ExtResource("11_ne7j7")
-user = NodePath("../..")
-groundDetection = NodePath("../../GroundDetection")
-wallDetector = NodePath("../../WallDetector")
-
-[node name="Wander" type="Node" parent="FSM" node_paths=PackedStringArray("user", "wallDetector", "groundDetector")]
-script = ExtResource("12_85eu6")
-user = NodePath("../..")
-wallDetector = NodePath("../../WallDetector")
-groundDetector = NodePath("../../GroundDetection")
-
-[node name="CollisionCooldown" type="Timer" parent="FSM/Wander"]
-wait_time = 0.2
-one_shot = true
-
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_area_exited"]
 [connection signal="hitbox_detected" from="Hurtbox" to="." method="_on_hurtbox_hitbox_detected"]
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
-[connection signal="body_entered" from="PlayerDetection" to="FSM/Chase" method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]
-[connection signal="body_exited" from="PlayerDetection" to="FSM/Chase" method="_on_player_detection_body_exited"]
 [connection signal="timeout" from="ChaseTimer" to="." method="_on_chase_timer_timeout"]
-[connection signal="timeout" from="FSM/Chase/ChaseTimer" to="FSM/Chase" method="_on_chase_timer_timeout"]

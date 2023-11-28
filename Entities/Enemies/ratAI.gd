@@ -13,32 +13,15 @@ var chasing : bool
 var player = null
 var state = "idle"
 
+@onready var fsm : FSM = $FSM
+
+var prevVel
+
 func _ready():
-	# Initialize the Rat's state and find the player
-	$AnimationPlayer.play("Move")
-	player = get_tree().get_first_node_in_group("Player")
-	chasing = false
+	pass
 
 func _process(delta):
-	if chasing == true && $AttackCooldown.is_stopped():
-		var direction = (player.global_position - global_position).normalized()
-		var distance_to_player = global_position.distance_to(player.global_position) / 3
-		velocity.y += world_gravity
-		
-		if direction.x < 0:
-			$AnimatedSprite2D.flip_h = true
-			$Hitbox.scale.x = -3
-		else:
-			$AnimatedSprite2D.flip_h = false
-			$Hitbox.scale.x = 3
-			
-		if distance_to_player <= attackRange:
-			$AnimationPlayer.play("Bite")
-			$AttackCooldown.start()
-			
-		velocity.x = direction.x * speed
-		
-		move_and_slide()
+	fsm.current.physics_update(delta)
 		
 #		if state == "idle":
 #			# Rat is not attacking and is idle
@@ -66,13 +49,24 @@ func die():
 	# Remove the Rat from the scene
 	queue_free()
 
+func facing(f:int):
+	if f < 0:
+		$AnimatedSprite2D.flip_h = true
+		$Hitbox.scale.x = -1
+		$GroundDetection.scale.x = -1
+		$WallDetector.scale.x = -1
+	elif f > 0:
+		$AnimatedSprite2D.flip_h = false
+		$Hitbox.scale.x = 1
+		$GroundDetection.scale.x = 1
+		$WallDetector.scale.x = 1
+
 
 func _on_player_detection_body_entered(body):
 	print("body entered")
 	if body.is_in_group("Player"):
 		print("body is player")
 		player = body
-		chasing = true
 
 
 func _on_animation_player_animation_finished(anim_name):
@@ -83,13 +77,12 @@ func _on_animation_player_animation_finished(anim_name):
 func _on_hurtbox_hitbox_detected(area, boxowner):
 	currentHealth -= area.damage
 	print("hit the rat")
-	
-	
+	$Hurtbox.go_invincible(0.4)
 	velocity.y = -300
 	if player:
 		velocity.x = sign( player.global_position.direction_to( global_position ).x ) * 500
-		
-	$Hurtbox.go_invincible(0.4)
+	
+	fsm.goto_state("Idle")
 	if currentHealth <= 0:
 		die()
 

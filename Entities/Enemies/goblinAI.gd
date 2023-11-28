@@ -46,7 +46,7 @@ func _on_hurtbox_hitbox_detected(area, boxowner):
 	print("hit the gobbin")
 	$Hurtbox.go_invincible(0.4)
 	velocity.y = -300
-	if player:
+	if playerd:
 		velocity.x = sign( player.global_position.direction_to( global_position ).x ) * 500
 	
 	fsm.goto_state("Idle")

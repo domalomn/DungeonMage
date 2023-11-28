@@ -113,7 +113,7 @@ layer_0/tile_data = PackedInt32Array(262144, 0, 1, 262145, 0, 1, 262146, 0, 1, 2
 [node name="GoblinSpawner1" parent="." node_paths=PackedStringArray("SpawnNode") instance=ExtResource("7_iqe4v")]
 position = Vector2(933, 314)
 SpawnNode = NodePath("..")
-SpawnObject = ExtResource("8_wy6yk")
+SpawnObject = ExtResource("7_25rdr")
 useSpawnerX = true
 useSpawnerY = true
 initialDelay = 0.1

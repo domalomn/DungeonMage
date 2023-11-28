@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cbggk663phi7u"]
+[gd_scene load_steps=28 format=3 uid="uid://cbggk663phi7u"]
 
 [ext_resource type="Texture2D" uid="uid://bpl0ws64i7tlj" path="res://Entities/Enemies/gob04.png" id="1_pld6v"]
 [ext_resource type="Script" path="res://Entities/Enemies/goblinAI.gd" id="1_xyuvq"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Entities/Enemies/EnemyStates/ChaseToAttack.gd" id="12_vidua"]
 [ext_resource type="Script" path="res://Entities/Enemies/EnemyStates/AnimAttack.gd" id="13_7hd47"]
 [ext_resource type="Script" path="res://Entities/Enemies/EnemyStates/Idle.gd" id="14_x26ox"]
+[ext_resource type="Script" path="res://Entities/Enemies/Wander.gd" id="15_2jt4x"]
 
 [sub_resource type="Animation" id="Animation_pa0d7"]
 resource_name = "Attack"
@@ -356,6 +357,9 @@ shape = SubResource("RectangleShape2D_l4dj6")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
 
+[node name="WallDetector" type="RayCast2D" parent="."]
+target_position = Vector2(30, 0)
+
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("animation_player", "readyState")]
 script = ExtResource("11_wh60u")
 animation_player = NodePath("../AnimationPlayer")
@@ -378,9 +382,21 @@ one_shot = true
 script = ExtResource("13_7hd47")
 user = NodePath("../..")
 
-[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
+[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("user", "groundDetection", "wallDetector")]
 script = ExtResource("14_x26ox")
 user = NodePath("../..")
+groundDetection = NodePath("../../GroundDetection")
+wallDetector = NodePath("../../WallDetector")
+
+[node name="Wander" type="Node" parent="FSM" node_paths=PackedStringArray("user", "wallDetector", "groundDetector")]
+script = ExtResource("15_2jt4x")
+user = NodePath("../..")
+wallDetector = NodePath("../../WallDetector")
+groundDetector = NodePath("../../GroundDetection")
+
+[node name="CollisionCooldown" type="Timer" parent="FSM/Wander"]
+wait_time = 0.2
+one_shot = true
 
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_area_exited"]
