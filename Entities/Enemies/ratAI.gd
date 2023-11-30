@@ -28,9 +28,11 @@ func facing(f:int):
 	if f < 0:
 		$AnimatedSprite2D.flip_h = true
 		$Hitbox.scale.x = -1
+		$GroundDetection.scale.x = -1
 	elif f > 0:
 		$AnimatedSprite2D.flip_h = false
 		$Hitbox.scale.x = 1
+		$GroundDetection.scale.x = 1
 
 
 func _on_player_detection_body_entered(body):

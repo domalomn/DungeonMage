@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cbggk663phi7u"]
+[gd_scene load_steps=28 format=3 uid="uid://cbggk663phi7u"]
 
 [ext_resource type="Texture2D" uid="uid://bpl0ws64i7tlj" path="res://Entities/Enemies/gob04.png" id="1_pld6v"]
 [ext_resource type="Script" path="res://Entities/Enemies/goblinAI.gd" id="1_xyuvq"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Entities/Enemies/EnemyStates/ChaseToAttack.gd" id="12_vidua"]
 [ext_resource type="Script" path="res://Entities/Enemies/EnemyStates/AnimAttack.gd" id="13_7hd47"]
 [ext_resource type="Script" path="res://Entities/Enemies/EnemyStates/Idle.gd" id="14_x26ox"]
+[ext_resource type="Script" path="res://Entities/Enemies/Wander.gd" id="15_y2ddn"]
 
 [sub_resource type="Animation" id="Animation_pa0d7"]
 resource_name = "Attack"
@@ -383,8 +384,18 @@ script = ExtResource("14_x26ox")
 user = NodePath("../..")
 shotChecker = NodePath("../../ShotChecker")
 
+[node name="Wander" type="Node" parent="FSM" node_paths=PackedStringArray("user", "groundDetector", "shotChecker")]
+script = ExtResource("15_y2ddn")
+user = NodePath("../..")
+groundDetector = NodePath("../../GroundDetection")
+shotChecker = NodePath("../../ShotChecker")
+
+[node name="CollisionCooldown" type="Timer" parent="FSM/Wander"]
+wait_time = 0.2
+one_shot = true
+
 [node name="ShotChecker" type="RayCast2D" parent="."]
-target_position = Vector2(0, 0)
+target_position = Vector2(1, 1)
 
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_area_exited"]
@@ -393,4 +404,5 @@ target_position = Vector2(0, 0)
 [connection signal="body_entered" from="PlayerDetection" to="FSM/Chase" method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="PlayerDetection" to="FSM/Chase" method="_on_player_detection_body_exited"]
 [connection signal="body_exited" from="PlayerDetection" to="FSM/Idle" method="_on_player_detection_body_exited"]
+[connection signal="body_exited" from="PlayerDetection" to="FSM/Wander" method="_on_player_detection_body_exited"]
 [connection signal="timeout" from="FSM/Chase/ChaseTimer" to="FSM/Chase" method="_on_chase_timer_timeout"]

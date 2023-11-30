@@ -8,8 +8,10 @@ extends State
 
 @export var attackDistance : float = 45
 
+@export var groundDetector : Area2D
+
 func enter_state(arg:Dictionary = {}): 
-	animation_player.play("Move")
+	animation_player.play("Walk")
 	$AttackCooldown.start(0.5)
 
 func physics_update(delta): 
@@ -20,6 +22,10 @@ func physics_update(delta):
 	
 	user.facing( sign(direction.x) )
 	user.velocity.x = move_toward(user.velocity.x,direction.x * user.speed,1000*delta)
+	
+	if user.is_on_wall() || (not groundDetector.has_overlapping_bodies()):
+		user.player = null
+		Machine.goto_state(CancelState)
 	
 	
 	if distance_to_player <= attackDistance and $AttackCooldown.is_stopped() and user.is_on_floor():
