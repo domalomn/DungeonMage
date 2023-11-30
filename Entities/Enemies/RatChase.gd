@@ -24,8 +24,8 @@ func physics_update(delta):
 	
 	if distance_to_player <= attackDistance and $AttackCooldown.is_stopped() and user.is_on_floor():
 		Machine.goto_state(AttackState)
-		
-	user.move_and_slide()
+	elif distance_to_player > attackDistance:
+		user.move_and_slide()
 
 func _on_chase_timer_timeout():
 	user.player = null

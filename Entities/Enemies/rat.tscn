@@ -277,16 +277,19 @@ wait_time = 10.0
 one_shot = true
 
 [node name="AttackCooldown" type="Timer" parent="FSM/Chase"]
-wait_time = 0.5
 one_shot = true
 
 [node name="Attack" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
 script = ExtResource("10_xol3l")
 user = NodePath("../..")
 
-[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
+[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("user", "shotChecker")]
 script = ExtResource("11_l12vj")
 user = NodePath("../..")
+shotChecker = NodePath("../../ShotChecker")
+
+[node name="ShotChecker" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]
@@ -294,5 +297,6 @@ user = NodePath("../..")
 [connection signal="hitbox_detected" from="Hurtbox" to="." method="_on_hurtbox_hitbox_detected"]
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]
+[connection signal="body_exited" from="PlayerDetection" to="FSM/Idle" method="_on_player_detection_body_exited"]
 [connection signal="timeout" from="ChaseTimer" to="." method="_on_chase_timer_timeout"]
 [connection signal="timeout" from="FSM/Chase/ChaseTimer" to="FSM/Chase" method="_on_chase_timer_timeout"]

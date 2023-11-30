@@ -53,7 +53,5 @@ func _on_hurtbox_hitbox_detected(area, boxowner):
 	if currentHealth <= 0:
 		die()
 		
-func _on_chase_timer_timeout():
-	chasing = false
-	$AnimationPlayer.play("Idle")
+
 

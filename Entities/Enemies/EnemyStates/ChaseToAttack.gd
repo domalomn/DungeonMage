@@ -21,6 +21,7 @@ func physics_update(delta):
 	if not user.is_on_floor(): user.velocity.y += 980 * delta
 	elif user.is_on_wall() || (not groundDetector.has_overlapping_bodies()):
 		user.velocity.y += -750
+		user.velocity.x = 400*sign(direction.x)
 		animation_player.play("Jump")
 	elif animation_player.current_animation == "Jump":
 		animation_player.play("Walk")
@@ -34,11 +35,12 @@ func physics_update(delta):
 
 func _on_chase_timer_timeout():
 	user.player = null
+	print("stop chasing")
 	Machine.goto_state(CancelState)
 
 func _on_player_detection_body_exited(body):
 	if body == user.player and Machine.current == self:
-		$ChaseTimer.start(1.0)
+		$ChaseTimer.start()
 
 
 func _on_player_detection_body_entered(body):
