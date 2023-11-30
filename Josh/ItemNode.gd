@@ -3,12 +3,12 @@ extends Node2D
 @export var itemResource : ItemResources = null : set = setItem
 @export var useNode : PackedScene = preload("res://EquippedItems/equipped_sword.tscn")
 
-@export var useCooldown : float = 0.5
+@export var useCooldown : float = 0.2
 
 @export_group("Projectile Info")
 @export var projectileType : int = 0
-@export var speed : float = 400
-@export var damage : int = 5
+@export var speed : float = 600
+@export var damage : int = 1
 
 func setItem(item:ItemResources):
 	if itemResource and is_in_group(itemResource.category):

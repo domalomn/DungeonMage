@@ -1,0 +1,278 @@
+[gd_scene load_steps=25 format=3 uid="uid://b6r6qa2y0o828"]
+
+[ext_resource type="Script" path="res://SkeletonWizardAI.gd" id="1_17upu"]
+[ext_resource type="Texture2D" uid="uid://djxwout41gent" path="res://Entities/Enemies/skelwiz04.png" id="2_jj125"]
+[ext_resource type="Texture2D" uid="uid://bfjjrxmgi1euo" path="res://Entities/Enemies/skelwiz05.png" id="3_1o372"]
+[ext_resource type="Texture2D" uid="uid://dvmtkpppa0xby" path="res://Entities/Enemies/skelwiz01.png" id="4_sqmqe"]
+[ext_resource type="Texture2D" uid="uid://b570xe72ux2hb" path="res://Entities/Enemies/skelwiz02.png" id="5_72uw5"]
+[ext_resource type="Texture2D" uid="uid://b0n2wrdvrxhpx" path="res://Entities/Enemies/skelwiz03.png" id="6_apunq"]
+[ext_resource type="Script" path="res://Entities/CollisionAreas/Hurtbox.gd" id="7_85k3w"]
+[ext_resource type="Script" path="res://Entities/CollisionAreas/Hitbox.gd" id="8_rdvbw"]
+[ext_resource type="Script" path="res://Entities/State Machines/Finite State Machine.gd" id="9_b2qg3"]
+[ext_resource type="Script" path="res://Entities/Enemies/SkelChase.gd" id="10_fcgku"]
+[ext_resource type="Script" path="res://Entities/Enemies/SkelAttack.gd" id="11_0th1t"]
+[ext_resource type="PackedScene" uid="uid://bgjkqairktwu" path="res://Entities/Projectiles/kinematic_bullet_enemy.tscn" id="12_f3q7u"]
+[ext_resource type="Script" path="res://Entities/Enemies/EnemyStates/Idle.gd" id="12_n7nsx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0bgut"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jj125")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1o372")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_sqmqe")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_72uw5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sqmqe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_apunq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sqmqe")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ncwk"]
+radius = 11.0
+height = 40.6667
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_unk36"]
+size = Vector2(33, 10.6667)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eksnd"]
+radius = 17.3862
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swa0f"]
+size = Vector2(33.0462, 19.809)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yukw8"]
+
+[sub_resource type="Animation" id="Animation_sn40a"]
+resource_name = "Idle"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r5x6n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_fd64h"]
+resource_name = "Walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Walk"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_v07w8"]
+resource_name = "Attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_swxlf"]
+_data = {
+"Attack": SubResource("Animation_v07w8"),
+"Idle": SubResource("Animation_sn40a"),
+"RESET": SubResource("Animation_r5x6n"),
+"Walk": SubResource("Animation_fd64h")
+}
+
+[node name="SkeletonWizard" type="CharacterBody2D"]
+scale = Vector2(3, 3)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_17upu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_0bgut")
+animation = &"Attack"
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_8ncwk")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+scale = Vector2(1.18689, 4.41364)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("7_85k3w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-0.5, -0.333333)
+shape = SubResource("RectangleShape2D_unk36")
+debug_color = Color(0, 0.643137, 0.294118, 0.419608)
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+scale = Vector2(8.51252, 8.49333)
+shape = SubResource("CircleShape2D_eksnd")
+debug_color = Color(0.658824, 0.74902, 0.0745098, 0.419608)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+monitorable = false
+script = ExtResource("8_rdvbw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(5.66667, -1.3582)
+rotation = -3.14159
+scale = Vector2(2.11825, -2.4593)
+shape = SubResource("RectangleShape2D_swa0f")
+debug_color = Color(1, 0, 0.0156863, 0.419608)
+
+[node name="GroundDetection" type="Area2D" parent="."]
+position = Vector2(-0.593443, -1.47121)
+scale = Vector2(1.18689, 4.41364)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetection"]
+position = Vector2(20.721, 5.24236)
+scale = Vector2(-0.658553, -0.174419)
+shape = SubResource("RectangleShape2D_yukw8")
+
+[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("animation_player", "readyState")]
+script = ExtResource("9_b2qg3")
+animation_player = NodePath("../AnimationPlayer")
+readyState = NodePath("Idle")
+
+[node name="Chase" type="Node" parent="FSM" node_paths=PackedStringArray("user", "groundDetector", "shotChecker")]
+script = ExtResource("10_fcgku")
+user = NodePath("../..")
+groundDetector = NodePath("../../GroundDetection")
+shotChecker = NodePath("../../ShotChecker")
+
+[node name="ChaseTimer" type="Timer" parent="FSM/Chase"]
+wait_time = 10.0
+one_shot = true
+
+[node name="AttackCooldown" type="Timer" parent="FSM/Chase"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Attack" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
+script = ExtResource("11_0th1t")
+user = NodePath("../..")
+bulletPath = ExtResource("12_f3q7u")
+
+[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
+script = ExtResource("12_n7nsx")
+user = NodePath("../..")
+
+[node name="ShotChecker" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_swxlf")
+}
+
+[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]
+[connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_area_exited"]
+[connection signal="hitbox_detected" from="Hurtbox" to="." method="_on_hurtbox_hitbox_detected"]
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_entered" from="PlayerDetection" to="FSM/Chase" method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="FSM/Chase" method="_on_player_detection_body_exited"]
+[connection signal="timeout" from="FSM/Chase/ChaseTimer" to="FSM/Chase" method="_on_chase_timer_timeout"]
