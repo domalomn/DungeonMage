@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://csnfkr8q3qyg3"]
+[gd_scene load_steps=24 format=3 uid="uid://csnfkr8q3qyg3"]
 
 [ext_resource type="Script" path="res://Entities/Enemies/ratAI.gd" id="1_3rgjr"]
 [ext_resource type="Texture2D" uid="uid://c1gcxtwmqjrmi" path="res://Entities/Enemies/ratattack0.png" id="2_s2o1k"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Entities/Enemies/RatChase.gd" id="9_ru71f"]
 [ext_resource type="Script" path="res://Entities/Enemies/RatAttack.gd" id="10_xol3l"]
 [ext_resource type="Script" path="res://Entities/Enemies/EnemyStates/Idle.gd" id="11_l12vj"]
+[ext_resource type="Script" path="res://Entities/Enemies/Wander.gd" id="12_kotqq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6tdfa"]
 animations = [{
@@ -121,8 +122,23 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_ak1rc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
 [sub_resource type="Animation" id="Animation_k23ww"]
-resource_name = "Move"
+resource_name = "Walk"
 length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -174,27 +190,12 @@ tracks/3/keys = {
 "values": [&"Move"]
 }
 
-[sub_resource type="Animation" id="Animation_ak1rc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wewfj"]
 _data = {
 "Bite": SubResource("Animation_kubx2"),
 "Idle": SubResource("Animation_uraku"),
-"Move": SubResource("Animation_k23ww"),
-"RESET": SubResource("Animation_ak1rc")
+"RESET": SubResource("Animation_ak1rc"),
+"Walk": SubResource("Animation_k23ww")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k21f2"]
@@ -209,6 +210,8 @@ size = Vector2(33, 10.6667)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n0i60"]
 size = Vector2(34.7811, 20.6736)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpxo5"]
+
 [node name="Rat" type="CharacterBody2D"]
 scale = Vector2(3, 3)
 script = ExtResource("1_3rgjr")
@@ -216,7 +219,8 @@ script = ExtResource("1_3rgjr")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_6tdfa")
-animation = &"Idle"
+animation = &"Move"
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -268,9 +272,10 @@ script = ExtResource("8_ybefq")
 animation_player = NodePath("../AnimationPlayer")
 readyState = NodePath("Idle")
 
-[node name="Chase" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
+[node name="Chase" type="Node" parent="FSM" node_paths=PackedStringArray("user", "groundDetector")]
 script = ExtResource("9_ru71f")
 user = NodePath("../..")
+groundDetector = NodePath("../../GroundDetection")
 
 [node name="ChaseTimer" type="Timer" parent="FSM/Chase"]
 wait_time = 10.0
@@ -288,8 +293,26 @@ script = ExtResource("11_l12vj")
 user = NodePath("../..")
 shotChecker = NodePath("../../ShotChecker")
 
+[node name="Wander" type="Node" parent="FSM" node_paths=PackedStringArray("user", "groundDetector", "shotChecker")]
+script = ExtResource("12_kotqq")
+user = NodePath("../..")
+groundDetector = NodePath("../../GroundDetection")
+shotChecker = NodePath("../../ShotChecker")
+
+[node name="CollisionCooldown" type="Timer" parent="FSM/Wander"]
+wait_time = 0.2
+one_shot = true
+
 [node name="ShotChecker" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
+
+[node name="GroundDetection" type="Area2D" parent="."]
+scale = Vector2(1.18689, 4.41364)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetection"]
+position = Vector2(20.5018, 2.49227)
+scale = Vector2(-0.658553, -0.174419)
+shape = SubResource("RectangleShape2D_vpxo5")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]
@@ -298,5 +321,6 @@ target_position = Vector2(0, 0)
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]
 [connection signal="body_exited" from="PlayerDetection" to="FSM/Idle" method="_on_player_detection_body_exited"]
+[connection signal="body_exited" from="PlayerDetection" to="FSM/Wander" method="_on_player_detection_body_exited"]
 [connection signal="timeout" from="ChaseTimer" to="." method="_on_chase_timer_timeout"]
 [connection signal="timeout" from="FSM/Chase/ChaseTimer" to="FSM/Chase" method="_on_chase_timer_timeout"]

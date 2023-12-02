@@ -12,7 +12,8 @@ func physics_update(delta):
 		shotChecker.target_position = shotChecker.to_local(user.player.global_position)
 		if not shotChecker.is_colliding():
 			Machine.goto_state("Chase")
-	
+	else:
+		Machine.goto_state("Wander")
 	
 	user.velocity.x = move_toward(user.velocity.x,0,1000*delta)
 	if not user.is_on_floor(): user.velocity.y += 980 * delta
