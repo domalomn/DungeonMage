@@ -2,9 +2,15 @@ extends Node2D
 
 @export var PlayerScene : PackedScene = preload("res://Entities/Player/Player.tscn")
 
+var controlPlayerHealth : LifeBar
+var controlPlayerInventory : Control
 
-
-func _ready(): if Multiplayer.isHost(): spawnPlayers.rpc()
+func _ready(): 
+	controlPlayerHealth = get_tree().get_first_node_in_group("Life Bar")
+	controlPlayerInventory = get_tree().get_first_node_in_group("InventoryGui")
+	print(is_instance_valid(controlPlayerHealth))
+	if Multiplayer.isHost(): 
+		spawnPlayers.rpc()
 	
 @rpc("call_local")
 func spawnPlayers():
@@ -25,5 +31,10 @@ func spawnPlayers():
 		add_child(player)
 		player.setAuth(multiplayer.get_unique_id())
 		player.global_position = pos
+		linkHealthToHost(player)
 	
-	
+func linkHealthToHost(player):
+	player.lifeBar = controlPlayerHealth
+	player.lifeBar.maxHealth = player.maxHealth
+	player.lifeBar.currentHealth = player.Health
+	player.InventoryRef = controlPlayerInventory 

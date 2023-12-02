@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://83o8n30h7dek"]
+[gd_scene load_steps=6 format=3 uid="uid://83o8n30h7dek"]
 
+[ext_resource type="Script" path="res://Aaliyah/UI/Life Bar/life_bar.gd" id="1_8qb1y"]
 [ext_resource type="Texture2D" uid="uid://k6yq6oeihyys" path="res://Aaliyah/UI/Counter/Counter.bmp" id="1_pcqbh"]
 [ext_resource type="FontFile" uid="uid://bmtf3mpkawr66" path="res://Aaliyah/UI/Font/ConnectionII.otf" id="2_5o8ek"]
 [ext_resource type="Texture2D" uid="uid://0ob7j6mvbstx" path="res://Aaliyah/UI/Life Bar/Life-bar.bmp" id="3_d3cc6"]
@@ -10,6 +11,7 @@ offset_left = 10.0
 offset_top = 8.0
 offset_right = 590.0
 offset_bottom = 65.0
+script = ExtResource("1_8qb1y")
 
 [node name="HP" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(180, 0)

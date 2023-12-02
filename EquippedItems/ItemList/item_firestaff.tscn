@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://coj4eripp6glu"]
 
 [ext_resource type="PackedScene" uid="uid://k3q00pnte5y6" path="res://Josh/items/Item.tscn" id="1_h2vn6"]
-[ext_resource type="Texture2D" uid="uid://c6331mx3ah21g" path="res://Josh/Art/Sword.png" id="2_mj4fh"]
 [ext_resource type="Texture2D" uid="uid://cnswwav0yo5ep" path="res://Josh/Art/Grey_Scale_Diamond.png" id="2_whlem"]
+[ext_resource type="Texture2D" uid="uid://c7xvujc7yls7w" path="res://Josh/Art/Staff_Hilt.png" id="2_ywf3o"]
 [ext_resource type="Script" path="res://Josh/ItemResource.gd" id="3_vja8t"]
 
 [sub_resource type="Resource" id="Resource_hfvgm"]
@@ -12,7 +12,7 @@ category = "Staff"
 isStaff = false
 stackSize = 1
 timeDelay = 3.0
-gui_texture = ExtResource("2_mj4fh")
+gui_texture = ExtResource("2_ywf3o")
 
 [node name="Item" instance=ExtResource("1_h2vn6")]
 itemResource = SubResource("Resource_hfvgm")

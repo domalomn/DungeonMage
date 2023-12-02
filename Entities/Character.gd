@@ -10,6 +10,9 @@ var currentItemSelected
 @export var meleeHitbox : Hitbox = null
 @export var meleeTimer : Timer = null
 
+var InventoryRef : Control
+var lifeBar : LifeBar
+
 signal death()
 
 var isHolding: bool = false
@@ -55,7 +58,7 @@ func deathAnim():
 		queue_free()
 
 func useItem():
-	currentItemSelected = get_tree().get_first_node_in_group("InventoryGui").equippedItem()
+	currentItemSelected = InventoryRef.equippedItem()
 	
 	if !(currentItemSelected and $AttackCooldown.is_stopped()): return
 		
@@ -113,6 +116,9 @@ func _getHit(area, boxowner):
 	print("HELLO")
 	velocity.y-=300
 	Health-=1
+	if lifeBar:
+		lifeBar.currentHealth = Health
+		print(lifeBar.currentHealth)
 	$Hurtbox.go_invincible(0.4)
 	if Health <= 0:
 		queue_free()
