@@ -41,6 +41,8 @@ func _on_player_detection_body_entered(body):
 	if body.is_in_group("Player"):
 		print("Player Entered")
 		player = body
+			
+
 
 func _on_hurtbox_hitbox_detected(area, boxowner):
 	currentHealth -= area.damage

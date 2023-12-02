@@ -68,6 +68,34 @@ size = Vector2(33.0462, 19.809)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yukw8"]
 
+[sub_resource type="Animation" id="Animation_v07w8"]
+resource_name = "Attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0]
+}
+
 [sub_resource type="Animation" id="Animation_sn40a"]
 resource_name = "Idle"
 length = 0.2
@@ -138,34 +166,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
-}
-
-[sub_resource type="Animation" id="Animation_v07w8"]
-resource_name = "Attack"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Attack"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 0, 1, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_swxlf"]
@@ -257,9 +257,10 @@ script = ExtResource("11_0th1t")
 user = NodePath("../..")
 bulletPath = ExtResource("12_f3q7u")
 
-[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
+[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("user", "shotChecker")]
 script = ExtResource("12_n7nsx")
 user = NodePath("../..")
+shotChecker = NodePath("../../ShotChecker")
 
 [node name="ShotChecker" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
@@ -275,4 +276,5 @@ libraries = {
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_entered" from="PlayerDetection" to="FSM/Chase" method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="PlayerDetection" to="FSM/Chase" method="_on_player_detection_body_exited"]
+[connection signal="body_exited" from="PlayerDetection" to="FSM/Idle" method="_on_player_detection_body_exited"]
 [connection signal="timeout" from="FSM/Chase/ChaseTimer" to="FSM/Chase" method="_on_chase_timer_timeout"]

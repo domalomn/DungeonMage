@@ -10,7 +10,7 @@ extends State
 
 @export var shotChecker : RayCast2D
 
-@export var attackDistance : float = 75
+@export var attackDistance : float = 125
 
 func enter_state(arg:Dictionary = {}): 
 	animation_player.play("Walk")
@@ -27,6 +27,10 @@ func physics_update(delta):
 	
 	user.facing( sign(direction.x) )
 	user.velocity.x = move_toward(user.velocity.x,direction.x * user.speed,1000*delta)
+	
+	if distance_to_player <= attackDistance && not shotChecker.is_colliding():
+		user.velocity.x = move_toward(user.velocity.x,0,1000*delta)
+	
 	user.move_and_slide()
 	
 	if (not shotChecker.is_colliding()) and $AttackCooldown.is_stopped() and user.is_on_floor():
@@ -38,7 +42,7 @@ func _on_chase_timer_timeout():
 
 func _on_player_detection_body_exited(body):
 	if body == user.player and Machine.current == self:
-		$ChaseTimer.start(1.0)
+		$ChaseTimer.start()
 
 
 func _on_player_detection_body_entered(body):

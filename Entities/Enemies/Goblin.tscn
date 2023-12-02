@@ -378,9 +378,13 @@ one_shot = true
 script = ExtResource("13_7hd47")
 user = NodePath("../..")
 
-[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
+[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("user", "shotChecker")]
 script = ExtResource("14_x26ox")
 user = NodePath("../..")
+shotChecker = NodePath("../../ShotChecker")
+
+[node name="ShotChecker" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
 
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_area_exited"]
@@ -388,4 +392,5 @@ user = NodePath("../..")
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_entered" from="PlayerDetection" to="FSM/Chase" method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="PlayerDetection" to="FSM/Chase" method="_on_player_detection_body_exited"]
+[connection signal="body_exited" from="PlayerDetection" to="FSM/Idle" method="_on_player_detection_body_exited"]
 [connection signal="timeout" from="FSM/Chase/ChaseTimer" to="FSM/Chase" method="_on_chase_timer_timeout"]
