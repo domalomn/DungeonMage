@@ -54,12 +54,17 @@ func player_died():
 	player = null
 
 func _on_hurtbox_hitbox_detected(area, boxowner):
-	currentHealth -= area.damage
-	print("hit the gobbin")
+	var dmg = area.damage
+	var knockDir = Vector2(velocity.x,-300)
+	if player: knockDir.x = sign( player.global_position.direction_to( global_position ).x ) * 500
+	
+	getHurt.rpc(dmg,knockDir)
+
+@rpc("any_peer","call_local")
+func getHurt(dmg,knockDir):
+	currentHealth -= dmg
 	$Hurtbox.go_invincible(0.4)
-	velocity.y = -300
-	if player:
-		velocity.x = sign( player.global_position.direction_to( global_position ).x ) * 500
+	velocity = knockDir
 	
 	fsm.goto_state("Idle")
 	if currentHealth <= 0:

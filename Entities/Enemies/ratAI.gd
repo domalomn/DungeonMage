@@ -57,17 +57,20 @@ func player_died():
 
 
 func _on_hurtbox_hitbox_detected(area, boxowner):
-	currentHealth -= area.damage
-	print("hit the rat")
-	
-	
-	velocity.y = -300
+	var knockDir = Vector2(velocity.x,-300)
 	if player:
-		velocity.x = sign( player.global_position.direction_to( global_position ).x ) * 500
+		knockDir.x = sign( player.global_position.direction_to( global_position ).x ) * 500
 		
+	getHurt.rpc(area.damage,knockDir)
+
+@rpc("any_peer","call_local")
+func getHurt(dmg,knockDir):
+	currentHealth -= dmg
 	$Hurtbox.go_invincible(0.4)
+	velocity = knockDir
+	
 	if currentHealth <= 0:
 		die()
-
+		
 func _on_chase_timer_timeout():
 	chasing = false

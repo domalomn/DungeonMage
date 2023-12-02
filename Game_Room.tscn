@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ce0e5nkfemr0e"]
+[gd_scene load_steps=14 format=3 uid="uid://ce0e5nkfemr0e"]
 
 [ext_resource type="Script" path="res://SceneManager.gd" id="1_k638j"]
 [ext_resource type="Texture2D" uid="uid://bk3wrgkwso81w" path="res://Josh/Art/seamless-grounds - Cold Taundra.png" id="2_43xaj"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://m0g0nq4fgq0u" path="res://Entities/CollisionAreas/tilemap.png" id="6_wn6v0"]
 [ext_resource type="PackedScene" uid="uid://csnfkr8q3qyg3" path="res://Entities/Enemies/rat.tscn" id="7_25rdr"]
 [ext_resource type="PackedScene" uid="uid://dcsm0bsxxdqp3" path="res://Dom/Spawner.tscn" id="7_iqe4v"]
-[ext_resource type="PackedScene" uid="uid://b6r6qa2y0o828" path="res://Entities/Enemies/skeleton_wizard.tscn" id="7_tlps1"]
 [ext_resource type="PackedScene" uid="uid://cbggk663phi7u" path="res://Entities/Enemies/Goblin.tscn" id="8_wy6yk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2rpx"]
@@ -77,6 +76,7 @@ script = ExtResource("1_k638j")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
 position = Vector2(575, 401)
 shape = SubResource("RectangleShape2D_t2rpx")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
@@ -113,7 +113,7 @@ layer_0/tile_data = PackedInt32Array(262144, 0, 1, 262145, 0, 1, 262146, 0, 1, 2
 [node name="GoblinSpawner1" parent="." node_paths=PackedStringArray("SpawnNode") instance=ExtResource("7_iqe4v")]
 position = Vector2(933, 314)
 SpawnNode = NodePath("..")
-SpawnObject = ExtResource("7_tlps1")
+SpawnObject = ExtResource("8_wy6yk")
 useSpawnerX = true
 useSpawnerY = true
 initialDelay = 0.1

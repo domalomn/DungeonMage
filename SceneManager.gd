@@ -8,7 +8,6 @@ var controlPlayerInventory : Control
 func _ready(): 
 	controlPlayerHealth = get_tree().get_first_node_in_group("Life Bar")
 	controlPlayerInventory = get_tree().get_first_node_in_group("InventoryGui")
-	print(is_instance_valid(controlPlayerHealth))
 	if Multiplayer.isHost(): 
 		spawnPlayers.rpc()
 	
@@ -24,6 +23,9 @@ func spawnPlayers():
 			player.setAuth(Multiplayer.Players[x].id)
 			player.global_position = spawners[index].global_position
 			index+=1
+			
+			if multiplayer.get_unique_id() == Multiplayer.Players[x].id: 
+				linkHealthToHost(player)
 			
 	else:
 		var pos = get_tree().get_first_node_in_group("PlayerSpawn").global_position

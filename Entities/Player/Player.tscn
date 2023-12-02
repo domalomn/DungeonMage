@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://kogoc4hg41mb"]
+[gd_scene load_steps=36 format=3 uid="uid://kogoc4hg41mb"]
 
 [ext_resource type="Script" path="res://Entities/Character.gd" id="1_arqb2"]
 [ext_resource type="Script" path="res://Entities/Character_Stats.gd" id="2_shtls"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Entities/State Machines/Player States/Idle.gd" id="4_hgayi"]
 [ext_resource type="Script" path="res://Entities/State Machines/Player States/Move.gd" id="6_jalty"]
 [ext_resource type="Script" path="res://Entities/State Machines/Player States/Falling.gd" id="7_g11qy"]
+[ext_resource type="Shader" path="res://Shaders/SpritePalette.gdshader" id="7_ntpkl"]
 [ext_resource type="Texture2D" uid="uid://ckonxewvr1qlg" path="res://Entities/Player/die01.png" id="7_pwnf3"]
 [ext_resource type="Texture2D" uid="uid://c4vh7tfqs4dyc" path="res://Entities/Player/die02.png" id="8_a8c2u"]
 [ext_resource type="Texture2D" uid="uid://c77gij5v3aiug" path="res://Entities/Player/penguinframe0.png" id="8_po8hb"]
@@ -17,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bwv5q35d8kiuf" path="res://Entities/Player/die05.png" id="11_07j7d"]
 [ext_resource type="Texture2D" uid="uid://st77q4lycdeq" path="res://Entities/Player/flipper.png" id="11_083uw"]
 [ext_resource type="Script" path="res://Entities/CollisionAreas/Hurtbox.gd" id="12_rfagg"]
+[ext_resource type="Material" uid="uid://c3hj0nva3n7y7" path="res://Shaders/Player2_Shader.tres" id="17_81cx4"]
 
 [sub_resource type="Resource" id="Resource_plgi6"]
 script = ExtResource("2_shtls")
@@ -26,6 +28,20 @@ Ground_Acceleration = 20
 Air_Speed = 100
 Air_Friction = 100
 Air_Acceleration = 100
+
+[sub_resource type="Gradient" id="Gradient_8rh1u"]
+offsets = PackedFloat32Array(0, 0.619266, 0.931193, 1)
+colors = PackedColorArray(0.12, 0, 0.022, 1, 0.478431, 0, 0.584314, 1, 0.98, 0, 0.0163331, 1, 1, 0.929412, 0.811765, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q4510"]
+gradient = SubResource("Gradient_8rh1u")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uklo5"]
+resource_local_to_scene = true
+shader = ExtResource("7_ntpkl")
+shader_parameter/paletteMix = 1.0
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_q4510")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r628a"]
 animations = [{
@@ -536,6 +552,10 @@ properties/2/path = NodePath("AnimatedSprite2D:flip_h")
 properties/2/spawn = true
 properties/2/sync = true
 properties/2/watch = false
+properties/3/path = NodePath(".:Health")
+properties/3/spawn = true
+properties/3/sync = true
+properties/3/watch = false
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b4byc"]
 radius = 24.0
@@ -574,6 +594,7 @@ airJumpHeight = -600.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_uklo5")
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_r628a")
 animation = &"Idle"
@@ -584,6 +605,7 @@ update_rotation = false
 update_scale = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_cnwos")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -601,6 +623,7 @@ position_smoothing_enabled = true
 
 [node name="Flipper" type="Sprite2D" parent="."]
 texture_filter = 1
+material = ExtResource("17_81cx4")
 position = Vector2(-15, 25)
 scale = Vector2(3, 3)
 texture = ExtResource("11_083uw")
@@ -614,6 +637,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("boxOwner")]
+visible = false
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("12_rfagg")

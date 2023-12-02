@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://c1v26labbh21"]
+
+[ext_resource type="Shader" path="res://Shaders/SpritePalette.gdshader" id="1_bleix"]
+
+[sub_resource type="Gradient" id="Gradient_171li"]
+offsets = PackedFloat32Array(0.155963, 0.577982, 0.724771)
+colors = PackedColorArray(0.19, 0, 0.057, 1, 0.91, 0.1911, 0.203081, 1, 0.99, 0.6468, 0.3465, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gfgdf"]
+gradient = SubResource("Gradient_171li")
+
+[resource]
+shader = ExtResource("1_bleix")
+shader_parameter/paletteMix = 1.0
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_gfgdf")

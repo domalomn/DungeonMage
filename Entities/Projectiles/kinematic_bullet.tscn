@@ -25,6 +25,7 @@ collision_layer = 0
 script = ExtResource("1_d62jh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_5x7qw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -32,10 +33,11 @@ position = Vector2(2.38419e-07, -5.96046e-07)
 scale = Vector2(0.392857, 0.392857)
 sprite_frames = SubResource("SpriteFrames_83tyn")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("boxOwner")]
 collision_layer = 4
-collision_mask = 0
+collision_mask = 4
 script = ExtResource("3_28bdu")
+boxOwner = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_28w1d")

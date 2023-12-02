@@ -21,6 +21,12 @@ func setAuth(id:int):
 	name = "Player" + str(id)
 	%MultiplayerSynchronizer.set_multiplayer_authority(id)
 	$Camera2D.enabled = %MultiplayerSynchronizer.is_multiplayer_authority()
+	if id != 1: 
+		$AnimatedSprite2D.material.set_shader_parameter("paletteMix",1.0)
+		$Flipper.material.set_shader_parameter("paletteMix",1.0)
+	else: 
+		$AnimatedSprite2D.material.set_shader_parameter("paletteMix",0.0)
+		$Flipper.material.set_shader_parameter("paletteMix",0.0)
 
 func _ready():
 	currentItemSelected = get_tree().get_first_node_in_group("InventoryGui").equippedItem()
@@ -31,7 +37,7 @@ var facing = 1
 func _physics_process(delta): 
 	State_Machine.current.physics_update(delta)
 	
-	if Input.is_action_just_pressed("A"):
+	if Input.is_action_just_pressed("A") and  %MultiplayerSynchronizer.is_multiplayer_authority():
 		useItem() 
 		
 	if facing < 0:
@@ -113,12 +119,10 @@ func useItem():
 @export var maxHealth : int = 5
 @onready var Health = maxHealth
 func _getHit(area, boxowner):
-	print("HELLO")
 	velocity.y-=300
 	Health-=1
 	if lifeBar:
 		lifeBar.currentHealth = Health
-		print(lifeBar.currentHealth)
 	$Hurtbox.go_invincible(0.4)
 	if Health <= 0:
 		queue_free()

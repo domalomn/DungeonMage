@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://c3hj0nva3n7y7"]
+
+[ext_resource type="Shader" path="res://Shaders/SpritePalette.gdshader" id="1_i76h3"]
+
+[sub_resource type="Gradient" id="Gradient_8rh1u"]
+offsets = PackedFloat32Array(0, 0.619266, 0.931193, 1)
+colors = PackedColorArray(0.12, 0, 0.022, 1, 0.478431, 0, 0.584314, 1, 0.98, 0, 0.0163331, 1, 1, 0.929412, 0.811765, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q4510"]
+gradient = SubResource("Gradient_8rh1u")
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_i76h3")
+shader_parameter/paletteMix = 1.0
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_q4510")

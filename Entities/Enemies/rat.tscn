@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://csnfkr8q3qyg3"]
+[gd_scene load_steps=25 format=3 uid="uid://csnfkr8q3qyg3"]
 
 [ext_resource type="Script" path="res://Entities/Enemies/ratAI.gd" id="1_3rgjr"]
 [ext_resource type="Texture2D" uid="uid://c1gcxtwmqjrmi" path="res://Entities/Enemies/ratattack0.png" id="2_s2o1k"]
@@ -212,6 +212,16 @@ size = Vector2(34.7811, 20.6736)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vpxo5"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4joj0"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath("AnimationPlayer:current_animation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
 [node name="Rat" type="CharacterBody2D"]
 scale = Vector2(3, 3)
 script = ExtResource("1_3rgjr")
@@ -313,6 +323,9 @@ scale = Vector2(1.18689, 4.41364)
 position = Vector2(20.5018, 2.49227)
 scale = Vector2(-0.658553, -0.174419)
 shape = SubResource("RectangleShape2D_vpxo5")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4joj0")
 
 [connection signal="lost_player" from="." to="." method="player_lost"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

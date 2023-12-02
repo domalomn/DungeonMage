@@ -14,6 +14,8 @@ func enter_state(arg:Dictionary = {}):
 		
 		animation_player.play(AttackAnim)
 		animation_player.seek(0)
+		
+		
 		user.velocity.x = 400*sign(direction.x)
 		user.velocity.y = -300
 		
