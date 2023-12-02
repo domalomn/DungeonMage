@@ -7,10 +7,7 @@
 script = ExtResource("1_pk8g0")
 itemName = "Speed Boost"
 category = "Consumable"
+isStaff = false
 stackSize = 1
-damage = 0
-multipleTargets = false
-radius = 0
-stunTime = 0
 timeDelay = 10.0
-textures = ExtResource("2_oi34x")
+gui_texture = ExtResource("2_oi34x")

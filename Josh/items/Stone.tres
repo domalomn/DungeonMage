@@ -7,10 +7,7 @@
 script = ExtResource("1_l1on6")
 itemName = "Stone"
 category = "Throwable"
+isStaff = false
 stackSize = 30
-damage = 1
-multipleTargets = false
-radius = 0
-stunTime = 4
 timeDelay = 1.0
-textures = ExtResource("2_ogs7h")
+gui_texture = ExtResource("2_ogs7h")

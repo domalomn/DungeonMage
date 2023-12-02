@@ -9,14 +9,10 @@
 script = ExtResource("3_vja8t")
 itemName = "FireStaff"
 category = "Staff"
+isStaff = false
 stackSize = 1
-damage = 5
-multipleTargets = false
-radius = 2
-stunTime = 0
 timeDelay = 3.0
 gui_texture = ExtResource("2_mj4fh")
-use_texture = ExtResource("2_mj4fh")
 
 [node name="Item" instance=ExtResource("1_h2vn6")]
 itemResource = SubResource("Resource_hfvgm")

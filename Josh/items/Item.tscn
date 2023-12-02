@@ -9,5 +9,6 @@ script = ExtResource("1_r6pwu")
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 122.0
 offset_bottom = 122.0
+scale = Vector2(0.6, 0.6)
 mouse_filter = 2
 texture = ExtResource("2_et4xe")

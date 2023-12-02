@@ -1,17 +1,13 @@
 [gd_resource type="Resource" script_class="ItemResources" load_steps=3 format=3 uid="uid://ccqyco0nhuy2g"]
 
 [ext_resource type="Script" path="res://Josh/ItemResource.gd" id="1_x8ror"]
-[ext_resource type="Texture2D" uid="uid://c6331mx3ah21g" path="res://Josh/Art/Sword.png" id="2_cm77l"]
+[ext_resource type="Texture2D" uid="uid://cn5bdi7co0lob" path="res://Josh/Art/Bomb.png" id="3_5in11"]
 
 [resource]
 script = ExtResource("1_x8ror")
 itemName = "Bomb"
 category = "Throwable"
+isStaff = false
 stackSize = 20
-damage = 8
-multipleTargets = true
-radius = 3
-stunTime = 0
 timeDelay = 8.0
-gui_texture = ExtResource("2_cm77l")
-use_texture = ExtResource("2_cm77l")
+gui_texture = ExtResource("3_5in11")
