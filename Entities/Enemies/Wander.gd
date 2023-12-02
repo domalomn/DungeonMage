@@ -15,6 +15,8 @@ func physics_update(delta):
 	if user.player: 
 		print("found u")
 		shotChecker.target_position = shotChecker.to_local(user.player.global_position)
+		shotChecker.force_raycast_update()
+		
 		if not shotChecker.is_colliding():
 			print("see u")
 			Machine.goto_state("Chase")
