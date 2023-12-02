@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://kogoc4hg41mb"]
+[gd_scene load_steps=31 format=3 uid="uid://kogoc4hg41mb"]
 
 [ext_resource type="Script" path="res://Entities/Character.gd" id="1_arqb2"]
 [ext_resource type="Script" path="res://Entities/Character_Stats.gd" id="2_shtls"]
@@ -6,10 +6,15 @@
 [ext_resource type="Script" path="res://Entities/State Machines/Player States/Idle.gd" id="4_hgayi"]
 [ext_resource type="Script" path="res://Entities/State Machines/Player States/Move.gd" id="6_jalty"]
 [ext_resource type="Script" path="res://Entities/State Machines/Player States/Falling.gd" id="7_g11qy"]
+[ext_resource type="Texture2D" uid="uid://ckonxewvr1qlg" path="res://Entities/Player/die01.png" id="7_pwnf3"]
+[ext_resource type="Texture2D" uid="uid://c4vh7tfqs4dyc" path="res://Entities/Player/die02.png" id="8_a8c2u"]
 [ext_resource type="Texture2D" uid="uid://c77gij5v3aiug" path="res://Entities/Player/penguinframe0.png" id="8_po8hb"]
 [ext_resource type="Texture2D" uid="uid://4cu5cpj2v6f0" path="res://Entities/Player/penguinframejump.png" id="9_5bl8k"]
 [ext_resource type="Texture2D" uid="uid://ddogu6vw0uao0" path="res://Entities/Player/penguinframe1.png" id="9_bu2lt"]
+[ext_resource type="Texture2D" uid="uid://frsmljl3t2m6" path="res://Entities/Player/die03.png" id="9_m8122"]
 [ext_resource type="Texture2D" uid="uid://1mdymyjo6c6g" path="res://Entities/Player/penguinframe2.png" id="10_7jh70"]
+[ext_resource type="Texture2D" uid="uid://bkud268tyyinr" path="res://Entities/Player/die04.png" id="10_w5i1a"]
+[ext_resource type="Texture2D" uid="uid://bwv5q35d8kiuf" path="res://Entities/Player/die05.png" id="11_07j7d"]
 [ext_resource type="Texture2D" uid="uid://st77q4lycdeq" path="res://Entities/Player/flipper.png" id="11_083uw"]
 [ext_resource type="Script" path="res://Entities/CollisionAreas/Hurtbox.gd" id="12_rfagg"]
 
@@ -24,6 +29,26 @@ Air_Acceleration = 100
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r628a"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_pwnf3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_a8c2u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_m8122")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_w5i1a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_07j7d")
+}],
+"loop": true,
+"name": &"Die",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("8_po8hb")
@@ -188,6 +213,34 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lqkhw"]
+resource_name = "Die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Die"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
 }
 
 [sub_resource type="Animation" id="Animation_f6ise"]
@@ -463,6 +516,7 @@ tracks/5/keys = {
 _data = {
 "AirJumpL": SubResource("Animation_sjcko"),
 "AirJumpR": SubResource("Animation_yqn32"),
+"Die": SubResource("Animation_lqkhw"),
 "Idle": SubResource("Animation_f6ise"),
 "Jump": SubResource("Animation_iubk1"),
 "RESET": SubResource("Animation_t5h4e"),
@@ -570,4 +624,6 @@ position = Vector2(7, 6)
 shape = SubResource("CapsuleShape2D_b4byc")
 debug_color = Color(0.0588235, 0.701961, 0, 0.419608)
 
+[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]
+[connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_area_exited"]
 [connection signal="hitbox_detected" from="Hurtbox" to="." method="_getHit"]

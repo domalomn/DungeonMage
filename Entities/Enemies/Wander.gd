@@ -12,7 +12,7 @@ func enter_state(arg:Dictionary = {}):
 	animation_player.play("Walk")
 
 func physics_update(delta): 
-	if user.player: 
+	if is_instance_valid(user.player): 
 		print("found u")
 		shotChecker.target_position = shotChecker.to_local(user.player.global_position)
 		shotChecker.force_raycast_update()
@@ -34,4 +34,4 @@ func physics_update(delta):
 	
 func _on_player_detection_body_exited(body):
 	if body == user.player and Machine.current == self:
-		user.player = null
+		user.emit_signal("lost_player")

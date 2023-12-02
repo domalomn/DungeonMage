@@ -7,14 +7,17 @@ extends State
 
 func enter_state(arg:Dictionary = {}): 
 	
-	var direction = user.global_position.direction_to( user.player.global_position ) 
-	
-	animation_player.play(AttackAnim)
-	animation_player.seek(0)
-	
-	
-	
-	call_deferred("awaitAttackAnim")
+	if not is_instance_valid(user.player):
+		Machine.goto_state("Idle")
+	else:
+		var direction = user.global_position.direction_to( user.player.global_position ) 
+		
+		animation_player.play(AttackAnim)
+		animation_player.seek(0)
+		
+		
+		
+		call_deferred("awaitAttackAnim")
 	
 func physics_update(delta): 
 	

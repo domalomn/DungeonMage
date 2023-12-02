@@ -281,6 +281,7 @@ libraries = {
 "": SubResource("AnimationLibrary_swxlf")
 }
 
+[connection signal="lost_player" from="." to="." method="player_lost"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_area_exited"]
 [connection signal="hitbox_detected" from="Hurtbox" to="." method="_on_hurtbox_hitbox_detected"]

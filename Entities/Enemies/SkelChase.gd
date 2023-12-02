@@ -17,27 +17,29 @@ func enter_state(arg:Dictionary = {}):
 	$AttackCooldown.start(0.5)
 
 func physics_update(delta): 
-	var direction = user.global_position.direction_to( user.player.global_position ) 
-	var distance_to_player = user.global_position.distance_to(user.player.global_position) / 3
-	shotChecker.target_position = shotChecker.to_local(user.player.global_position)
-	
-	if not user.is_on_floor(): user.velocity.y += 980 * delta
-	elif (not groundDetector.has_overlapping_bodies()) || distance_to_player <= attackDistance:
-		user.velocity.x = move_toward(user.velocity.x,0 * user.speed,1000*delta)
-	
-	user.facing( sign(direction.x) )
-	user.velocity.x = move_toward(user.velocity.x,direction.x * user.speed,1000*delta)
-	
-	if distance_to_player <= attackDistance && not shotChecker.is_colliding():
-		user.velocity.x = move_toward(user.velocity.x,0,1000*delta)
-	
-	user.move_and_slide()
+	if is_instance_valid(user.player):
+		var direction = user.global_position.direction_to( user.player.global_position ) 
+		var distance_to_player = user.global_position.distance_to(user.player.global_position) / 3
+		shotChecker.target_position = shotChecker.to_local(user.player.global_position)
+		
+		if not user.is_on_floor(): user.velocity.y += 980 * delta
+		elif (not groundDetector.has_overlapping_bodies()) || distance_to_player <= attackDistance:
+			user.velocity.x = move_toward(user.velocity.x,0 * user.speed,1000*delta)
+		
+		user.facing( sign(direction.x) )
+		user.velocity.x = move_toward(user.velocity.x,direction.x * user.speed,1000*delta)
+		
+		if distance_to_player <= attackDistance && not shotChecker.is_colliding():
+			user.velocity.x = move_toward(user.velocity.x,0,1000*delta)
+		
+		user.move_and_slide()
 	
 	if (not shotChecker.is_colliding()) and $AttackCooldown.is_stopped() and user.is_on_floor():
 		Machine.goto_state(AttackState)
 
 func _on_chase_timer_timeout():
-	user.player = null
+	if is_instance_valid(user.player):
+		user.emit_signal("lost_player")
 	Machine.goto_state(CancelState)
 
 func _on_player_detection_body_exited(body):

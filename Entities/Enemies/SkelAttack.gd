@@ -8,22 +8,25 @@ extends State
 
 func enter_state(arg:Dictionary = {}): 
 	print("skelwizattack")
-	var direction = user.global_position.direction_to( user.player.global_position ) 
-	animation_player.play(AttackAnim)
-	animation_player.seek(0)
-	var bullet = bulletPath.instantiate()
-			
+	if not is_instance_valid(user.player):
+		Machine.goto_state("Idle")
+	else:
+		var direction = user.global_position.direction_to( user.player.global_position ) 
+		animation_player.play(AttackAnim)
+		animation_player.seek(0)
+		var bullet = bulletPath.instantiate()
+				
 
-	bullet.damage = user.damage;
-			#bullet.affliction = currentItemSelected.affliction;
+		bullet.damage = user.damage;
+				#bullet.affliction = currentItemSelected.affliction;
+			
+		get_parent().add_child(bullet)
+				# starts at player position
+		bullet.position = user.global_position
+				# fires from unit vector pointing from player to cursor, speed is determined from staff data
+		bullet.velocity = (user.player.global_position - bullet.position).normalized() * bullet.speed
 		
-	get_parent().add_child(bullet)
-			# starts at player position
-	bullet.position = user.global_position
-			# fires from unit vector pointing from player to cursor, speed is determined from staff data
-	bullet.velocity = (user.player.global_position - bullet.position).normalized() * bullet.speed
-	
-	call_deferred("awaitAttackAnim")
+		call_deferred("awaitAttackAnim")
 	
 func physics_update(delta): 
 	

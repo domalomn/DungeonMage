@@ -15,26 +15,27 @@ func enter_state(arg:Dictionary = {}):
 	$AttackCooldown.start(0.5)
 
 func physics_update(delta): 
-	var direction = user.global_position.direction_to( user.player.global_position ) 
-	var distance_to_player = user.global_position.distance_to(user.player.global_position) / 3
-	
-	if not user.is_on_floor(): user.velocity.y += 980 * delta
-	
-	user.facing( sign(direction.x) )
-	user.velocity.x = move_toward(user.velocity.x,direction.x * user.speed,1000*delta)
-	
-	if user.is_on_wall() || (not groundDetector.has_overlapping_bodies()):
-		user.player = null
-		Machine.goto_state(CancelState)
-	
-	
-	if distance_to_player <= attackDistance and $AttackCooldown.is_stopped() and user.is_on_floor():
-		Machine.goto_state(AttackState)
-	elif distance_to_player > attackDistance:
-		user.move_and_slide()
+	if is_instance_valid(user.player):
+		var direction = user.global_position.direction_to( user.player.global_position ) 
+		var distance_to_player = user.global_position.distance_to(user.player.global_position) / 3
+		
+		if not user.is_on_floor(): user.velocity.y += 980 * delta
+		
+		user.facing( sign(direction.x) )
+		user.velocity.x = move_toward(user.velocity.x,direction.x * user.speed,1000*delta)
+		
+		if user.is_on_wall() || (not groundDetector.has_overlapping_bodies()):
+			user.player = null
+			Machine.goto_state(CancelState)
+		
+		
+		if distance_to_player <= attackDistance and $AttackCooldown.is_stopped() and user.is_on_floor():
+			Machine.goto_state(AttackState)
+		elif distance_to_player > attackDistance:
+			user.move_and_slide()
 
 func _on_chase_timer_timeout():
-	user.player = null
+	user.emit_signal("lost_player")
 	Machine.goto_state(CancelState)
 
 func _on_player_detection_body_exited(body):

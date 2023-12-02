@@ -8,7 +8,7 @@ func enter_state(arg:Dictionary = {}):
 	animation_player.play("Idle")
 	
 func physics_update(delta): 
-	if user.player: 
+	if is_instance_valid(user.player): 
 		shotChecker.target_position = shotChecker.to_local(user.player.global_position)
 		if not shotChecker.is_colliding():
 			Machine.goto_state("Chase")

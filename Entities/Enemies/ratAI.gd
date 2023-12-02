@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 var world_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+signal lost_player()
+
 var speed = 150
 var attackRange = 45
 var maxHealth = 5
@@ -39,8 +41,19 @@ func _on_player_detection_body_entered(body):
 	print("body entered")
 	if body.is_in_group("Player"):
 		print("body is player")
+		# temp check if already pursuing player?
+		if is_instance_valid(player):
+			player_lost()
 		player = body
-		chasing = true
+		player.connect("death", player_died)
+
+func player_lost():
+	if player.is_connected("death", player_died):
+		player.disconnect("death", player_died)
+		player = null
+
+func player_died():
+	player = null
 
 
 func _on_hurtbox_hitbox_detected(area, boxowner):

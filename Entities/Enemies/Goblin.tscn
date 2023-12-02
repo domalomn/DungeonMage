@@ -334,7 +334,7 @@ debug_color = Color(0.658824, 0.74902, 0.0745098, 0.419608)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 monitorable = false
 script = ExtResource("9_dppye")
 
@@ -397,6 +397,7 @@ one_shot = true
 [node name="ShotChecker" type="RayCast2D" parent="."]
 target_position = Vector2(1, 1)
 
+[connection signal="lost_player" from="." to="." method="player_lost"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_area_exited"]
 [connection signal="hitbox_detected" from="Hurtbox" to="." method="_on_hurtbox_hitbox_detected"]
@@ -405,4 +406,5 @@ target_position = Vector2(1, 1)
 [connection signal="body_exited" from="PlayerDetection" to="FSM/Chase" method="_on_player_detection_body_exited"]
 [connection signal="body_exited" from="PlayerDetection" to="FSM/Idle" method="_on_player_detection_body_exited"]
 [connection signal="body_exited" from="PlayerDetection" to="FSM/Wander" method="_on_player_detection_body_exited"]
+[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="timeout" from="FSM/Chase/ChaseTimer" to="FSM/Chase" method="_on_chase_timer_timeout"]

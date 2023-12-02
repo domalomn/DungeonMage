@@ -10,6 +10,8 @@ var currentItemSelected
 @export var meleeHitbox : Hitbox = null
 @export var meleeTimer : Timer = null
 
+signal death()
+
 var isHolding: bool = false
 
 func setAuth(id:int): 
@@ -41,6 +43,16 @@ func _physics_process(delta):
 			$Flipper.position *= Vector2(-1, 1)
 
 func _process(delta): State_Machine.current.update(delta)
+
+func die():
+	emit_signal("death")
+	$AnimationPlayer.play("Die")
+	
+	call_deferred("deathAnim")
+	
+func deathAnim():
+	if await $AnimationPlayer.animation_finished == "Die":
+		queue_free()
 
 func useItem():
 	currentItemSelected = get_tree().get_first_node_in_group("InventoryGui").equippedItem()
@@ -101,4 +113,7 @@ func _getHit(area, boxowner):
 	print("HELLO")
 	velocity.y-=300
 	Health-=1
+	$Hurtbox.go_invincible(0.4)
+	if Health <= 0:
+		queue_free()
 	
