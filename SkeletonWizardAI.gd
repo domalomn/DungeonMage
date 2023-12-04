@@ -28,6 +28,12 @@ func _physics_process(delta):
 
 func die():
 	queue_free()
+	var item = preload("res://EquippedItems/ItemList/item_firestaff.tscn").instantiate()
+	item.projectileType = randi_range(0,3)
+	var itemDropped = preload("res://EquippedItems/dropped_item.tscn").instantiate()
+	get_parent().add_child(itemDropped)
+	itemDropped.itemNode = item
+	itemDropped.position = global_position
 
 func facing(f:int):
 	if f < 0:
@@ -60,7 +66,7 @@ func _on_hurtbox_hitbox_detected(area, boxowner):
 	print("hit the wiz")
 	$Hurtbox.go_invincible(0.4)
 	velocity.y = -300
-	if player:
+	if is_instance_valid(player):
 		velocity.x = sign( player.global_position.direction_to( global_position ).x ) * 500
 	
 	fsm.goto_state("Idle")

@@ -22,7 +22,7 @@ animations = [{
 }]
 
 [node name="sickle_shot" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 0
 script = ExtResource("1_0dyio")
 
 [node name="Timer" type="Timer" parent="."]
@@ -32,7 +32,7 @@ shape = SubResource("CircleShape2D_l7338")
 
 [node name="Hitbox" type="Area2D" parent="."]
 scale = Vector2(1.11436, 1.11436)
-collision_layer = 8
+collision_layer = 4
 collision_mask = 4
 script = ExtResource("2_vpoen")
 
@@ -47,3 +47,4 @@ scale = Vector2(0.535714, 0.535714)
 sprite_frames = SubResource("SpriteFrames_a0edg")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]

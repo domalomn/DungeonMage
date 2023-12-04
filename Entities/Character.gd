@@ -13,6 +13,8 @@ var currentItemSelected
 var InventoryRef : Control
 var lifeBar : LifeBar
 
+var itemInRange
+
 signal death()
 
 var isHolding: bool = false
@@ -40,6 +42,9 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("A") and  %MultiplayerSynchronizer.is_multiplayer_authority():
 		useItem() 
 		
+	if Input.is_action_just_pressed("Y") and  %MultiplayerSynchronizer.is_multiplayer_authority():
+		pickUp()
+		
 	if facing < 0:
 		$AnimatedSprite2D.flip_h = true
 		$Flipper.scale.x = -3
@@ -62,6 +67,12 @@ func die():
 func deathAnim():
 	if await $AnimationPlayer.animation_finished == "Die":
 		queue_free()
+
+func pickUp():
+	if is_instance_valid(itemInRange):
+		InventoryRef.appendItem(itemInRange.itemNode)
+		itemInRange.queue_free()
+		
 
 func useItem():
 	currentItemSelected = InventoryRef.equippedItem()
@@ -127,3 +138,26 @@ func _getHit(area, boxowner):
 	if Health <= 0:
 		queue_free()
 	
+
+
+
+
+
+func _on_item_detector_area_entered(area):
+	itemInRange = area.get_parent()
+
+
+
+func _on_item_detector_area_exited(area):
+	itemInRange = null
+
+
+func _on_item_detector_body_entered(body):
+	print("item found.")
+	itemInRange = body
+	
+
+
+
+func _on_item_detector_body_exited(body):
+	itemInRange = null

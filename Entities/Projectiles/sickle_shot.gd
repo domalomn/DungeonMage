@@ -33,3 +33,7 @@ func _physics_process(delta):
 			
 	$Sprite.rotate(.5)
 
+
+
+func _on_hitbox_hit(target):
+	queue_free()

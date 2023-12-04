@@ -56,7 +56,7 @@ func player_died():
 func _on_hurtbox_hitbox_detected(area, boxowner):
 	var dmg = area.damage
 	var knockDir = Vector2(velocity.x,-300)
-	if player: knockDir.x = sign( player.global_position.direction_to( global_position ).x ) * 500
+	if is_instance_valid(player): knockDir.x = sign( player.global_position.direction_to( global_position ).x ) * 500
 	
 	getHurt.rpc(dmg,knockDir)
 

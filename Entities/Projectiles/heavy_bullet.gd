@@ -39,3 +39,7 @@ func rotate_vel(velocity, angle):
 		
 		
 
+
+
+func _on_hitbox_hit(target):
+	queue_free()
