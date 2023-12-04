@@ -47,6 +47,8 @@ func can_spawn(checkType:int = 0):
 func spawn():
 	if isActive and can_spawn(3):
 		if not SpawnNode: SpawnNode = get_tree().get_first_node_in_group("SpawnNode")
+		$MPSpawner.spawn_path = $MPSpawner.get_path_to(SpawnNode)
+		
 		
 		var obj = SpawnObject.instantiate()
 	

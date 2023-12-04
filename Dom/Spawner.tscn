@@ -7,4 +7,6 @@ script = ExtResource("1_dc42a")
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="MPSpawner" type="MultiplayerSpawner" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="spawn"]
