@@ -28,8 +28,13 @@ func _physics_process(delta):
 
 func die():
 	queue_free()
-	var item = preload("res://EquippedItems/ItemList/item_firestaff.tscn").instantiate()
-	item.projectileType = randi_range(0,3)
+	var item = null
+	match randi_range(0,1):
+		0:
+			item = preload("res://EquippedItems/ItemList/item_firestaff.tscn").instantiate()
+		1:
+			item = preload("res://EquippedItems/ItemList/item_lightningstaff.tscn").instantiate()
+		
 	var itemDropped = preload("res://EquippedItems/dropped_item.tscn").instantiate()
 	get_parent().add_child(itemDropped)
 	itemDropped.itemNode = item
