@@ -3,7 +3,7 @@ extends Node
 var Players = {}
 
 @export var ipAddress = str( IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1) )
-@export var port = 8910
+@export var port = 9999
 var peer : ENetMultiplayerPeer
 
 func isHost(): return multiplayer.get_unique_id() == get_multiplayer_authority()
@@ -33,8 +33,8 @@ func _hostGame():
 
 func _joinGame():
 	peer = ENetMultiplayerPeer.new()
-	peer.create_client(ipAddress,port)
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
+	print("Trying to connect ", peer.create_client("10.9.61.149",port))
+	peer.host.compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
 	
 func _playerConnected(id):
