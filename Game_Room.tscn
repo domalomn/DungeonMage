@@ -246,6 +246,7 @@ hframes = 4
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="EndFlag"]
+autoplay = "Flag Moving"
 libraries = {
 "": SubResource("AnimationLibrary_c4ctj")
 }

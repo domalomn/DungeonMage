@@ -1,10 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://c172cwaq5m6kl"]
+[gd_scene load_steps=8 format=3 uid="uid://c172cwaq5m6kl"]
 
 [ext_resource type="PackedScene" uid="uid://k3q00pnte5y6" path="res://Josh/items/Item.tscn" id="1_qt5qp"]
 [ext_resource type="Texture2D" uid="uid://c7xvujc7yls7w" path="res://Josh/Art/Staff_Hilt.png" id="2_kogtc"]
 [ext_resource type="Texture2D" uid="uid://cnswwav0yo5ep" path="res://Josh/Art/Grey_Scale_Diamond.png" id="2_s46uk"]
+[ext_resource type="Shader" path="res://Shaders/SpritePalette.gdshader" id="3_bv6cl"]
+
+[sub_resource type="Gradient" id="Gradient_335s6"]
+offsets = PackedFloat32Array(0, 0.275362, 0.710145, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.275362, 0.275362, 0.275362, 1, 0.054902, 0.729412, 0.937255, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1ll5l"]
+gradient = SubResource("Gradient_335s6")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e4t2p"]
+shader = ExtResource("3_bv6cl")
+shader_parameter/paletteMix = 1.0
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_1ll5l")
 
 [node name="Item" instance=ExtResource("1_qt5qp")]
 
