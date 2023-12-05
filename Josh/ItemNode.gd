@@ -10,6 +10,10 @@ extends Node2D
 @export var speed : float = 600
 @export var damage : int = 1
 
+@export_group("Consumable Info")
+@export var hp_up : int = 0
+
+
 func setItem(item:ItemResources):
 	if itemResource and is_in_group(itemResource.category):
 		remove_from_group(itemResource.category)

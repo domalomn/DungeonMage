@@ -27,6 +27,11 @@ func _physics_process(delta):
 
 func die():
 	queue_free()
+	var item = preload("res://EquippedItems/ItemList/item_HP.tscn").instantiate()
+	var itemDropped = preload("res://EquippedItems/dropped_item.tscn").instantiate()
+	get_parent().add_child(itemDropped)
+	itemDropped.itemNode = item
+	itemDropped.position = global_position
 
 func facing(f:int):
 	if f < 0:

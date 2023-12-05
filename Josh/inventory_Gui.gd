@@ -14,6 +14,7 @@ func _ready():
 func initInventory():
 	appendItem( preload("res://EquippedItems/ItemList/item_firestaff.tscn").instantiate() )
 	appendItem( preload("res://EquippedItems/ItemList/item_Knife.tscn").instantiate() )
+	appendItem( preload("res://EquippedItems/ItemList/item_HP.tscn").instantiate() )
 	
 func slot_gui_input(event: InputEvent, slot:SlotClass):
 	print("AAAA")
@@ -38,8 +39,8 @@ func _input(event):
 	if holding_item:
 		holding_item.global_position = get_global_mouse_position()
 		
-func equippedItem():
-	return inventory_slots.get_child(0).item;
+func equippedItemSlot():
+	return inventory_slots.get_child(0);
 
 
 func appendItem(item:Node):
@@ -47,5 +48,3 @@ func appendItem(item:Node):
 		if !slot.item: 
 			slot.putIntoSlot(item)
 			return true
-	
-	return false

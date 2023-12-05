@@ -31,7 +31,7 @@ func setAuth(id:int):
 		$Flipper.material.set_shader_parameter("paletteMix",0.0)
 
 func _ready():
-	currentItemSelected = get_tree().get_first_node_in_group("InventoryGui").equippedItem()
+	currentItemSelected = get_tree().get_first_node_in_group("InventoryGui").equippedItemSlot().item
 
 func _input(event): if %MultiplayerSynchronizer.is_multiplayer_authority(): State_Machine.current.handle_input(event)
 
@@ -75,14 +75,14 @@ func pickUp():
 		
 
 func useItem():
-	currentItemSelected = InventoryRef.equippedItem()
+	currentItemSelected = InventoryRef.equippedItemSlot().item
 	
 	if !(currentItemSelected and $AttackCooldown.is_stopped()): return
 		
+	print(currentItemSelected.itemResource.category)
 	
 	
-	
-	if currentItemSelected.is_in_group("Staff"):
+	if currentItemSelected.itemResource.category == "Staff":
 		var bulletPath
 		
 		# checks enum in staff instance for its projectile type to instantiate bullet upon firing
@@ -112,7 +112,6 @@ func useItem():
 			bullet.velocity = (get_global_mouse_position() - bullet.position).normalized() * bullet.speed
 		
 		# no velocity value for laser, so it needs a seperate condition.
-		
 		else:
 			var laser = bulletPath.instantiate()
 			laser.damage = currentItemSelected.damage;
@@ -121,6 +120,11 @@ func useItem():
 		
 		# (At the moment) checks for a generic item to perform a melee attack.
 		# Enabled hitbox and starts animation and timer.
+	elif currentItemSelected.itemResource.category == "Consumable":
+			print("using consumable")
+			Health += currentItemSelected.hp_up
+			InventoryRef.equippedItemSlot().pickFromSlot()
+			currentItemSelected.queue_free()
 	else:
 		var useItem = currentItemSelected.useNode.instantiate()
 		$Flipper.add_child(useItem)
@@ -128,19 +132,21 @@ func useItem():
 	$AttackCooldown.start(currentItemSelected.useCooldown)
 
 @export var maxHealth : int = 5
-@onready var Health = maxHealth
+@onready var Health = maxHealth : set = setHealth
+
 func _getHit(area, boxowner):
 	velocity.y-=300
 	Health-=1
-	if lifeBar:
-		lifeBar.currentHealth = Health
 	$Hurtbox.go_invincible(0.4)
 	if Health <= 0:
 		queue_free()
 	
 
-
-
+func setHealth(newHealth):
+	Health = newHealth
+	if Health > maxHealth: Health = maxHealth
+	if lifeBar:
+		lifeBar.currentHealth = Health
 
 
 func _on_item_detector_area_entered(area):
