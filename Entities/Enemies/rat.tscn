@@ -55,7 +55,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fvepv"]
-size = Vector2(34.3908, 38.5416)
+size = Vector2(65.2413, 15.9305)
 
 [sub_resource type="Animation" id="Animation_kubx2"]
 resource_name = "Bite"
@@ -149,7 +149,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("RectangleShape2D_fvepv")]
+"values": [null]
 }
 
 [sub_resource type="Animation" id="Animation_k23ww"]
@@ -183,22 +183,10 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hitbox:monitorable")
+tracks/2/path = NodePath("AnimatedSprite2D:animation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D:animation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -273,15 +261,15 @@ visible = false
 scale = Vector2(8.51252, 8.49333)
 shape = SubResource("CircleShape2D_xvtcn")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("boxOwner")]
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("7_mea8j")
+boxOwner = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(23.6667, -0.833333)
+position = Vector2(33.8334, 0.5)
 scale = Vector2(0.659091, 0.648649)
-shape = SubResource("RectangleShape2D_fvepv")
 debug_color = Color(0.984314, 0, 0.329412, 0.419608)
 
 [node name="ChaseTimer" type="Timer" parent="."]
@@ -300,6 +288,7 @@ readyState = NodePath("Idle")
 [node name="Chase" type="Node" parent="FSM" node_paths=PackedStringArray("user", "groundDetector")]
 script = ExtResource("9_ru71f")
 user = NodePath("../..")
+attackDistance = 30.0
 groundDetector = NodePath("../../GroundDetection")
 
 [node name="ChaseTimer" type="Timer" parent="FSM/Chase"]

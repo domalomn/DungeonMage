@@ -2,7 +2,7 @@ extends Node
 
 var Players = {}
 
-@export var ipAddress = "127.0.0.1"
+@export var ipAddress = str( IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1) )
 @export var port = 8910
 var peer : ENetMultiplayerPeer
 
