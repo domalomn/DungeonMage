@@ -32,6 +32,7 @@ func setAuth(id:int):
 
 func _ready():
 	currentItemSelected = get_tree().get_first_node_in_group("InventoryGui").equippedItemSlot().item
+	
 
 func _input(event): if %MultiplayerSynchronizer.is_multiplayer_authority(): State_Machine.current.handle_input(event)
 
@@ -135,6 +136,7 @@ func useItem():
 @onready var Health = maxHealth : set = setHealth
 
 func _getHit(area, boxowner):
+	
 	velocity.y-=300
 	Health-=1
 	$Hurtbox.go_invincible(0.4)

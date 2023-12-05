@@ -27,6 +27,7 @@ func set_tracking(track):
 
 ## Fired when an area enters. Fires the hitbox_detected signal if it's a hitbox	
 func _area_entered(area):
+	print("Hi")
 	if area is Hitbox and area != ignoreBox: 
 		if (not area in tracked_areas) and area.continuous_checking: 
 			tracked_areas.append(area)
