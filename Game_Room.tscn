@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ce0e5nkfemr0e"]
+[gd_scene load_steps=19 format=3 uid="uid://ce0e5nkfemr0e"]
 
 [ext_resource type="Script" path="res://SceneManager.gd" id="1_k638j"]
 [ext_resource type="Texture2D" uid="uid://bk3wrgkwso81w" path="res://Josh/Art/seamless-grounds - Cold Taundra.png" id="2_43xaj"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://csnfkr8q3qyg3" path="res://Entities/Enemies/rat.tscn" id="7_25rdr"]
 [ext_resource type="PackedScene" uid="uid://dcsm0bsxxdqp3" path="res://Dom/Spawner.tscn" id="7_iqe4v"]
 [ext_resource type="PackedScene" uid="uid://cbggk663phi7u" path="res://Entities/Enemies/Goblin.tscn" id="8_wy6yk"]
+[ext_resource type="Texture2D" uid="uid://chuobbavebx25" path="res://Josh/Art/End_Flag.png" id="10_fb77j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t2rpx"]
 size = Vector2(1142, 40)
@@ -123,6 +124,44 @@ physics_layer_0/collision_mask = 2
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_ujlml")
 
+[sub_resource type="Animation" id="Animation_481fo"]
+resource_name = "Flag Moving"
+length = 2.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_m3f7b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c4ctj"]
+_data = {
+"Flag Moving": SubResource("Animation_481fo"),
+"RESET": SubResource("Animation_m3f7b")
+}
+
 [node name="GameRoom" type="Node2D"]
 script = ExtResource("1_k638j")
 
@@ -198,3 +237,15 @@ useSpawnerX = true
 useSpawnerY = true
 initialDelay = 0.1
 maxSpawnObjects = 1
+
+[node name="EndFlag" type="Sprite2D" parent="."]
+position = Vector2(1609, -1411)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("10_fb77j")
+hframes = 4
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EndFlag"]
+libraries = {
+"": SubResource("AnimationLibrary_c4ctj")
+}

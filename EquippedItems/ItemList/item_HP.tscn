@@ -10,4 +10,5 @@ itemResource = ExtResource("2_0q0rr")
 hp_up = 5
 
 [node name="TextureRect" parent="." index="0"]
+texture_filter = 1
 texture = ExtResource("3_y7ume")

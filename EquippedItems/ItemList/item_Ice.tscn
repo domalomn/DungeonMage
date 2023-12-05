@@ -1,9 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://c172cwaq5m6kl"]
+[gd_scene load_steps=5 format=3 uid="uid://c172cwaq5m6kl"]
 
 [ext_resource type="PackedScene" uid="uid://k3q00pnte5y6" path="res://Josh/items/Item.tscn" id="1_qt5qp"]
+[ext_resource type="Texture2D" uid="uid://c7xvujc7yls7w" path="res://Josh/Art/Staff_Hilt.png" id="2_kogtc"]
 [ext_resource type="Texture2D" uid="uid://cnswwav0yo5ep" path="res://Josh/Art/Grey_Scale_Diamond.png" id="2_s46uk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e4t2p"]
 
 [node name="Item" instance=ExtResource("1_qt5qp")]
 
-[node name="TextureRect" parent="." index="0"]
+[node name="StaffHilt" type="Sprite2D" parent="." index="0"]
+position = Vector2(3, 14)
+scale = Vector2(0.246528, 0.274306)
+texture = ExtResource("2_kogtc")
+centered = false
+
+[node name="TextureRect" parent="." index="1"]
+material = SubResource("ShaderMaterial_e4t2p")
+offset_left = 19.0
+offset_top = -1.0
+offset_right = 141.0
+offset_bottom = 121.0
+scale = Vector2(0.35, 0.35)
 texture = ExtResource("2_s46uk")

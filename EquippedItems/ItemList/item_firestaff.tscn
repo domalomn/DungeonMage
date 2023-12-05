@@ -19,11 +19,16 @@ gui_texture = ExtResource("2_whlem")
 itemResource = SubResource("Resource_hfvgm")
 
 [node name="StaffHilt" type="Sprite2D" parent="." index="0"]
-position = Vector2(-55, 9)
-scale = Vector2(0.6, 0.6)
+position = Vector2(3, 14)
+scale = Vector2(0.246528, 0.274306)
 texture = ExtResource("4_e0v10")
 centered = false
 
 [node name="TextureRect" parent="." index="1"]
 material = ExtResource("5_ba1p8")
+offset_left = 19.0
+offset_top = -1.0
+offset_right = 141.0
+offset_bottom = 121.0
+scale = Vector2(0.35, 0.35)
 texture = ExtResource("2_whlem")
