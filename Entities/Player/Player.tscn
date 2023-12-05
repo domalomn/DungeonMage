@@ -658,6 +658,8 @@ collision_mask = 256
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemDetector"]
 shape = SubResource("CircleShape2D_2ffxj")
 
+[node name="GUI" type="CanvasLayer" parent="."]
+
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_area_exited"]
 [connection signal="hitbox_detected" from="Hurtbox" to="." method="_getHit"]

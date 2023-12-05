@@ -1,5 +1,7 @@
 class_name Character extends CharacterBody2D
 
+const gameScene = preload("res://Aaliyah/UI/game_over_scene.tscn")
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var world_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var currentItemSelected
@@ -142,6 +144,9 @@ func _getHit(area, boxowner):
 	$Hurtbox.go_invincible(0.4)
 	if Health <= 0:
 		queue_free()
+	
+	if Health <= 0:
+		Global.changeScene( gameScene.instantiate() )
 	
 
 func setHealth(newHealth):
