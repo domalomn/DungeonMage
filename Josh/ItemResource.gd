@@ -1,5 +1,6 @@
 class_name ItemResources extends Resource
 
+# Basic Variables initalized to call under resource.
 @export var itemName: String = "Sword"
 @export var category: String = "Weapon"
 @export var isStaff: bool = false

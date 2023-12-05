@@ -11,11 +11,13 @@ func _ready():
 		
 	call_deferred("initInventory")
 	
+	# slots the items textures in the GUI
 func initInventory():
 	appendItem( preload("res://EquippedItems/ItemList/item_firestaff.tscn").instantiate() )
 	appendItem( preload("res://EquippedItems/ItemList/item_Knife.tscn").instantiate() )
 	appendItem( preload("res://EquippedItems/ItemList/item_HP.tscn").instantiate() )
 	
+# Re-Slotting the GUI with mouse 
 func slot_gui_input(event: InputEvent, slot:SlotClass):
 	print("AAAA")
 	if event is InputEventMouseButton:
@@ -35,10 +37,12 @@ func slot_gui_input(event: InputEvent, slot:SlotClass):
 				holding_item = slot.pickFromSlot()
 				holding_item.global_position = get_global_mouse_position()
 				
+# Checks if item is currently slotted
 func _input(event):
 	if holding_item:
 		holding_item.global_position = get_global_mouse_position()
 		
+# Equips first slot
 func equippedItemSlot():
 	return inventory_slots.get_child(0);
 
