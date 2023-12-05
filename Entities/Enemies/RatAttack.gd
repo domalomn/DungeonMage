@@ -21,8 +21,6 @@ func enter_state(arg:Dictionary = {}):
 	
 func physics_update(delta): 
 	
-	print(user.velocity)
-	
 	user.velocity.x = 0
 	if not user.is_on_floor(): user.velocity.y += 980 * delta
 	user.move_and_slide()
