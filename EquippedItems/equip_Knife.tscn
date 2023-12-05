@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvw4ggd88qnhg"]
+
+[ext_resource type="Texture2D" uid="uid://5ho0hr0io16m" path="res://Josh/Art/Throwing Knife sprite.png" id="1_grr35"]
+
+[sub_resource type="Animation" id="Animation_ctcl5"]
+resource_name = "Throwing Knofe"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_bj8ms"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rf53j"]
+_data = {
+"RESET": SubResource("Animation_bj8ms"),
+"Throwing Knofe": SubResource("Animation_ctcl5")
+}
+
+[node name="equip_Knife" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+rotation = 1.5708
+texture = ExtResource("1_grr35")
+offset = Vector2(56, -20)
+hframes = 4
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_rf53j")
+}
