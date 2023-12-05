@@ -208,6 +208,7 @@ SpawnNode = NodePath("..")
 SpawnObject = ExtResource("7_0au5v")
 useSpawnerX = true
 useSpawnerY = true
+spawnTime = 10.0
 initialDelay = 0.1
 maxSpawnObjects = 1
 
@@ -217,6 +218,7 @@ SpawnNode = NodePath("..")
 SpawnObject = ExtResource("8_wy6yk")
 useSpawnerX = true
 useSpawnerY = true
+spawnTime = 10.0
 initialDelay = 0.1
 maxSpawnObjects = 1
 
@@ -226,6 +228,7 @@ SpawnNode = NodePath("..")
 SpawnObject = ExtResource("7_25rdr")
 useSpawnerX = true
 useSpawnerY = true
+spawnTime = 10.0
 initialDelay = 0.1
 maxSpawnObjects = 1
 
@@ -235,6 +238,7 @@ SpawnNode = NodePath("..")
 SpawnObject = ExtResource("7_25rdr")
 useSpawnerX = true
 useSpawnerY = true
+spawnTime = 10.0
 initialDelay = 0.1
 maxSpawnObjects = 1
 
