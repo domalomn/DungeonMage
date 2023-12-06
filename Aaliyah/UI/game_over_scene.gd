@@ -12,9 +12,11 @@ func _process(delta):
 	pass
 
 
-func _on_restart_pressed():
+func _on_retry_pressed():
 	Global.changeScene( gameScene.instantiate() )
 
+func _on_main_menu_pressed():
+	get_tree().change_scene_to_file("res://Aaliyah/UI/main_menu.tscn")
 
 func _on_quit_pressed():
-	get_tree().change_scene_to_file("res://Aaliyah/UI/main_menu.tscn")
+	get_tree().quit()

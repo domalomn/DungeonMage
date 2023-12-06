@@ -1,6 +1,6 @@
 class_name Character extends CharacterBody2D
 
-const gameScene = preload("res://Aaliyah/UI/game_over_scene.tscn")
+const gameScene = preload("res://Aaliyah/UI/game_over.tscn")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var world_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")

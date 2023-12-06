@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0n8ba7ycnw1t"]
+[gd_scene load_steps=9 format=3 uid="uid://4hvo85rkcs5n"]
 
-[ext_resource type="Script" path="res://Main Menu.gd" id="1_svj8s"]
-[ext_resource type="Texture2D" uid="uid://dbp6xw1k6j3o" path="res://Aaliyah/UI/Background/Dungeon Pic.jpeg" id="2_4o3sx"]
-[ext_resource type="FontFile" uid="uid://bmtf3mpkawr66" path="res://Aaliyah/UI/Font/ConnectionII.otf" id="3_4knk1"]
+[ext_resource type="Script" path="res://Win Screen.gd" id="1_nuf5p"]
+[ext_resource type="Texture2D" uid="uid://dbp6xw1k6j3o" path="res://Aaliyah/UI/Background/Dungeon Pic.jpeg" id="2_tt2p4"]
+[ext_resource type="FontFile" uid="uid://bmtf3mpkawr66" path="res://Aaliyah/UI/Font/ConnectionII.otf" id="3_ie7iw"]
 
 [sub_resource type="Animation" id="Animation_be0j4"]
 resource_name = "BaseState"
@@ -58,7 +58,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("VBoxContainer/Quit:disabled")
+tracks/4/path = NodePath("HBoxContainer/Quit:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -74,10 +74,46 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HBoxContainer/Quit:disabled")
+tracks/0/path = NodePath("HBoxContainer:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-600, 350), Vector2(280, 350)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer/Retry:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HBoxContainer/Main Menu:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HBoxContainer/Quit:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -266,17 +302,17 @@ _data = {
 "RESET": SubResource("Animation_pivru")
 }
 
-[node name="Main Menu" type="Control"]
+[node name="Game Over" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_svj8s")
+script = ExtResource("1_nuf5p")
 
 [node name="Anim" type="AnimationPlayer" parent="."]
-autoplay = "BaseState"
+autoplay = "GameOver"
 libraries = {
 "": SubResource("AnimationLibrary_7p4a2")
 }
@@ -284,64 +320,36 @@ libraries = {
 [node name="DungeonPic" type="Sprite2D" parent="."]
 position = Vector2(578.5, 326)
 scale = Vector2(1.13, 1.14)
-texture = ExtResource("2_4o3sx")
+texture = ExtResource("2_tt2p4")
 
-[node name="Game Name" type="Label" parent="."]
+[node name="Game Over" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -292.0
-offset_top = 40.0
-offset_right = 292.0
-offset_bottom = 123.0
+offset_left = -120.0
+offset_top = 88.0
+offset_right = 120.0
+offset_bottom = 171.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("3_4knk1")
+theme_override_fonts/font = ExtResource("3_ie7iw")
 theme_override_font_sizes/font_size = 80
-text = "Dungeon Mage"
+text = "Game Over"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Lost" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -400.0
-offset_top = 200.0
-offset_right = -97.0
-offset_bottom = 444.0
+offset_left = -461.0
+offset_top = 192.0
+offset_right = 461.0
+offset_bottom = 278.0
 grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Start" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_4knk1")
-theme_override_font_sizes/font_size = 50
-disabled = true
-text = "Singleplayer"
-
-[node name="Multiplayer" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_4knk1")
-theme_override_font_sizes/font_size = 50
-disabled = true
-text = "Multiplayer"
-
-[node name="Options" type="Button" parent="VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_4knk1")
-theme_override_font_sizes/font_size = 50
-disabled = true
-text = "Options"
-
-[node name="Quit" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_4knk1")
-theme_override_font_sizes/font_size = 50
-disabled = true
-text = "Quit"
+theme_override_fonts/font = ExtResource("3_ie7iw")
+theme_override_font_sizes/font_size = 40
+text = "You have been killed by a dangerous enemy"
+autowrap_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -350,77 +358,38 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 6047.5
-offset_top = 3940.0
-offset_right = 6624.5
-offset_bottom = 3998.0
+offset_left = -1176.0
+offset_top = 26.0
+offset_right = -599.0
+offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
 
-[node name="Host" type="Button" parent="HBoxContainer"]
+[node name="Retry" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_4knk1")
+theme_override_fonts/font = ExtResource("3_ie7iw")
 theme_override_font_sizes/font_size = 50
 disabled = true
-text = "Host"
+text = "Retry"
 
-[node name="Join" type="Button" parent="HBoxContainer"]
+[node name="Main Menu" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_4knk1")
+theme_override_fonts/font = ExtResource("3_ie7iw")
 theme_override_font_sizes/font_size = 50
 disabled = true
-text = "Join"
+text = "Main Menu
+"
 
-[node name="Start Game" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
+[node name="Quit" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_4knk1")
+theme_override_fonts/font = ExtResource("3_ie7iw")
 theme_override_font_sizes/font_size = 50
 disabled = true
-text = "Start Game"
+text = "Quit"
 
-[node name="PlayerList" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 792.0
-offset_top = 700.0
-offset_right = 1152.0
-offset_bottom = 934.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="Name" type="TextEdit" parent="PlayerList"]
-custom_minimum_size = Vector2(275, 50)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_4knk1")
-theme_override_font_sizes/font_size = 30
-placeholder_text = "Type Name Here"
-
-[node name="List" type="Label" parent="PlayerList"]
-custom_minimum_size = Vector2(360, 180)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_4knk1")
-theme_override_font_sizes/font_size = 40
-text = " Player List
----------------
-1. Eggbert (You)
-2. Smegbert "
-horizontal_alignment = 1
-vertical_alignment = 2
-text_overrun_behavior = 1
-
-[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/Multiplayer" to="." method="_on_multiplayer_pressed"]
-[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="HBoxContainer/Host" to="." method="_hostGame"]
-[connection signal="pressed" from="HBoxContainer/Join" to="." method="_joinGame"]
-[connection signal="pressed" from="HBoxContainer/Start Game" to="." method="_startGame"]
-[connection signal="text_changed" from="PlayerList/Name" to="." method="_nameEdit"]
+[connection signal="pressed" from="HBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="HBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]
