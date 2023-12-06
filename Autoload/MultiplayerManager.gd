@@ -2,8 +2,8 @@ extends Node
 
 var Players = {}
 
-@export var ipAddress = str( IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1) )
-@export var port = 9999
+@export var ipAddress = "192.168.0.31"
+@export var port = 5029
 var peer : ENetMultiplayerPeer
 
 func isHost(): return multiplayer.get_unique_id() == get_multiplayer_authority()
