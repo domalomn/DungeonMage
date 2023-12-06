@@ -21,7 +21,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="sickle_shot" type="CharacterBody2D"]
+[node name="sickle_shot" type="CharacterBody2D" groups=["Projectile"]]
 collision_layer = 0
 script = ExtResource("1_0dyio")
 

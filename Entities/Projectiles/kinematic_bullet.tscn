@@ -20,7 +20,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_28w1d"]
 radius = 12.0
 
-[node name="KinematicBullet" type="CharacterBody2D"]
+[node name="KinematicBullet" type="CharacterBody2D" groups=["Projectile"]]
 collision_layer = 0
 script = ExtResource("1_d62jh")
 

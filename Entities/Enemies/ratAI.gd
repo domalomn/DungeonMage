@@ -57,18 +57,21 @@ func player_died():
 
 
 func _on_hurtbox_hitbox_detected(area, boxowner):
+	var dmg = area.damage
 	var knockDir = Vector2(velocity.x,-300)
-	if is_instance_valid(player):
-		knockDir.x = sign( player.global_position.direction_to( global_position ).x ) * 500
+	if is_instance_valid(player): knockDir.x = sign( player.global_position.direction_to( global_position ).x ) * 500
+	if is_instance_valid(boxowner) and boxowner.is_in_group("Projectile"):
+		knockDir = null
 		
-	getHurt.rpc(area.damage,knockDir)
+	getHurt.rpc(dmg,knockDir)
 
 @rpc("any_peer","call_local")
 func getHurt(dmg,knockDir):
 	currentHealth -= dmg
 	$Hurtbox.go_invincible(0.4)
-	velocity = knockDir
-	
+	if knockDir:
+		velocity = knockDir
+		fsm.goto_state("Idle")
 	if currentHealth <= 0:
 		die()
 		
