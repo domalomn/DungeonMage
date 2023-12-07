@@ -570,7 +570,6 @@ collision_mask = 3
 safe_margin = 1.0
 script = ExtResource("1_arqb2")
 Stats = SubResource("Resource_plgi6")
-maxHealth = 10
 metadata/_edit_horizontal_guides_ = [63.0]
 
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("animation_player", "readyState")]

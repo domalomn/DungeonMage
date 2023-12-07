@@ -22,7 +22,7 @@ func initInventory():
 func slot_gui_input(event: InputEvent, slot:SlotClass):
 	print("AAAA")
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
+		if event.button_index == MOUSE_BUTTON_RIGHT && event.pressed:
 			if holding_item != null:
 				if !slot.item:
 					slot.putIntoSlot(holding_item)
