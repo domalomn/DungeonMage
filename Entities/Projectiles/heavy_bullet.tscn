@@ -24,6 +24,8 @@ radius = 12.0
 [node name="HeavyBullet" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_o438y")
+speed = 400
+gravity = 1100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_36dt4")

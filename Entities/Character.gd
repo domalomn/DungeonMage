@@ -39,6 +39,7 @@ func _ready():
 func _input(event): if %MultiplayerSynchronizer.is_multiplayer_authority(): State_Machine.current.handle_input(event)
 
 var facing = 1
+var lockFacing = false
 func _physics_process(delta): 
 	State_Machine.current.physics_update(delta)
 	
@@ -85,52 +86,30 @@ func useItem():
 	print(currentItemSelected.itemResource.category)
 	
 	
-	if currentItemSelected.itemResource.category == "Staff":
-		var bulletPath
-		
-		# checks enum in staff instance for its projectile type to instantiate bullet upon firing
-		match currentItemSelected.projectileType:
-			0:
-				bulletPath = preload("res://Entities/Projectiles/kinematic_bullet.tscn")
-			1:
-				bulletPath = preload("res://Entities/Projectiles/heavy_bullet.tscn")
-			2:
-				bulletPath = preload("res://Entities/Projectiles/shotgun_spray.tscn")
-			3:
-				bulletPath = preload("res://Entities/Projectiles/sickle_shot.tscn")
-			4:
-				bulletPath = preload("res://Entities/Projectiles/laser.tscn")
-		if currentItemSelected.projectileType != 4:
-			var bullet = bulletPath.instantiate()
+	if currentItemSelected.projectile:
+		var bullet = currentItemSelected.projectile.instantiate()
 			
-			# any instance of a staff should contain variables that can set the variables of its bullets (such as speed, damage per bullet, and any status affliction)
-			bullet.speed = currentItemSelected.speed;
-			bullet.damage = currentItemSelected.damage;
-			#bullet.affliction = currentItemSelected.affliction;
+		# any instance of a staff should contain variables that can set the variables of its bullets (such as speed, damage per bullet, and any status affliction)
+		bullet.speed = currentItemSelected.speed;
+		bullet.damage = currentItemSelected.damage;
+		#bullet.affliction = currentItemSelected.affliction;
+
+		get_parent().add_child(bullet)
+		# starts at player position
+		bullet.position = global_position
+		# fires from unit vector pointing from player to cursor, speed is determined from staff data
+		bullet.velocity = (get_global_mouse_position() - bullet.position).normalized() * bullet.speed
 		
-			get_parent().add_child(bullet)
-			# starts at player position
-			bullet.position = global_position
-			# fires from unit vector pointing from player to cursor, speed is determined from staff data
-			bullet.velocity = (get_global_mouse_position() - bullet.position).normalized() * bullet.speed
-		
-		# no velocity value for laser, so it needs a seperate condition.
-		else:
-			var laser = bulletPath.instantiate()
-			laser.damage = currentItemSelected.damage;
-			get_parent().add_child(laser)
-			laser.position = global_position
-		
-		# (At the moment) checks for a generic item to perform a melee attack.
-		# Enabled hitbox and starts animation and timer.
-	elif currentItemSelected.itemResource.category == "Consumable":
+	
+	if currentItemSelected.itemResource.category == "Consumable":
 			print("using consumable")
 			Health += currentItemSelected.hp_up
 			InventoryRef.equippedItemSlot().pickFromSlot()
 			currentItemSelected.queue_free()
 	else:
-		var useItem = currentItemSelected.useNode.instantiate()
-		$Flipper.add_child(useItem)
+		if currentItemSelected.useNode:
+			var useItem = currentItemSelected.useNode.instantiate()
+			$Flipper.add_child(useItem)
 		
 	$AttackCooldown.start(currentItemSelected.useCooldown)
 
