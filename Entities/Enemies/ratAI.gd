@@ -78,20 +78,23 @@ func _on_hurtbox_hitbox_detected(area, boxowner):
 		knockDir = null
 
 	# Call the getHurt RPC function to handle damage
-	getHurt.rpc(dmg, knockDir)
+	getHurt.rpc(dmg,knockDir,area.iFrames)
 
 # RPC function to handle taking damage
 @rpc("any_peer", "call_local")
-func getHurt(dmg, knockDir):
+func getHurt(dmg, knockDir,iFrames):
+	# Reduce current health by the damage amount
 	currentHealth -= dmg
-	$Hurtbox.go_invincible(0.4)
+	# Make the hurtbox invincible for a short duration
+	$Hurtbox.go_invincible(iFrames)
+	
+	# If knockback direction is provided, set the velocity and transition to "Idle" state
 	if knockDir:
-		# Apply knockback if a valid knockback direction is provided
 		velocity = knockDir
 		fsm.goto_state("Idle")
-	if currentHealth <= 0:
-		# Die if health drops to zero
-		die()
+	# If health drops to or below 0, call the die function
+		if currentHealth <= 0:
+			die()
 
 func _on_chase_timer_timeout():
 	# Event when the chase timer times out, indicating the rat is no longer chasing

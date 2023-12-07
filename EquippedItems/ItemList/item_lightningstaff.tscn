@@ -22,6 +22,7 @@ useNode = null
 useCooldown = 0.8
 projectile = ExtResource("4_mxphs")
 projectileType = 1
+speed = 400.0
 
 [node name="StaffHilt" type="Sprite2D" parent="." index="0"]
 position = Vector2(-55, 9)

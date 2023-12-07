@@ -7,7 +7,7 @@ var affliction
 var bounceY = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-@export var gravity = 9.8
+@export var gravity = 980
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

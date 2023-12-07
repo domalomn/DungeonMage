@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b6r6qa2y0o828"]
+[gd_scene load_steps=27 format=3 uid="uid://b6r6qa2y0o828"]
 
 [ext_resource type="Script" path="res://SkeletonWizardAI.gd" id="1_17upu"]
 [ext_resource type="Texture2D" uid="uid://djxwout41gent" path="res://Entities/Enemies/skelwiz04.png" id="2_jj125"]
@@ -177,6 +177,16 @@ _data = {
 "Walk": SubResource("Animation_fd64h")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_73v86"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath("AnimationPlayer:current_animation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
 [node name="SkeletonWizard" type="CharacterBody2D"]
 scale = Vector2(3, 3)
 collision_layer = 2
@@ -280,6 +290,9 @@ target_position = Vector2(0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_swxlf")
 }
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_73v86")
 
 [connection signal="lost_player" from="." to="." method="player_lost"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_area_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvw4ggd88qnhg"]
+[gd_scene load_steps=9 format=3 uid="uid://bvw4ggd88qnhg"]
 
 [ext_resource type="Script" path="res://Entities/Projectiles/kinematic_bullet.gd" id="1_37rnw"]
 [ext_resource type="Texture2D" uid="uid://5ho0hr0io16m" path="res://Josh/Art/Throwing Knife sprite.png" id="1_grr35"]
@@ -45,9 +45,12 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_boyxq"]
 radius = 30.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3bmbe"]
+radius = 13.0
+
 [node name="equip_Knife" type="CharacterBody2D"]
+collision_layer = 0
 script = ExtResource("1_37rnw")
-speed = 1200
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -64,8 +67,16 @@ libraries = {
 [node name="Hitbox" parent="." instance=ExtResource("2_4cm5p")]
 collision_layer = 4
 collision_mask = 20
+iFrames = 0.1
+damage = 5
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource("CircleShape2D_boyxq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3bmbe")
+debug_color = Color(0.211765, 0.619608, 0.462745, 0.419608)
+
+[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
 
 [editable path="Hitbox"]

@@ -19,6 +19,7 @@ itemResource = SubResource("Resource_atuwy")
 useNode = null
 useCooldown = 0.6
 projectile = ExtResource("4_b0i7n")
+speed = 1000.0
 
 [node name="TextureRect" parent="." index="0"]
 texture = ExtResource("2_ti5ul")

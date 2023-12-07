@@ -25,7 +25,6 @@ radius = 12.0
 collision_layer = 0
 script = ExtResource("1_o438y")
 speed = 400
-gravity = 1100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_36dt4")
@@ -37,6 +36,7 @@ sprite_frames = SubResource("SpriteFrames_k0ma6")
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("3_siauc")
+damage = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 scale = Vector2(2.48, 2.48)

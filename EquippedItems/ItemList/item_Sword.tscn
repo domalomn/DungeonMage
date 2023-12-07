@@ -16,7 +16,7 @@ gui_texture = ExtResource("2_fxs6o")
 
 [node name="Item" instance=ExtResource("1_0wm7o")]
 itemResource = SubResource("Resource_x11n7")
-useCooldown = 0.6
+useCooldown = 0.75
 
 [node name="TextureRect" parent="." index="0"]
 texture = ExtResource("2_yjaw0")

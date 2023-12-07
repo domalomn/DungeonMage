@@ -89,16 +89,18 @@ func _on_hurtbox_hitbox_detected(area, boxowner):
 	# If the hitbox owner is a projectile, nullify the knockback direction
 	if is_instance_valid(boxowner) and boxowner.is_in_group("Projectile"):
 		knockDir = null
+		
 	# Call the getHurt RPC with damage and knockback direction
-	getHurt.rpc(dmg, knockDir)
+	getHurt.rpc(dmg, knockDir,area.iFrames)
 
 # RPC function to handle taking damage
 @rpc("any_peer", "call_local")
-func getHurt(dmg, knockDir):
+func getHurt(dmg, knockDir,iFrames):
 	# Reduce current health by the damage amount
 	currentHealth -= dmg
 	# Make the hurtbox invincible for a short duration
-	$Hurtbox.go_invincible(0.4)
+	$Hurtbox.go_invincible(iFrames)
+	
 	# If knockback direction is provided, set the velocity and transition to "Idle" state
 	if knockDir:
 		velocity = knockDir

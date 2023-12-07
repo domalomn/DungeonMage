@@ -91,14 +91,13 @@ func useItem():
 			
 		# any instance of a staff should contain variables that can set the variables of its bullets (such as speed, damage per bullet, and any status affliction)
 		bullet.speed = currentItemSelected.speed;
-		bullet.damage = currentItemSelected.damage;
-		#bullet.affliction = currentItemSelected.affliction;
-
-		get_parent().add_child(bullet)
+		
 		# starts at player position
 		bullet.position = global_position
 		# fires from unit vector pointing from player to cursor, speed is determined from staff data
 		bullet.velocity = (get_global_mouse_position() - bullet.position).normalized() * bullet.speed
+		
+		get_parent().add_child(bullet)
 		
 	
 	if currentItemSelected.itemResource.category == "Consumable":

@@ -52,6 +52,7 @@ func facing(f:int):
 
 func _on_player_detection_body_entered(body):
 	if body.is_in_group("Player"):
+		
 		print("Player Entered")
 		player = body
 		player.connect("death", player_died)
@@ -73,14 +74,18 @@ func _on_hurtbox_hitbox_detected(area, boxowner):
 	if is_instance_valid(boxowner) and boxowner.is_in_group("Projectile"):
 		knockDir = null
 	
+	getHurt.rpc(dmg,knockDir,area.iFrames)
+
+@rpc("any_peer","call_local")
+func getHurt(dmg,knockDir,iFrames):
 	currentHealth -= dmg
-	$Hurtbox.go_invincible(0.4)
+	$Hurtbox.go_invincible(iFrames)
 	if knockDir:
 		velocity = knockDir
 		fsm.goto_state("Idle")
 	if currentHealth <= 0:
 		die()
-		
+				
 func _on_chase_timer_timeout():
 	chasing = false
 	$AnimationPlayer.play("Idle")
