@@ -352,6 +352,7 @@ text = "Options"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4knk1")
 theme_override_font_sizes/font_size = 50
+disabled = true
 text = "Quit"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
