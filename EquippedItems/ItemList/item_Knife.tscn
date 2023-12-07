@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://rjoflyrgtsxl"]
+[gd_scene load_steps=6 format=3 uid="uid://rjoflyrgtsxl"]
 
 [ext_resource type="PackedScene" uid="uid://k3q00pnte5y6" path="res://Josh/items/Item.tscn" id="1_njbjh"]
 [ext_resource type="Texture2D" uid="uid://xtpgykwd72t7" path="res://Josh/Art/Throwing Knife.png" id="2_ti5ul"]
 [ext_resource type="Script" path="res://Josh/ItemResource.gd" id="3_wvbyw"]
+[ext_resource type="PackedScene" uid="uid://bvw4ggd88qnhg" path="res://EquippedItems/equip_Knife.tscn" id="4_b0i7n"]
 
 [sub_resource type="Resource" id="Resource_atuwy"]
 script = ExtResource("3_wvbyw")
@@ -15,7 +16,9 @@ gui_texture = ExtResource("2_ti5ul")
 
 [node name="Item" instance=ExtResource("1_njbjh")]
 itemResource = SubResource("Resource_atuwy")
+useNode = null
 useCooldown = 0.6
+projectile = ExtResource("4_b0i7n")
 
 [node name="TextureRect" parent="." index="0"]
 texture = ExtResource("2_ti5ul")

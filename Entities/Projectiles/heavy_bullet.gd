@@ -1,16 +1,17 @@
 extends CharacterBody2D
 
-var speed = 500
+@export var speed = 500
 var bounceNum = 0
 var damage
 var affliction
+var bounceY = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+@export var gravity = 9.8
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	bounceY = -abs(velocity.y)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,11 +20,13 @@ func _physics_process(delta):
 	if move_and_slide(): 
 		var collision_info : KinematicCollision2D = get_last_slide_collision()
 		var name = get_last_slide_collision().get_collider().name
+		
+		if vel.y < 0: vel.y = min(vel.y,bounceY)
+		
 		if name != "Player":
-			if bounceNum <= 1:
+			if bounceNum < 2:
 				velocity = vel.bounce(collision_info.get_normal())
 				bounceNum += 1
-				print(bounceNum)
 			else:
 				queue_free()
 	# Add the gravity.

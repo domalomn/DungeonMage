@@ -62,7 +62,7 @@ func physics_update(delta):
 		
 		if plummet:
 			if Input.is_action_pressed("down"):
-				user.velocity.y = airJumpHeight*abs(v.y)*0.00135
+				user.velocity.y = airJumpHeight*abs(v.y)*0.0013
 			else:
 				user.velocity.y = airJumpHeight
 				
