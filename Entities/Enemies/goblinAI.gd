@@ -9,7 +9,7 @@ signal lost_player()
 # Character attributes
 var speed = 195
 var attackRange = 50
-var maxHealth = 5
+@export var maxHealth = 10
 var currentHealth = maxHealth
 var isAttacking = false
 
@@ -38,7 +38,14 @@ func die():
 	# Remove the Goblin from the scene
 	queue_free()
 	# Instantiate an HP item and a dropped item
-	var item = preload("res://EquippedItems/ItemList/item_HP.tscn").instantiate()
+	var item = null
+	match randi_range(0,1):
+		0:
+			item = preload("res://EquippedItems/ItemList/item_HP.tscn").instantiate()
+		1:
+			item = preload("res://EquippedItems/ItemList/item_Knife.tscn").instantiate()
+		
+	
 	var itemDropped = preload("res://EquippedItems/dropped_item.tscn").instantiate()
 	# Add the dropped item to the parent
 	get_parent().add_child(itemDropped)

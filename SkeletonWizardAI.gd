@@ -6,7 +6,7 @@ signal lost_player()
 
 var speed = 195
 var attackRange = 50
-var maxHealth = 10
+@export var maxHealth = 10
 var currentHealth = maxHealth
 var isAttacking = false
 var damage = 5
