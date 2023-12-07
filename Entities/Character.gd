@@ -6,11 +6,9 @@ const gameScene = preload("res://Aaliyah/UI/game_over.tscn")
 var world_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var currentItemSelected
 
-@export var State_Machine : FSM = null
+@onready var State_Machine : FSM = $FSM
 @export var Stats : CharacterStats = null
-@export var aimStartPos : Marker2D = null
-@export var meleeHitbox : Hitbox = null
-@export var meleeTimer : Timer = null
+@onready var aimStartPos : Marker2D = $Flipper/AimStartPosition
 
 var InventoryRef : Control
 var lifeBar : LifeBar
@@ -118,8 +116,8 @@ func useItem():
 func _getHit(area, boxowner):
 	
 	velocity.y-=300
-	Health-=1
-	$Hurtbox.go_invincible(0.4)
+	Health-= area.damage
+	$Hurtbox.go_invincible(area.iFrames)
 	if Health <= 0:
 		queue_free()
 	
