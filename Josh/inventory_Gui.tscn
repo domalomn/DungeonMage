@@ -1,9 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3ctjyrhjwgo6"]
+[gd_scene load_steps=9 format=3 uid="uid://b3ctjyrhjwgo6"]
 
 [ext_resource type="Script" path="res://Josh/inventory_Gui.gd" id="1_fs45b"]
 [ext_resource type="Texture2D" uid="uid://52feq4kfp2wp" path="res://Josh/Art/InventoryGui.png" id="2_b5dmn"]
+[ext_resource type="Shader" path="res://Shaders/SpritePalette.gdshader" id="3_4vqsx"]
 [ext_resource type="Theme" uid="uid://bykmy2e7k7fqa" path="res://Josh/items/SlotTheme.tres" id="3_x6yd0"]
 [ext_resource type="Script" path="res://Josh/Slot.gd" id="4_n5qpo"]
+
+[sub_resource type="Gradient" id="Gradient_ch6g2"]
+offsets = PackedFloat32Array(0, 0.487805, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0.53, 0.53, 0.53, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ewggp"]
+gradient = SubResource("Gradient_ch6g2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_casau"]
+shader = ExtResource("3_4vqsx")
+shader_parameter/paletteMix = 1.0
+shader_parameter/lerper = null
+shader_parameter/pal0 = SubResource("GradientTexture1D_ewggp")
 
 [node name="InventoryGui" type="Control" groups=["InventoryGui"]]
 layout_mode = 3
@@ -34,6 +48,7 @@ offset_bottom = 426.0
 columns = 10
 
 [node name="Slot1" type="Panel" parent="TextureRect/GridContainer"]
+material = SubResource("ShaderMaterial_casau")
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 theme = ExtResource("3_x6yd0")
