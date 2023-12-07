@@ -113,7 +113,7 @@ func getHurt(dmg, knockDir,iFrames):
 		velocity = knockDir
 		fsm.goto_state("Idle")
 	# If health drops to or below 0, call the die function
-		if currentHealth <= 0:
+	if currentHealth <= 0:
 			die()
 
 # Function called when the hitbox hits a target

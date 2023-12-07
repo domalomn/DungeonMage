@@ -69,6 +69,7 @@ func player_died():
 # Function for when the hurtbox detects a hitbox
 func _on_hurtbox_hitbox_detected(area, boxowner):
 	var dmg = area.damage
+	print(dmg)
 	var knockDir = Vector2(velocity.x, -300)
 	if is_instance_valid(player): 
 		# Calculate knockback direction based on player's position
@@ -84,7 +85,9 @@ func _on_hurtbox_hitbox_detected(area, boxowner):
 @rpc("any_peer", "call_local")
 func getHurt(dmg, knockDir,iFrames):
 	# Reduce current health by the damage amount
+	
 	currentHealth -= dmg
+	print(currentHealth)
 	# Make the hurtbox invincible for a short duration
 	$Hurtbox.go_invincible(iFrames)
 	
@@ -93,7 +96,7 @@ func getHurt(dmg, knockDir,iFrames):
 		velocity = knockDir
 		fsm.goto_state("Idle")
 	# If health drops to or below 0, call the die function
-		if currentHealth <= 0:
+	if currentHealth <= 0:
 			die()
 
 func _on_chase_timer_timeout():

@@ -20,6 +20,7 @@ gui_texture = ExtResource("2_whlem")
 itemResource = SubResource("Resource_hfvgm")
 useNode = null
 projectile = ExtResource("4_jvd4m")
+damage = 3
 
 [node name="StaffHilt" type="Sprite2D" parent="." index="0"]
 position = Vector2(3, 14)
