@@ -7,6 +7,7 @@ extends Node2D
 @export var useCooldown : float = 0.2
 
 @export_group("Projectile Info")
+@export var projectile : PackedScene = null
 @export var projectileType : int = 0
 @export var speed : float = 600
 @export var damage : int = 1

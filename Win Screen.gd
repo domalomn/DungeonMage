@@ -11,14 +11,14 @@ func _ready():
 func _process(delta):
 	pass
 
-
+# when retry is pressed, go back to the game room
 func _on_retry_pressed():
 	Global.changeScene( gameScene.instantiate() )
 
-
+# when quit is pressed, quit the game
 func _on_quit_pressed():
 	get_tree().quit()
 
-
+# when main menu is pressed, go back to the main menu
 func _on_main_menu_pressed():
 	get_tree().change_scene_to_file("res://Aaliyah/UI/main_menu.tscn")
