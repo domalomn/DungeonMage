@@ -103,16 +103,17 @@ func useItem():
 	if currentItemSelected.itemResource.category == "Consumable":
 			print("using consumable")
 			Health += currentItemSelected.hp_up
-			InventoryRef.equippedItemSlot().pickFromSlot()
-			currentItemSelected.queue_free()
 	else:
 		if currentItemSelected.useNode:
 			var useItem = currentItemSelected.useNode.instantiate()
 			$Flipper.add_child(useItem)
 		
 	$AttackCooldown.start(currentItemSelected.useCooldown)
+	if currentItemSelected.itemResource.itemName != "Sword" and currentItemSelected.itemResource.category != "Staff":
+		InventoryRef.equippedItemSlot().pickFromSlot()
+		currentItemSelected.queue_free()
 
-@export var maxHealth : int = 5
+@export var maxHealth : int = 10
 @onready var Health = maxHealth : set = setHealth
 
 func _getHit(area, boxowner):

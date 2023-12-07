@@ -14,6 +14,7 @@ func _ready():
 	# slots the items textures in the GUI
 func initInventory():
 	appendItem( preload("res://EquippedItems/ItemList/item_firestaff.tscn").instantiate() )
+	appendItem( preload("res://EquippedItems/ItemList/item_Sword.tscn").instantiate() )
 	appendItem( preload("res://EquippedItems/ItemList/item_Knife.tscn").instantiate() )
 	appendItem( preload("res://EquippedItems/ItemList/item_HP.tscn").instantiate() )
 	
