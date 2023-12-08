@@ -1,11 +1,11 @@
-[gd_scene load_steps=37 format=3 uid="uid://bi1vd1tp1yrx6"]
+[gd_scene load_steps=37 format=3 uid="uid://diu23wdqqfbdy"]
 
-[ext_resource type="Script" path="res://Entities/Character.gd" id="1_arqb2"]
+[ext_resource type="Script" path="res://Entities/Character.gd" id="1_fxfth"]
 [ext_resource type="Script" path="res://Entities/Character_Stats.gd" id="2_shtls"]
-[ext_resource type="Script" path="res://Entities/State Machines/Finite State Machine.gd" id="3_ui0s5"]
-[ext_resource type="Script" path="res://Entities/State Machines/Player States/Idle.gd" id="4_hgayi"]
-[ext_resource type="Script" path="res://Entities/State Machines/Player States/Move.gd" id="6_jalty"]
-[ext_resource type="Script" path="res://Entities/State Machines/Player States/Falling.gd" id="7_g11qy"]
+[ext_resource type="Script" path="res://Entities/State Machines/Finite State Machine.gd" id="3_anr7p"]
+[ext_resource type="Script" path="res://Entities/State Machines/Player States/Idle.gd" id="4_8l07g"]
+[ext_resource type="Script" path="res://Entities/State Machines/Player States/Move.gd" id="5_cjhv7"]
+[ext_resource type="Script" path="res://Entities/State Machines/Player States/Falling.gd" id="6_ocbmc"]
 [ext_resource type="Shader" path="res://Shaders/SpritePalette.gdshader" id="7_ntpkl"]
 [ext_resource type="Texture2D" uid="uid://ckonxewvr1qlg" path="res://Entities/Player/die01.png" id="7_pwnf3"]
 [ext_resource type="Texture2D" uid="uid://c4vh7tfqs4dyc" path="res://Entities/Player/die02.png" id="8_a8c2u"]
@@ -16,9 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://1mdymyjo6c6g" path="res://Entities/Player/penguinframe2.png" id="10_7jh70"]
 [ext_resource type="Texture2D" uid="uid://bkud268tyyinr" path="res://Entities/Player/die04.png" id="10_w5i1a"]
 [ext_resource type="Texture2D" uid="uid://bwv5q35d8kiuf" path="res://Entities/Player/die05.png" id="11_07j7d"]
-[ext_resource type="Texture2D" uid="uid://st77q4lycdeq" path="res://Entities/Player/flipper.png" id="11_083uw"]
-[ext_resource type="Script" path="res://Entities/CollisionAreas/Hurtbox.gd" id="12_rfagg"]
-[ext_resource type="Material" uid="uid://c3hj0nva3n7y7" path="res://Shaders/Player2_Shader.tres" id="17_81cx4"]
+[ext_resource type="Material" uid="uid://c3hj0nva3n7y7" path="res://Shaders/Player2_Shader.tres" id="17_hp7on"]
+[ext_resource type="Texture2D" uid="uid://st77q4lycdeq" path="res://Entities/Player/flipper.png" id="18_hnii1"]
+[ext_resource type="Script" path="res://Entities/CollisionAreas/Hurtbox.gd" id="19_bg4rr"]
 
 [sub_resource type="Resource" id="Resource_plgi6"]
 script = ExtResource("2_shtls")
@@ -568,26 +568,26 @@ radius = 103.31
 collision_layer = 10
 collision_mask = 3
 safe_margin = 1.0
-script = ExtResource("1_arqb2")
+script = ExtResource("1_fxfth")
 Stats = SubResource("Resource_plgi6")
 metadata/_edit_horizontal_guides_ = [63.0]
 
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("animation_player", "readyState")]
-script = ExtResource("3_ui0s5")
+script = ExtResource("3_anr7p")
 animation_player = NodePath("../AnimationPlayer")
 readyState = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
-script = ExtResource("4_hgayi")
+script = ExtResource("4_8l07g")
 user = NodePath("../..")
 
 [node name="Move" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
-script = ExtResource("6_jalty")
+script = ExtResource("5_cjhv7")
 user = NodePath("../..")
 speed = 500.0
 
 [node name="Falling" type="Node" parent="FSM" node_paths=PackedStringArray("user")]
-script = ExtResource("7_g11qy")
+script = ExtResource("6_ocbmc")
 user = NodePath("../..")
 speed = 500.0
 acceleration = 30.0
@@ -624,10 +624,10 @@ position_smoothing_enabled = true
 
 [node name="Flipper" type="Sprite2D" parent="."]
 texture_filter = 1
-material = ExtResource("17_81cx4")
+material = ExtResource("17_hp7on")
 position = Vector2(-15, 25)
 scale = Vector2(3, 3)
-texture = ExtResource("11_083uw")
+texture = ExtResource("18_hnii1")
 
 [node name="AimStartPosition" type="Marker2D" parent="Flipper"]
 position = Vector2(5, -8.33333)
@@ -640,7 +640,7 @@ one_shot = true
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("boxOwner")]
 collision_layer = 8
 collision_mask = 8
-script = ExtResource("12_rfagg")
+script = ExtResource("19_bg4rr")
 boxOwner = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]

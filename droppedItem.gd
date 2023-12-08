@@ -13,4 +13,9 @@ func _physics_process(delta):
 func textureSet(setNode):
 	itemNode = setNode
 	$TextureRect.texture = itemNode.itemResource.gui_texture
+	$Timer.start()
 
+
+
+func _on_timer_timeout():
+	queue_free()

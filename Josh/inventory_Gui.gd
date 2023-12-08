@@ -17,7 +17,7 @@ func initInventory():
 	appendItem( preload("res://EquippedItems/ItemList/item_Sword.tscn").instantiate() )
 	appendItem( preload("res://EquippedItems/ItemList/item_Knife.tscn").instantiate() )
 	appendItem( preload("res://EquippedItems/ItemList/item_HP.tscn").instantiate() )
-	
+	appendItem( preload("res://EquippedItems/ItemList/item_Bomb.tscn").instantiate() )
 # Re-Slotting the GUI with mouse 
 func slot_gui_input(event: InputEvent, slot:SlotClass):
 	print("AAAA")
