@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://kogoc4hg41mb"]
+[gd_scene load_steps=37 format=3 uid="uid://bi1vd1tp1yrx6"]
 
 [ext_resource type="Script" path="res://Entities/Character.gd" id="1_arqb2"]
 [ext_resource type="Script" path="res://Entities/Character_Stats.gd" id="2_shtls"]

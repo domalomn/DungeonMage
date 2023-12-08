@@ -134,7 +134,7 @@ func _getHit(area, boxowner):
 	
 	velocity.y-=300
 	Health-= area.damage
-	$Hurtbox.go_invincible(area.iFrames)
+	$Hurtbox.go_invincible(0.4)
 	if Health <= 0:
 		queue_free()
 	

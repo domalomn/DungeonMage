@@ -45,13 +45,13 @@ func _input(event):
 		
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP && event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN && event.pressed:
 				equippedItemSlot().material = null
 				equipSlotIndex += 1
 				if equipSlotIndex > 9: equipSlotIndex = 0
 				equippedItemSlot().material = preload("res://Josh/Art/equipShader.tres")
 				
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN && event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP && event.pressed:
 			equippedItemSlot().material = null
 			equipSlotIndex -= 1
 			if equipSlotIndex < 0: equipSlotIndex = 9
