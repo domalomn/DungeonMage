@@ -211,6 +211,7 @@ size = Vector2(33, 10.6667)
 [sub_resource type="CircleShape2D" id="CircleShape2D_xvtcn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vpxo5"]
+size = Vector2(20, 45.506)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4joj0"]
 properties/0/path = NodePath(".:position")
@@ -321,12 +322,12 @@ one_shot = true
 target_position = Vector2(0, 0)
 
 [node name="GroundDetection" type="Area2D" parent="."]
-visible = false
 scale = Vector2(1.18689, 4.41364)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetection"]
-position = Vector2(20.5018, 2.49227)
-scale = Vector2(-0.658553, -0.174419)
+position = Vector2(20.5018, 4.71664)
+rotation = 3.14159
+scale = Vector2(0.658553, 0.174419)
 shape = SubResource("RectangleShape2D_vpxo5")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

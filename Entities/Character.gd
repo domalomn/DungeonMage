@@ -47,6 +47,11 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Y") and  %MultiplayerSynchronizer.is_multiplayer_authority():
 		pickUp()
 		
+	if Input.is_action_just_pressed("L") and  %MultiplayerSynchronizer.is_multiplayer_authority():
+		print("dropping")
+		drop()
+		
+		
 	if facing < 0:
 		$AnimatedSprite2D.flip_h = true
 		$Flipper.scale.x = -3
@@ -75,7 +80,18 @@ func pickUp():
 		InventoryRef.appendItem(itemInRange.itemNode)
 		itemInRange.queue_free()
 		
-
+		
+func drop():
+	currentItemSelected = InventoryRef.equippedItemSlot().item
+	if currentItemSelected:
+		var itemDropped = preload("res://EquippedItems/dropped_item.tscn").instantiate()
+		get_parent().add_child(itemDropped)
+		itemDropped.itemNode = currentItemSelected.duplicate()
+		InventoryRef.equippedItemSlot().pickFromSlot()
+		itemDropped.position = global_position
+		currentItemSelected.queue_free()
+	
+	
 func useItem():
 	currentItemSelected = InventoryRef.equippedItemSlot().item
 	
@@ -118,7 +134,7 @@ func _getHit(area, boxowner):
 	
 	velocity.y-=300
 	Health-= area.damage
-	$Hurtbox.go_invincible(area.iFrames)
+	$Hurtbox.go_invincible(0.4)
 	if Health <= 0:
 		queue_free()
 	

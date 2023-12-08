@@ -289,6 +289,7 @@ size = Vector2(33, 10.6667)
 [sub_resource type="CircleShape2D" id="CircleShape2D_wmr4i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4dj6"]
+size = Vector2(20, 42.475)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_s8v26"]
 properties/0/path = NodePath(".:position")
@@ -359,8 +360,9 @@ position = Vector2(-0.593443, -1.47121)
 scale = Vector2(1.18689, 4.41364)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetection"]
-position = Vector2(20.721, 5.24236)
-scale = Vector2(-0.658553, -0.174419)
+position = Vector2(20.721, 7.20239)
+rotation = 3.14159
+scale = Vector2(0.658553, 0.174419)
 shape = SubResource("RectangleShape2D_l4dj6")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

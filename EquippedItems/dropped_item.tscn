@@ -19,3 +19,8 @@ offset_right = 105.0
 offset_bottom = 105.0
 scale = Vector2(0.277706, 0.277706)
 texture = ExtResource("2_sy26x")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

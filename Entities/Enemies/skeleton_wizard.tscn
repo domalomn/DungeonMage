@@ -68,6 +68,7 @@ radius = 17.3862
 size = Vector2(33.0462, 19.809)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yukw8"]
+size = Vector2(20, 45.939)
 
 [sub_resource type="Animation" id="Animation_v07w8"]
 resource_name = "Attack"
@@ -240,8 +241,9 @@ position = Vector2(-0.593443, -1.47121)
 scale = Vector2(1.18689, 4.41364)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetection"]
-position = Vector2(20.721, 5.24236)
-scale = Vector2(-0.658553, -0.174419)
+position = Vector2(20.721, 7.50449)
+rotation = 3.14159
+scale = Vector2(0.658553, 0.174419)
 shape = SubResource("RectangleShape2D_yukw8")
 
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("animation_player", "readyState")]

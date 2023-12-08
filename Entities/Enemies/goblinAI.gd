@@ -39,12 +39,13 @@ func die():
 	queue_free()
 	# Instantiate an HP item and a dropped item
 	var item = null
-	match randi_range(0,1):
+	match randi_range(0,2):
 		0:
 			item = preload("res://EquippedItems/ItemList/item_HP.tscn").instantiate()
 		1:
 			item = preload("res://EquippedItems/ItemList/item_Knife.tscn").instantiate()
-		
+		2:
+			item = preload("res://EquippedItems/ItemList/item_Bomb.tscn").instantiate()
 	
 	var itemDropped = preload("res://EquippedItems/dropped_item.tscn").instantiate()
 	# Add the dropped item to the parent
@@ -113,7 +114,7 @@ func getHurt(dmg, knockDir,iFrames):
 		velocity = knockDir
 		fsm.goto_state("Idle")
 	# If health drops to or below 0, call the die function
-		if currentHealth <= 0:
+	if currentHealth <= 0:
 			die()
 
 # Function called when the hitbox hits a target
