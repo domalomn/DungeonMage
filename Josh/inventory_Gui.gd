@@ -37,26 +37,25 @@ func slot_gui_input(event: InputEvent, slot:SlotClass):
 			elif slot.item:
 				holding_item = slot.pickFromSlot()
 				holding_item.global_position = get_global_mouse_position()
-		
-		# detects scroll input, effects which slot is the equip slot.
-		# scrolling up moves the index up, scrolling down does vice sera.
-		# index caps at 0-9, will change to endpoint if exceeds this range depending on direction.
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP && event.pressed:
-			equippedItemSlot().material = null
-			equipSlotIndex += 1
-			if equipSlotIndex > 9: equipSlotIndex = 0
-			equippedItemSlot().material = preload("res://Josh/Art/equipShader.tres")
-			
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN && event.pressed:
-			equippedItemSlot().material = null
-			equipSlotIndex -= 1
-			if equipSlotIndex < 0: equipSlotIndex = 9
-			equippedItemSlot().material = preload("res://Josh/Art/equipShader.tres")
 			
 # Checks if item is currently slotted
 func _input(event):
 	if holding_item:
 		holding_item.global_position = get_global_mouse_position()
+		
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP && event.pressed:
+				equippedItemSlot().material = null
+				equipSlotIndex += 1
+				if equipSlotIndex > 9: equipSlotIndex = 0
+				equippedItemSlot().material = preload("res://Josh/Art/equipShader.tres")
+				
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN && event.pressed:
+			equippedItemSlot().material = null
+			equipSlotIndex -= 1
+			if equipSlotIndex < 0: equipSlotIndex = 9
+			equippedItemSlot().material = preload("res://Josh/Art/equipShader.tres")
 		
 # Equips first slot
 func equippedItemSlot():
