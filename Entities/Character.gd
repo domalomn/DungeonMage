@@ -1,7 +1,5 @@
 class_name Character extends CharacterBody2D
 
-const gameScene = preload("res://Aaliyah/UI/game_over.tscn")
-
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var world_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var currentItemSelected
@@ -76,8 +74,7 @@ func deathAnim():
 		queue_free()
 
 func pickUp():
-	if is_instance_valid(itemInRange):
-		InventoryRef.appendItem(itemInRange.itemNode)
+	if is_instance_valid(itemInRange) and InventoryRef.appendItem(itemInRange.itemNode):
 		itemInRange.queue_free()
 		
 		
@@ -123,23 +120,24 @@ func useItem():
 			$Flipper.add_child(useItem)
 		
 	$AttackCooldown.start(currentItemSelected.useCooldown)
-	if currentItemSelected.itemResource.itemName != "Sword" and currentItemSelected.itemResource.category != "Staff":
+	if currentItemSelected.itemResource.category == "Consumable":
 		InventoryRef.equippedItemSlot().pickFromSlot()
+		InventoryRef.incrementEquipSlot(1)
 		currentItemSelected.queue_free()
 
 @export var maxHealth : int = 10
 @onready var Health = maxHealth : set = setHealth
 
+signal died
 func _getHit(area, boxowner):
 	
 	velocity.y-=300
 	Health-= area.damage
 	$Hurtbox.go_invincible(0.4)
 	if Health <= 0:
+		emit_signal("died")
 		queue_free()
-	
-	if Health <= 0:
-		Global.changeScene( gameScene.instantiate() )
+		
 	
 
 func setHealth(newHealth):

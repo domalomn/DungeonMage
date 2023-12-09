@@ -24,8 +24,6 @@ func enter_state(arg: Dictionary = {}):
 		# Instantiate a bullet from the bullet scene
 		var bullet = bulletPath.instantiate()
 		
-		# Set bullet properties, such as damage
-		bullet.damage = user.damage
 		# Note: Affliction property commented out as it is not defined in the provided code
 		
 		# Add the bullet as a child of the parent node

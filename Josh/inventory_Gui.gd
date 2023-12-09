@@ -18,9 +18,9 @@ func initInventory():
 	appendItem( preload("res://EquippedItems/ItemList/item_Knife.tscn").instantiate() )
 	appendItem( preload("res://EquippedItems/ItemList/item_HP.tscn").instantiate() )
 	appendItem( preload("res://EquippedItems/ItemList/item_Bomb.tscn").instantiate() )
+	appendItem( preload("res://EquippedItems/ItemList/item_ice.tscn").instantiate() )
 # Re-Slotting the GUI with mouse 
 func slot_gui_input(event: InputEvent, slot:SlotClass):
-	print("AAAA")
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT && event.pressed:
 			if holding_item != null:
@@ -45,25 +45,28 @@ func _input(event):
 		
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN && event.pressed:
-				equippedItemSlot().material = null
-				equipSlotIndex += 1
-				if equipSlotIndex > 9: equipSlotIndex = 0
-				equippedItemSlot().material = preload("res://Josh/Art/equipShader.tres")
-				
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP && event.pressed:
-			equippedItemSlot().material = null
-			equipSlotIndex -= 1
-			if equipSlotIndex < 0: equipSlotIndex = 9
-			equippedItemSlot().material = preload("res://Josh/Art/equipShader.tres")
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN && event.pressed: incrementEquipSlot(1)
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP && event.pressed: incrementEquipSlot(-1)
 		
 # Equips first slot
 func equippedItemSlot():
 	return inventory_slots.get_child(equipSlotIndex);
 
 
-func appendItem(item:Node):
+func appendItem(item:Node) -> bool:
 	for slot in inventory_slots.get_children():
 		if !slot.item: 
 			slot.putIntoSlot(item)
 			return true
+			
+	return false
+
+func incrementEquipSlot(amount=1):
+	equippedItemSlot().material = null
+	while true:
+		equipSlotIndex += amount
+		if equipSlotIndex > 9: equipSlotIndex = 0
+		
+		if equippedItemSlot() and equippedItemSlot().item: break
+		
+	equippedItemSlot().material = preload("res://Josh/Art/equipShader.tres")

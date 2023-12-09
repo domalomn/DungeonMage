@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="Resource_j5pcm"]
 script = ExtResource("3_vst4k")
 itemName = "Bomb"
-category = "Weapon"
+category = "Consumable"
 isStaff = false
 stackSize = 20
 timeDelay = 8.0
@@ -18,6 +18,7 @@ gui_texture = ExtResource("4_mctcq")
 itemResource = SubResource("Resource_j5pcm")
 useNode = null
 projectile = ExtResource("4_q0yng")
+speed = 900.0
 
 [node name="TextureRect" parent="." index="0"]
 texture = ExtResource("4_mctcq")

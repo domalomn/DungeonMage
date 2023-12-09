@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed = 500
+var speed = 500
 var bounceNum = 0
 var damage
 var affliction

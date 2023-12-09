@@ -19,8 +19,9 @@ gui_texture = ExtResource("2_whlem")
 [node name="Item" instance=ExtResource("1_h2vn6")]
 itemResource = SubResource("Resource_hfvgm")
 useNode = null
+useCooldown = 0.25
 projectile = ExtResource("4_jvd4m")
-damage = 3
+speed = 950.0
 
 [node name="StaffHilt" type="Sprite2D" parent="." index="0"]
 position = Vector2(3, 14)

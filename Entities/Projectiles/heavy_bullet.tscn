@@ -1,22 +1,49 @@
-[gd_scene load_steps=7 format=3 uid="uid://48hymad55al7"]
+[gd_scene load_steps=9 format=3 uid="uid://48hymad55al7"]
 
-[ext_resource type="Texture2D" uid="uid://b7bbid17psh2a" path="res://Entities/Projectiles/tempball.png" id="1_jbx70"]
 [ext_resource type="Script" path="res://Entities/Projectiles/heavy_bullet.gd" id="1_o438y"]
+[ext_resource type="Texture2D" uid="uid://wgjv0nc0jnon" path="res://Josh/Art/Lightning ball.png" id="2_3hnyv"]
 [ext_resource type="Script" path="res://Entities/CollisionAreas/Hitbox.gd" id="3_siauc"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_36dt4"]
-radius = 28.6356
+[sub_resource type="Animation" id="Animation_83hnp"]
+resource_name = "lightningSpin"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_k0ma6"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_jbx70")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="Animation" id="Animation_8ffgx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2rp7u"]
+_data = {
+"RESET": SubResource("Animation_8ffgx"),
+"lightningSpin": SubResource("Animation_83hnp")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_36dt4"]
+radius = 21.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2xlwg"]
 radius = 12.0
@@ -24,15 +51,22 @@ radius = 12.0
 [node name="HeavyBullet" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_o438y")
-speed = 400
+
+[node name="LightningBall" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_3hnyv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LightningBall"]
+autoplay = "lightningSpin"
+libraries = {
+"": SubResource("AnimationLibrary_2rp7u")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_36dt4")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_k0ma6")
-
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("3_siauc")

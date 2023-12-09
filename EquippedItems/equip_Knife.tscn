@@ -52,19 +52,68 @@ radius = 13.0
 collision_layer = 0
 script = ExtResource("1_37rnw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="knife" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("1_grr35")
 offset = Vector2(0, -4)
 hframes = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+[node name="Shadow" type="Sprite2D" parent="knife"]
+modulate = Color(0.701961, 0.796078, 1, 0.588235)
+show_behind_parent = true
+texture_filter = 1
+rotation = -0.523599
+texture = ExtResource("1_grr35")
+offset = Vector2(0, -4)
+hframes = 4
+
+[node name="Shadow" type="Sprite2D" parent="knife/Shadow"]
+modulate = Color(0.701961, 0.796078, 1, 0.588235)
+show_behind_parent = true
+texture_filter = 1
+rotation = -0.523599
+scale = Vector2(1, 1)
+texture = ExtResource("1_grr35")
+offset = Vector2(0, -4)
+hframes = 4
+
+[node name="Shadow" type="Sprite2D" parent="knife/Shadow/Shadow"]
+modulate = Color(0.701961, 0.796078, 1, 0.588235)
+show_behind_parent = true
+texture_filter = 1
+rotation = -0.523599
+texture = ExtResource("1_grr35")
+offset = Vector2(0, -4)
+hframes = 4
+
+[node name="Shadow" type="Sprite2D" parent="knife/Shadow/Shadow/Shadow"]
+modulate = Color(0.701961, 0.796078, 1, 0.588235)
+show_behind_parent = true
+texture_filter = 1
+rotation = -0.523599
+scale = Vector2(1, 1)
+texture = ExtResource("1_grr35")
+offset = Vector2(0, -4)
+hframes = 4
+
+[node name="Shadow" type="Sprite2D" parent="knife/Shadow/Shadow/Shadow/Shadow"]
+modulate = Color(0.701961, 0.796078, 1, 0.588235)
+show_behind_parent = true
+texture_filter = 1
+rotation = -0.523599
+scale = Vector2(1, 1)
+texture = ExtResource("1_grr35")
+offset = Vector2(0, -4)
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="knife"]
 autoplay = "Throwing Knofe"
 libraries = {
 "": SubResource("AnimationLibrary_rf53j")
 }
 
 [node name="Hitbox" parent="." instance=ExtResource("2_4cm5p")]
+visible = false
 collision_layer = 4
 collision_mask = 20
 iFrames = 0.1
@@ -74,6 +123,7 @@ damage = 5
 shape = SubResource("CircleShape2D_boyxq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_3bmbe")
 debug_color = Color(0.211765, 0.619608, 0.462745, 0.419608)
 

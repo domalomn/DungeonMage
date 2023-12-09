@@ -276,7 +276,7 @@ _data = {
 [node name="BombThrow" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_pse2s")
-gravity = 900
+gravity = 1000
 
 [node name="Bomb" type="Sprite2D" parent="."]
 scale = Vector2(3, 3)

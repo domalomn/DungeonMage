@@ -1,39 +1,76 @@
-[gd_scene load_steps=7 format=3 uid="uid://covd4yghqoo57"]
+[gd_scene load_steps=9 format=3 uid="uid://covd4yghqoo57"]
 
 [ext_resource type="Script" path="res://Entities/Projectiles/kinematic_bullet.gd" id="1_d62jh"]
-[ext_resource type="Texture2D" uid="uid://b7bbid17psh2a" path="res://Entities/Projectiles/tempball.png" id="1_thnht"]
 [ext_resource type="Script" path="res://Entities/CollisionAreas/Hitbox.gd" id="3_28bdu"]
+[ext_resource type="Texture2D" uid="uid://c0njo66qswucn" path="res://Josh/Art/Fire ball.png" id="3_w3bp5"]
+
+[sub_resource type="Animation" id="Animation_7fglh"]
+resource_name = "fire"
+length = 0.266673
+loop_mode = 1
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_47uuq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7jik2"]
+_data = {
+"RESET": SubResource("Animation_47uuq"),
+"fire": SubResource("Animation_7fglh")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5x7qw"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_83tyn"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_thnht")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+radius = 9.05539
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_28w1d"]
-radius = 12.0
+radius = 17.0
 
 [node name="KinematicBullet" type="CharacterBody2D" groups=["Projectile"]]
 collision_layer = 0
 script = ExtResource("1_d62jh")
 
+[node name="FireBall" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_w3bp5")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FireBall"]
+libraries = {
+"": SubResource("AnimationLibrary_7jik2")
+}
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(2, 0)
 shape = SubResource("CircleShape2D_5x7qw")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2.38419e-07, -5.96046e-07)
-scale = Vector2(0.392857, 0.392857)
-sprite_frames = SubResource("SpriteFrames_83tyn")
-
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("boxOwner")]
+visible = false
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("3_28bdu")
@@ -43,5 +80,6 @@ damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_28w1d")
+debug_color = Color(0.811765, 0.333333, 0.627451, 0.419608)
 
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
