@@ -124,9 +124,8 @@ physics_layer_0/collision_mask = 2
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_ujlml")
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_aw62g"]
-a = Vector2(-30.6667, 44.6667)
-b = Vector2(29.3333, 44.6667)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g517u"]
+size = Vector2(50, 97.3333)
 
 [sub_resource type="Animation" id="Animation_481fo"]
 resource_name = "Flag Moving"
@@ -172,7 +171,6 @@ script = ExtResource("1_k638j")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-visible = false
 position = Vector2(575, 401)
 shape = SubResource("RectangleShape2D_t2rpx")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
@@ -220,10 +218,13 @@ texture = ExtResource("10_fb77j")
 hframes = 4
 frame = 1
 
-[node name="FlagStaticBody2D" type="StaticBody2D" parent="EndFlag"]
+[node name="FlagArea" type="Area2D" parent="EndFlag"]
+collision_layer = 8
+collision_mask = 8
 
-[node name="FlagCollision2D" type="CollisionShape2D" parent="EndFlag/FlagStaticBody2D"]
-shape = SubResource("SegmentShape2D_aw62g")
+[node name="Collider" type="CollisionShape2D" parent="EndFlag/FlagArea"]
+position = Vector2(10.3333, -1.33331)
+shape = SubResource("RectangleShape2D_g517u")
 debug_color = Color(0.717647, 0.764706, 0, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="EndFlag"]
@@ -431,3 +432,5 @@ useSpawnerY = true
 spawnTime = 10.0
 initialDelay = 0.1
 maxSpawnObjects = 1
+
+[connection signal="body_entered" from="EndFlag/FlagArea" to="." method="_on_Game_Win"]

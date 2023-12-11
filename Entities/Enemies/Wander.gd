@@ -6,6 +6,8 @@ extends State
 @export var groundDetector: Area2D
 @export var shotChecker: RayCast2D
 
+@export var speedMod : float = 1.0
+
 # Function called when entering the state
 func enter_state(arg: Dictionary = {}): 
 	# Play the walking animation
@@ -43,7 +45,7 @@ func physics_update(delta):
 	
 	# Set the user's facing direction and move toward the ground detection point
 	user.facing(sign(direction.x))
-	user.velocity.x = move_toward(user.velocity.x, direction.x * user.speed, 1000 * delta)
+	user.velocity.x = move_toward(user.velocity.x, direction.x * user.speed*speedMod, 1000 * delta)
 	# Move and slide the user
 	user.move_and_slide()
 

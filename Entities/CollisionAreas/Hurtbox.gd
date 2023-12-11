@@ -51,8 +51,7 @@ func go_invincible(time:float=0.0):
 func _area_exited(area):
 	if area in tracked_areas: 
 		tracked_areas.erase(area)
-	
-	emit_signal("hitbox_exited",area,area.boxOwner)
+		emit_signal("hitbox_exited",area,area.boxOwner)
 
 ## Fires hitbox hitting function for each tracked area
 func _process(_delta):

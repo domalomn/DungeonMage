@@ -66,6 +66,8 @@ func physics_update(delta):
 			else:
 				user.velocity.y = airJumpHeight
 				
+			user.velocity = user.velocity.rotated(user.get_floor_normal().x)
+				
 			plummet = false
 			jumps = maxjumps
 		else:

@@ -3,14 +3,19 @@ extends Node2D
 const PlayerScene = preload("res://Entities/Player/Player.tscn")
 const gameScene = preload("res://Aaliyah/UI/game_over.tscn")
 
+const music = preload("res://Music/Groove and Ghoul_LP.ogg")
+
 var controlPlayerHealth : LifeBar
 var controlPlayerInventory : Control
 
 func _ready(): 
 	controlPlayerHealth = get_tree().get_first_node_in_group("Life Bar")
 	controlPlayerInventory = get_tree().get_first_node_in_group("InventoryGui")
+	
 	if Multiplayer.isHost(): 
 		spawnPlayers.rpc()
+	
+	Audio.playAudio(music,"Music","Master",{"override":true,"volume":-10})
 		
 var playersAlive = 0
 @rpc("call_local")
@@ -44,10 +49,18 @@ func spawnPlayers():
 func _on_Player_Death():
 	playersAlive-=1
 	if playersAlive <= 0: 
-		Global.changeScene( gameScene.instantiate() )
+		var gameOverScene = gameScene.instantiate()
+		gameOverScene.endGame(false)
+		Global.changeScene( gameOverScene )
 	
 func linkHealthToHost(player):
 	player.lifeBar = controlPlayerHealth
 	player.lifeBar.maxHealth = player.maxHealth
 	player.lifeBar.currentHealth = player.Health
 	player.InventoryRef = controlPlayerInventory 
+
+
+func _on_Game_Win(body):
+	var gameOverScene = gameScene.instantiate()
+	gameOverScene.endGame(true)
+	Global.changeScene( gameOverScene )

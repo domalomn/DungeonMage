@@ -7,7 +7,7 @@ var world_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 signal lost_player()
 
 # Attributes for the rat
-var speed = 150
+@export var speed = 550
 var attackRange = 45
 var maxHealth = 5
 var currentHealth = maxHealth

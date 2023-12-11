@@ -1,9 +1,11 @@
 extends Control
 
 const gameScene = preload("res://Game_Room.tscn")
+const music = preload("res://Music/Undying Menus.ogg")
 
 func _ready():
 	Multiplayer.connect("playerInfoUpdated",updatePlayerList)
+	Audio.playAudio(music,"Music","Master",{"override":true,"volume":-10})
 
 func _on_start_pressed():
 	Global.changeScene( gameScene.instantiate() )

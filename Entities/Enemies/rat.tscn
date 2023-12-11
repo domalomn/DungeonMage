@@ -226,6 +226,7 @@ properties/1/watch = false
 [node name="Rat" type="CharacterBody2D"]
 scale = Vector2(3, 3)
 script = ExtResource("1_3rgjr")
+speed = 650
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -289,7 +290,6 @@ readyState = NodePath("Idle")
 [node name="Chase" type="Node" parent="FSM" node_paths=PackedStringArray("user", "groundDetector")]
 script = ExtResource("9_ru71f")
 user = NodePath("../..")
-attackDistance = 30.0
 groundDetector = NodePath("../../GroundDetection")
 
 [node name="ChaseTimer" type="Timer" parent="FSM/Chase"]
@@ -313,6 +313,7 @@ script = ExtResource("12_kotqq")
 user = NodePath("../..")
 groundDetector = NodePath("../../GroundDetection")
 shotChecker = NodePath("../../ShotChecker")
+speedMod = 0.5
 
 [node name="CollisionCooldown" type="Timer" parent="FSM/Wander"]
 wait_time = 0.2
